@@ -19,3 +19,4 @@ View your app in AI Studio: https://ai.studio/apps/16d8f2e6-be6e-4d9c-aac6-5dccc
 3. Run the app:
    `npm run dev`
 # spa
+# NamasteSaloon-Web-Application
