@@ -1,24 +1,21 @@
-# Namastey Wellness Spa
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-A modern and responsive wellness spa website built using React and Vite.
+# Run and deploy your AI Studio app
 
-## Features
-- Luxury spa-themed UI
-- Service showcase carousel
-- Specialist/Healer profiles
-- Appointment booking interface
-- Responsive design for mobile and desktop
-- Smooth navigation and animations
+This contains everything you need to run your app locally.
 
-## Tech Stack
-- React.js
-- Vite
-- JavaScript
-- Tailwind CSS
-- Lucide React Icons
+View your app in AI Studio: https://ai.studio/apps/16d8f2e6-be6e-4d9c-aac6-5dcccdd32281
 
-## Installation
+## Run Locally
 
-```bash
-npm install
-npm run dev
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+# spa
