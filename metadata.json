@@ -1,6 +1,0 @@
-{
-  "name": "Namastey Wellness Spa",
-  "description": "An elegant, luxurious wellness and spa reservation platform with cream-and-forest-green aesthetics and booking management.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
