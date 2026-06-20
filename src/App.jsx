@@ -678,10 +678,10 @@ export default function App() {
           <div className="space-y-3 font-display">
             <h4 className="text-[10px] uppercase font-mono tracking-widest text-[#1E3E34] font-black">ACTIVE CLUBS</h4>
             <ul className="space-y-2 text-slate-600 text-[11px] font-semibold">
-              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Boston — Back Bay</li>
-              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Flatiron — NYC</li>
-              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Soho — NYC</li>
-              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> West Hollywood — LA</li>
+              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Charni Road</li>
+              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Mumbai Central</li>
+              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Vashi</li>
+              <li className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2D5446]" /> Andheri</li>
             </ul>
           </div>
 
