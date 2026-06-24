@@ -33,7 +33,7 @@
   background: rgba(30, 62, 52, 0.5);
 }
 
-/* Ambient animations for sunset theme */
+/* Ambient animations for somatic theme */
 @keyframes float {
   0%, 100% { transform: translateY(0px) scale(1); }
   50% { transform: translateY(-8px) scale(1.01); }
@@ -45,5 +45,14 @@
 
 .ambient-glow-2 {
   animation: float 20s ease-in-out infinite reverse;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s ease-out forwards;
 }
 

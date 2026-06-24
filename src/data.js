@@ -1,195 +1,415 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+ 
 
-import { SpaCategory, SpaService, Specialist } from "./types.js";
+import { SpaCategory } from "./types.js";
+
+export const BUSINESS_DETAILS = {
+  name: "NAMASTEY Wellness SPA",
+  tagline: "SELF-CARE MADE SOCIAL",
+  about: "Elevating cellular recovery, sensory re-alignment, and communal heat/cold somatic practice in a premium high-end light frosted space.",
+  yearEstablished: 2014,
+  phone: "+91 95944 01718",
+  whatsapp: "919594401718",
+  email: "concierge@namastey.social",
+  address: "Sea Face Plaza, Marine Drive, Charni Road, Mumbai, MH - 400004",
+  mapsLink: "https://maps.google.com/?q=Marine+Drive+Charni+Road+Mumbai",
+  instagram: "https://instagram.com/namastey.wellness",
+  facebook: "https://facebook.com/namastey.wellness"
+};
 
 export const SERVICES = [
-  new SpaService(
-    "service-1",
-    "Guided Ice Bath & Breathwork",
-    "Submerge in cold water recovery paired with active pranayama and vagus nerve stimulation, designed to optimize nervous system resilience.",
-    SpaCategory.TECH_REMEDIES,
-    45,
-    95,
-    4.9,
-    142,
-    "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=800",
-    true
-  ),
-  new SpaService(
-    "service-2",
-    "Infrared & Chroma Sauna Suite",
-    "Deep-penetrating cell detoxification utilizing full-spectrum thermal light, promoting muscle repair and metabolic upregulation.",
-    SpaCategory.TECH_REMEDIES,
-    60,
-    80,
-    4.8,
-    310,
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
-    true
-  ),
-  new SpaService(
-    "service-3",
-    "Lymphatic Air Compression",
-    "Dynamic pulsing massage cuffs utilizing pneumatic compression to flush biological waste and accelerate athletic recovery.",
-    SpaCategory.TECH_REMEDIES,
-    50,
-    75,
-    4.7,
-    88,
-    "https://images.unsplash.com/photo-1519823551279-64bc75d44f47?auto=format&fit=crop&q=80&w=800",
-    false
-  ),
-  new SpaService(
-    "service-4",
-    "Hyperbaric Oxygen Chamber",
-    "Breathe 95% pure medical-grade oxygen under soft hydrostatic pressure to dramatically accelerate wound/tissue repair and cellular energy.",
-    SpaCategory.TECH_REMEDIES,
-    75,
-    140,
-    4.9,
-    95,
-    "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
-    true
-  ),
-  new SpaService(
-    "service-5",
-    "Intravenous Vitamin Infusion",
-    "Hydrate cells deeply with customizable IV infusions of Glutathione, Vitamin C, minerals, and peptides for instant cellular glow.",
-    SpaCategory.ALTERNATIVE_MEDICINE,
-    50,
-    160,
-    4.9,
-    215,
-    "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800",
-    false
-  ),
-  new SpaService(
-    "service-6",
-    "Electro-Acupuncture Bio-Scan",
-    "Acupuncture needles coupled with micro-current and electro-magnetic frequency scans to quickly balance structural nervous points.",
-    SpaCategory.ALTERNATIVE_MEDICINE,
-    60,
-    125,
-    4.85,
-    104,
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800",
-    false
-  ),
-  new SpaService(
-    "service-7",
-    "Ayurvedic Abhyanga Massages",
-    "An ancient, warm herbal-oil somatic massage that focuses on major energy channels (Marma points) to ground bodily bio-energies.",
-    SpaCategory.MASSAGES,
-    90,
-    180,
-    4.95,
-    420,
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
-    true
-  ),
-  new SpaService(
-    "service-8",
-    "Remedy Vulcanic Hot Rock",
-    "Synergistic massage utilizing premium basalt stones and lavender-infused extracts to meltingly release heavy spinal blockages.",
-    SpaCategory.MASSAGES,
-    75,
-    150,
-    4.9,
-    192,
-    "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
-    false
-  ),
-  new SpaService(
-    "service-9",
-    "Resting Metabolic Rate & VO2 Max",
-    "Analyze breath gasses under resting and test stress variables to calculate exact biological calorie burn rate and peak oxygen volume.",
-    SpaCategory.BIOMETRIC_TESTING,
-    90,
-    220,
-    4.8,
-    76,
-    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800",
-    false
-  ),
-  new SpaService(
-    "service-10",
-    "Alchemical Sound Bath Ritual",
-    "Immersive therapeutic ceremony utilizing custom gold quartz singing bowls, gongs, and planetary chimes to reset neurological vibrations.",
-    SpaCategory.CLASSES,
-    60,
-    55,
-    4.98,
-    540,
-    "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800",
-    true
-  )
+  {
+    id: "service-1",
+    name: "Guided Ice Bath & Breathwork",
+    description: "Submerge in cold water recovery paired with active pranayama and vagus nerve stimulation, designed to optimize nervous system resilience.",
+    benefits: [
+      "Triggers rapid anti-inflammatory response and pain relief",
+      "Accelerates athletic recovery and cellular regeneration",
+      "Stimulates the vagus nerve to reduce stress and anxiety",
+      "Improves vascular circulation and immune response"
+    ],
+    category: SpaCategory.TECH_REMEDIES,
+    durationMinutes: 45,
+    price: 95,
+    rating: 4.9,
+    ratingCount: 142,
+    image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=800",
+    isFeatured: true
+  },
+  {
+    id: "service-2",
+    name: "Infrared & Chroma Sauna Suite",
+    description: "Deep-penetrating cell detoxification utilizing full-spectrum thermal light, promoting muscle repair and metabolic upregulation.",
+    benefits: [
+      "Promotes deep cellular sweating to flush out waste",
+      "Relaxes tight muscle groups and joints",
+      "Chroma-therapy lighting balances mood and energy levels",
+      "Increases core body temperature for a mild cardiovascular workout"
+    ],
+    category: SpaCategory.TECH_REMEDIES,
+    durationMinutes: 60,
+    price: 80,
+    rating: 4.8,
+    ratingCount: 310,
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
+    isFeatured: true
+  },
+  {
+    id: "service-3",
+    name: "Lymphatic Air Compression",
+    description: "Dynamic pulsing massage cuffs utilizing pneumatic compression to flush biological waste and accelerate athletic recovery.",
+    benefits: [
+      "Enhances lymphatic drainage and reduces fluid retention",
+      "Eliminates metabolic waste from muscle tissues",
+      "Provides relief from heavy, tired, or swollen legs",
+      "Improves range of motion and overall flexibility"
+    ],
+    category: SpaCategory.TECH_REMEDIES,
+    durationMinutes: 50,
+    price: 75,
+    rating: 4.7,
+    ratingCount: 88,
+    image: "https://images.unsplash.com/photo-1519823551279-64bc75d44f47?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "service-4",
+    name: "Hyperbaric Oxygen Chamber",
+    description: "Breathe 95% pure medical-grade oxygen under soft hydrostatic pressure to dramatically accelerate wound/tissue repair and cellular energy.",
+    benefits: [
+      "Saturates plasma with high-concentration pure oxygen",
+      "Dramatically stimulates collagen production and tissue repair",
+      "Reduces chronic swelling and supports cognitive longevity",
+      "Combats fatigue and optimizes ATP energy output"
+    ],
+    category: SpaCategory.TECH_REMEDIES,
+    durationMinutes: 75,
+    price: 140,
+    rating: 4.9,
+    ratingCount: 95,
+    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+    isFeatured: true
+  },
+  {
+    id: "service-5",
+    name: "Intravenous Vitamin Infusion",
+    description: "Hydrate cells deeply with customizable IV infusions of Glutathione, Vitamin C, minerals, and peptides for instant cellular glow.",
+    benefits: [
+      "100% absorption of vital micro-nutrients bypassing digestion",
+      "Glutathione actively brightens skin tone and fights oxidant stress",
+      "Boosts baseline immunity and mental focus",
+      "Instantly restores physiological hydration"
+    ],
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
+    durationMinutes: 50,
+    price: 160,
+    rating: 4.9,
+    ratingCount: 215,
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "service-6",
+    name: "Electro-Acupuncture Bio-Scan",
+    description: "Acupuncture needles coupled with micro-current and electro-magnetic frequency scans to quickly balance structural nervous points.",
+    benefits: [
+      "Re-establishes healthy bio-electric pathways in the body",
+      "Provides relief for chronic neuropathic discomfort",
+      "Identifies structural energy blocks via diagnostic scans",
+      "Calms the sympathetic fight-or-flight response"
+    ],
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
+    durationMinutes: 60,
+    price: 125,
+    rating: 4.85,
+    ratingCount: 104,
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "service-7",
+    name: "Ayurvedic Abhyanga Massages",
+    description: "An ancient, warm herbal-oil somatic massage that focuses on major energy channels (Marma points) to ground bodily bio-energies.",
+    benefits: [
+      "Detoxifies cells via friction and warm, custom-blended herbal oils",
+      "Nourishes dry skin while supporting musculoskeletal health",
+      "Induces a profoundly deep state of sensory tranquility",
+      "Stimulates lymphatic pathways and joint lubrication"
+    ],
+    category: SpaCategory.MASSAGES,
+    durationMinutes: 90,
+    price: 180,
+    rating: 4.95,
+    ratingCount: 420,
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
+    isFeatured: true
+  },
+  {
+    id: "service-8",
+    name: "Remedy Vulcanic Hot Rock",
+    description: "Synergistic massage utilizing premium basalt stones and lavender-infused extracts to meltingly release heavy spinal blockages.",
+    benefits: [
+      "Deep heat penetration melts chronic muscular spasms",
+      "Lavender aromatics induce immediate parasympathetic shifts",
+      "Reduces spinal alignment tension and structural stiffness",
+      "Improves vascular and lymphatic micro-circulation"
+    ],
+    category: SpaCategory.MASSAGES,
+    durationMinutes: 75,
+    price: 150,
+    rating: 4.9,
+    ratingCount: 192,
+    image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "service-9",
+    name: "Resting Metabolic Rate & VO2 Max",
+    description: "Analyze breath gasses under resting and test stress variables to calculate exact biological calorie burn rate and peak oxygen volume.",
+    benefits: [
+      "Identifies exact personal cellular metabolic burn rate",
+      "Calculates VO2 Max for peak oxygen delivery limits",
+      "Customizes zone training targets for ultimate endurance",
+      "Provides a data-driven path to optimizing fat oxidation"
+    ],
+    category: SpaCategory.BIOMETRIC_TESTING,
+    durationMinutes: 90,
+    price: 220,
+    rating: 4.8,
+    ratingCount: 76,
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "service-10",
+    name: "Alchemical Sound Bath Ritual",
+    description: "Immersive therapeutic ceremony utilizing custom gold quartz singing bowls, gongs, and planetary chimes to reset neurological vibrations.",
+    benefits: [
+      "Entrains brainwaves into high-alpha and theta deep states",
+      "Instantly relieves high mental strain and cortisol levels",
+      "Establishes deep vibrational resonance throughout the tissues",
+      "Improves focus, sleep architecture, and dream depth"
+    ],
+    category: SpaCategory.CLASSES,
+    durationMinutes: 60,
+    price: 55,
+    rating: 4.98,
+    ratingCount: 540,
+    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800",
+    isFeatured: true
+  }
 ];
 
 export const SPECIALISTS = [
-  new Specialist(
-    "spec-1",
-    "Aarya Varma",
-    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=600",
-    4.9,
-    SpaCategory.MASSAGES,
-    "AYURVEDIC MEDICINE & PANCHAKARMA",
-    [
+  {
+    id: "spec-1",
+    name: "Aarya Varma",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=600",
+    rating: 4.9,
+    category: SpaCategory.MASSAGES,
+    specialtyTag: "AYURVEDIC MEDICINE & PANCHAKARMA",
+    degrees: [
       "B.A.M.S (Govt. Ayurvedic Medical College, Bengaluru)",
       "M.S. in Panchakarma (Global Institute of Indian Medicine)"
     ],
-    "12+ Years of Advanced Clinical Practice",
-    ["Mon", "Tue", "Thu", "Fri", "Sat"],
-    "Expert in diagnosing constitutional doshas and executing targeted deep-tissue somatic release therapy using bespoke warm organic oils."
-  ),
-  new Specialist(
-    "spec-2",
-    "Dr. Marcus Sterling",
-    "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600",
-    4.8,
-    SpaCategory.BIOMETRIC_TESTING,
-    "SPORTS SCIENCE & PERFORMANCE CARDIOLOGY",
-    [
+    experience: "12+ Years of Advanced Clinical Practice",
+    availableDays: ["Mon", "Tue", "Thu", "Fri", "Sat"],
+    bio: "Expert in diagnosing constitutional doshas and executing targeted deep-tissue somatic release therapy using bespoke warm organic oils."
+  },
+  {
+    id: "spec-2",
+    name: "Dr. Marcus Sterling",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600",
+    rating: 4.8,
+    category: SpaCategory.BIOMETRIC_TESTING,
+    specialtyTag: "SPORTS SCIENCE & PERFORMANCE CARDIOLOGY",
+    degrees: [
       "M.D. (Stanford University School of Medicine)",
       "Fellowship in Sports Recovery (Mayo Clinic, Rochester)"
     ],
-    "9+ Years coaching elite and Olympic athletes",
-    ["Tue", "Wed", "Fri", "Sat"],
-    "Specializes in biometric profiling, peak cardiac health output, hyperbaric oxygen protocols, and custom high-altitude oxygen recovery."
-  )
-  // new Specialist(
-  //   "spec-3",
-  //   "Elena Rostova",
-  //   "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600&h=600",
-  //   4.95,
-  //   SpaCategory.CLASSES,
-  //   "VIBRATIONAL MEDICINE & SOUND ALCHEMY",
-  //   [
-  //     "M.A. in Music Therapy & Hertz Resonance (Berklee)",
-  //     "Somatic Breath Therapy Certification (Rishikesh, India)"
-  //   ],
-  //   "8+ Years leading cosmic acoustic soundscapes",
-  //   ["Wed", "Thu", "Fri", "Sun"],
-  //   "Integrates crystalline quartz vocal resonance with rhythmic holotropic breathwork sequences to induce high-alpha state sensory calm."
-  // ),
-  // new Specialist(
-  //   "spec-4",
-  //   "Dr. Kenji Tanaka",
-  //   "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600&h=600",
-  //   4.9,
-  //   SpaCategory.ALTERNATIVE_MEDICINE,
-  //   "EASTERN ACUPUNCTURE & BIO-SIGNALING",
-  //   [
-  //     "D.A.O.M (Doctor of Eastern Medicine, San Francisco)",
-  //     "B.S. in Neurobiology (University of Tokyo)"
-  //   ],
-  //   "15+ Years solving neuropathic chronic fatigue",
-  //   ["Mon", "Wed", "Thu", "Sat"],
-  //   "Maintains advanced expertise in neural pathway mapping, electro-acupuncture, trigger point infusions, and biological peptide signaling."
-  // )
+    experience: "9+ Years coaching elite and Olympic athletes",
+    availableDays: ["Tue", "Wed", "Fri", "Sat"],
+    bio: "Specializes in biometric profiling, peak cardiac health output, hyperbaric oxygen protocols, and custom high-altitude oxygen recovery."
+  }
 ];
+
+export const PRICING_PACKAGES = [
+  {
+    id: "pkg-1",
+    title: "Somatic Day Pass",
+    price: 65,
+    duration: "1 Day Access",
+    description: "Perfect for single-session thermal recovery.",
+    benefits: [
+      "Access to Contrast Suites (Hot & Cold plunge)",
+      "Full spectrum Infrared Sauna access",
+      "Complimentary organic herbal infusion bar",
+      "Towel & luxury locker amenities"
+    ],
+    popular: false,
+    type: "individual"
+  },
+  {
+    id: "pkg-2",
+    title: "Acoustic Tier Membership",
+    price: 195,
+    duration: "Per Month",
+    description: "Designed for steady recovery and nervous system balancing.",
+    benefits: [
+      "4 Contrast Plunge or Sauna bookings per month",
+      "2 Alchemical Sound Bath class passes",
+      "10% discount on all custom massages",
+      "Access to member-only sanctuary lounges"
+    ],
+    popular: true,
+    type: "membership"
+  },
+  {
+    id: "pkg-3",
+    title: "Pranayama Club Membership",
+    price: 350,
+    duration: "Per Month",
+    description: "Committed recovery with biometric monitoring.",
+    benefits: [
+      "Unlimited Hot/Cold plunge & Sauna admissions",
+      "1 VO2 Max profiling assessment per quarter",
+      "4 Alchemical Sound Bath or breathing workshops",
+      "15% off all alternative medicine & IV therapies"
+    ],
+    popular: false,
+    type: "membership"
+  },
+  {
+    id: "pkg-4",
+    title: "Universal VIP Access",
+    price: 799,
+    duration: "Per Month",
+    description: "The peak somatic and restorative wellness suite.",
+    benefits: [
+      "Unlimited admission to all contrast thermal suites",
+      "4 Custom Somatic Massages (75 min) per month",
+      "Unlimited IV infusion drips and vitamin consults",
+      "Personalized medical wellness and cardiac profiling"
+    ],
+    popular: false,
+    type: "membership"
+  },
+  {
+    id: "pkg-5",
+    title: "Couple's Somatic Re-alignment",
+    price: 320,
+    duration: "Single Session (120 mins)",
+    description: "Co-restorative sensory balancing for couples.",
+    benefits: [
+      "Private contrast thermal suite (60 mins)",
+      "Coordinated Ayurvedic or Vulcanic massage (60 mins)",
+      "Dual copper bowl sound vibration resonance",
+      "Elysian cocoa & elixir platter served privately"
+    ],
+    popular: false,
+    type: "couple"
+  },
+  {
+    id: "pkg-6",
+    title: "Seasonal Solstice Reset",
+    price: 245,
+    duration: "Solstice Special (150 mins)",
+    description: "A tailored seasonal detox and system reboot.",
+    benefits: [
+      "Pneumatic Lymphatic Compression (30 mins)",
+      "Full-body Abhyanga warm herbal oil massage (60 mins)",
+      "Hyperbaric Oxygen rejuvenation session (60 mins)",
+      "Adaptogenic herbal tea & take-home solstice kit"
+    ],
+    popular: false,
+    type: "seasonal"
+  }
+];
+
+export const BLOGS = [
+  {
+    id: "blog-1",
+    title: "The Neuro-biology of Cold Shock Contrast Therapy",
+    summary: "How submerging in cold plunge protocols releases norepinephrine and resets neural inflammatory pathways.",
+    content: `In recent sports science and somatic cardiology, deliberate cold exposure has emerged as a cornerstone for systemic physiological optimization. Submerging into water maintained at temperatures between 2°C to 5°C triggers an immediate, profound anti-inflammatory cascade. 
+
+Upon contact, cold receptors in the skin stimulate the sympathetic nervous system, inducing a sharp spike in norepinephrine—up to 530% above baseline. This neurotransmitter acts both as an anti-inflammatory chemical and a neural stimulator, immediately clearing brain fog, boosting cognitive clarity, and triggering fat-burning pathways.
+
+In this guide, we break down how to properly structure your cold contrast intervals:
+1. **The Pre-Plunge Breathing**: Aligning your lungs with deliberate pranayama or box breathing to activate the parasympathetic tone.
+2. **The Immersion**: Keeping a steady, slow exhale as you enter. Aiming for 2 to 3 minutes of quiet stillness.
+3. **The Rewarm**: Relying on natural thermogenesis rather than immediate hot showers. Let your core temperature raise itself naturally for optimum mitochondrial benefit.`,
+    author: "Dr. Marcus Sterling",
+    date: "June 18, 2026",
+    image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=800",
+    readTime: "5 min read"
+  },
+  {
+    id: "blog-2",
+    title: "Ayurvedic Marma Therapy: Mapping Cellular Energy Channels",
+    summary: "Discover the 107 vital intersections of bone, tendon, and joint vital points that release stored chronic tension.",
+    content: `Ayurveda, the sister science of Yoga, outlines 107 Marma points—anatomical intersections of muscle, blood vessels, ligaments, and bones. When stress is stored physically, it accumulates at these major energetic junctions, creating local soreness, fatigue, and nervous disruption.
+
+Our signature Abhyanga and Marma point massage therapies utilize warm, herbal-infused sesame and mustard oils customized to your personal Dosha constitution. By utilizing precise circular motions and delicate compression, our practitioners relieve stagnant energies. 
+
+The immediate result is a lighter, more integrated skeletal alignment and a profound release of structural holding patterns in the mind.`,
+    author: "Aarya Varma",
+    date: "May 14, 2026",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600",
+    readTime: "7 min read"
+  }
+];
+
+export const FAQS = [
+  {
+    question: "What is a Somatic Contrast Suite?",
+    answer: "Our Somatic Contrast Suite is a premium therapy space designed around hot and cold integration. It couples deep thermal exposure (via full-spectrum infrared saunas) with deep cryo-immersion (via ice baths or cold plunge tubs). This rapid contrast forces vasodilation and vasoconstriction, flushing tissues and building nervous system stamina."
+  },
+  {
+    question: "Do I need a prior medical clearance for Hyperbaric Oxygen or IV drips?",
+    answer: "No, we have licensed sports science and wellness practitioners on-staff. Before your initial hyperbaric oxygen session or IV Vitamin drip, a practitioner will carry out a quick medical intake form and assess your vitals to customize your peptide, vitamin, or pressure ratios."
+  },
+  {
+    id: "faq-3",
+    question: "Is there a cancellation or rescheduling policy?",
+    answer: "Yes. To preserve the boutique and private nature of our thermal rooms, we require a minimum of 24 hours notice for all cancellations or rescheduling. Cancellations within 24 hours are subject to a fee equal to 50% of the scheduled service cost."
+  },
+  {
+    question: "How does the WhatsApp Booking Integration work?",
+    answer: "We offer an elegant, streamlined booking experience. Once you select a therapy, therapist, and time slot, you can submit the form to pre-fill a detailed reservation text. Clicking submit opens a secure WhatsApp thread directly with our concierge desk to instantly confirm your spot."
+  }
+];
+
+export const TESTIMONIALS = [
+  {
+    id: "rev-1",
+    name: "Vikram Malhotra",
+    review: "The Guided Ice Bath changed my recovery routine entirely. Aarya's guidance during the pranayama breathwork kept me completely centered. The Charni Road sanctuary is absolutely breathtaking.",
+    rating: 5,
+    date: "June 20, 2026",
+    isGoogleReview: true,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150"
+  },
+  {
+    id: "rev-2",
+    name: "Ananya Mehta",
+    review: "As a professional athlete, metabolic health and recovery are non-negotiable. Dr. Sterling's VO2 profiling and subsequent hyperbaric protocols have noticeably improved my systemic stamina. Highly recommend the memberships!",
+    rating: 5,
+    date: "May 29, 2026",
+    isGoogleReview: true,
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150"
+  },
+  {
+    id: "rev-3",
+    name: "Rohan & Sneha Joshi",
+    review: "We booked the Couple's Somatic Re-alignment for our anniversary. The private plunge room, followed by the Ayurvedic Abhyanga massage with warm oils, left us in a state of absolute bliss.",
+    rating: 5,
+    date: "April 11, 2026",
+    isGoogleReview: false,
+    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=150"
+  }
+];
+
+export const POLICIES = {
+  cancellation: "We require at least 24 hours of advance notice for any cancellations or reschedules. Within 24 hours, a 50% reservation charge applies to protect the slot of our somatic practitioners.",
+  refund: "Memberships are billed monthly and can be cancelled at any time with 7 days notice. Gift certificates, packages, and individual diagnostic deposits are non-refundable but fully transferable to other services or friends.",
+  privacy: "We value your cellular and computational privacy. Your biometric scan reports, physical intake cards, and cardiac records are stored under military-grade, fully compliant cloud databases. Your personal data is never shared with third parties.",
+  terms: "By booking or entering NAMASTEY Wellness SPA facilities, you agree to respect our communal quiet guidelines. Electronic devices must be kept on silent, and active somatic plunges must be used with appropriate athletic wear."
+};
 
 export const TIME_SLOTS = [
   "08:00 AM",
@@ -202,15 +422,3 @@ export const TIME_SLOTS = [
   "06:30 PM",
   "08:00 PM"
 ];
-
-// Helper to convert AM/PM slot to a standard sorted value
-export function parseTimeToMinutes(timeStr) {
-  const match = timeStr.match(/^(\d+):(\d+)\s*(AM|PM)$/i);
-  if (!match) return 0;
-  let hours = parseInt(match[1]);
-  const minutes = parseInt(match[2]);
-  const ampm = match[3].toUpperCase();
-  if (ampm === "PM" && hours !== 12) hours += 12;
-  if (ampm === "AM" && hours === 12) hours = 0;
-  return hours * 60 + minutes;
-}
