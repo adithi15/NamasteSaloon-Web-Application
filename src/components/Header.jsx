@@ -142,7 +142,7 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
             )}
           </button>
 
-          <button
+          {/* <button
             onClick={() => handleNavClick("blog")}
             className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
               activeView === "blog" ? "text-white" : "text-[#FAF8F5]/80"
@@ -152,7 +152,7 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
             {activeView === "blog" && (
               <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
             )}
-          </button>
+          </button> */}
 
           <button
             onClick={() => handleNavClick("contact")}

@@ -631,7 +631,7 @@ export default function App() {
               className="w-full"
             >
               {/* HERO SECTION - Premium Minimalist Layout */}
-              <section className="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-4 py-20 overflow-hidden bg-[#022A24] border-b border-[#2D5446]/20">
+              <section className="relative min-h-[100vh] flex flex-col justify-center items-center text-center px-4 py-20 overflow-hidden bg-[#022A24] border-b border-[#2D5446]/20">
                 {/* Visual Glass Overlay & Ambient glow over dark background */}
                 <video
                   autoPlay
