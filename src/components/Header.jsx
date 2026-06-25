@@ -166,17 +166,17 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
             )}
           </button>
 
-          <button
-            onClick={() => handleNavClick("bookings")}
-            className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-              activeView === "bookings" ? "text-white" : "text-[#FAF8F5]/80"
-            }`}
-          >
-            Reservations
-            {activeView === "bookings" && (
-              <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
-            )}
-          </button>
+            {/* <button
+              onClick={() => handleNavClick("bookings")}
+              className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+                activeView === "bookings" ? "text-white" : "text-[#FAF8F5]/80"
+              }`}
+            >
+              Reservations
+              {activeView === "bookings" && (
+                <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
+              )}
+            </button> */}
         </nav>
 
         {/* Right Action buttons */}

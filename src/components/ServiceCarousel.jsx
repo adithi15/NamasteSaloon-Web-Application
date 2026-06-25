@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight, Clock, Star, Sparkles } from "lucide-react";
 import { SERVICES } from "../data.js";
+// import { getWhatsAppUrl } from "./whatsapp.js";
 
 export default function ServiceCarousel({ onSelectService }) {
   const carouselRef = useRef(null);
@@ -130,6 +131,7 @@ export default function ServiceCarousel({ onSelectService }) {
 
                     <button
                       onClick={() => onSelectService(service)}
+                      // onClick={openWhatsAppGeneral}
                       className="px-4 py-2 bg-[#1E3E34] hover:bg-[#2D5446] text-white rounded-xl text-xs uppercase tracking-widest font-extrabold transition-all hover:scale-105 cursor-pointer shadow-md active:scale-95"
                     >
                       Reserve
