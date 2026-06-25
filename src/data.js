@@ -4,7 +4,7 @@ import { SpaCategory } from "./types.js";
 
 export const BUSINESS_DETAILS = {
   name: "NAMASTEY Wellness SPA",
-  tagline: "SELF-CARE MADE SOCIAL",
+  // tagline: "SELF-CARE MADE SOCIAL",
   about: "Elevating cellular recovery, sensory re-alignment, and communal heat/cold somatic practice in a premium high-end light frosted space.",
   yearEstablished: 2014,
   phone: "+91 95944 01718",
@@ -401,7 +401,86 @@ export const TESTIMONIALS = [
     date: "April 11, 2026",
     isGoogleReview: false,
     avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=150"
-  }
+  },
+  {
+  id: "rev-4",
+  name: "Ananya Kapoor",
+  review: "Beautiful interiors, welcoming staff, and a truly relaxing atmosphere. The aromatherapy session was exactly what I needed after a hectic week.",
+  rating: 5,
+  date: "June 12, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-5",
+  name: "Karan Verma",
+  review: "The sauna and ice bath combination was amazing. I felt completely rejuvenated afterward. Highly recommend trying the recovery package.",
+  rating: 5,
+  date: "June 10, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-6",
+  name: "Neha Joshi",
+  review: "From the moment I entered, everything felt luxurious and peaceful. The staff made me feel comfortable, and the treatment exceeded expectations.",
+  rating: 5,
+  date: "June 8, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-7",
+  name: "Arjun Desai",
+  review: "I've made this part of my weekly routine. The wellness sessions have significantly improved my focus, recovery, and overall well-being.",
+  rating: 5,
+  date: "June 5, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-8",
+  name: "Sneha Patel",
+  review: "The sound healing session was unlike anything I've experienced before. I left feeling deeply relaxed and mentally refreshed.",
+  rating: 5,
+  date: "June 2, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-9",
+  name: "Rohan Khanna",
+  review: "Outstanding service and a premium experience from start to finish. The facilities are immaculate, and the therapists are highly skilled.",
+  rating: 5,
+  date: "May 30, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-10",
+  name: "Meera Nair",
+  review: "A perfect escape from the city's chaos. Every detail, from the ambiance to the treatments, felt thoughtfully curated.",
+  rating: 5,
+  date: "May 28, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150"
+},
+
+{
+  id: "rev-11",
+  name: "Aditya Shah",
+  review: "Excellent service and professional therapists. The recovery therapies helped relieve weeks of muscle tension in just one session.",
+  rating: 5,
+  date: "May 25, 2026",
+  isGoogleReview: true,
+  avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150"
+}
 ];
 
 export const POLICIES = {
