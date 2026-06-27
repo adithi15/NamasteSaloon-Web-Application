@@ -220,7 +220,7 @@ export const SPECIALISTS = [
     "Certified Aromatherapy Practitioner",
     "Spa Therapy Certification"
   ],
-  experience: "6+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Expert in aromatherapy and hot stone massage, creating deeply relaxing and rejuvenating wellness experiences."
 },
 {
@@ -234,7 +234,7 @@ export const SPECIALISTS = [
     "Certified Thai Massage Therapist",
     "Balinese Massage Certification"
   ],
-  experience: "8+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Combines traditional Thai stretching techniques with Balinese massage for complete body relaxation."
 },
 {
@@ -248,7 +248,7 @@ export const SPECIALISTS = [
     "Certified Lymphatic Massage Therapist",
     "Professional Spa Therapy Certification"
   ],
-  experience: "10+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Experienced in lymphatic drainage, relaxation therapies, and customized wellness treatments."
 },
 {
@@ -276,7 +276,7 @@ export const SPECIALISTS = [
     "Certified Spa Therapist",
     "Body Treatment Specialist"
   ],
-  experience: "9+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Specializes in luxury body treatments, exfoliation therapies, and full-body wellness rituals."
 },
 {
@@ -290,7 +290,7 @@ export const SPECIALISTS = [
     "Certified Thai Spa Therapist",
     "Herbal Therapy Certification"
   ],
-  experience: "6+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Uses herbal compress treatments and traditional Thai massage techniques to restore energy and flexibility."
 },
 {
@@ -304,7 +304,7 @@ export const SPECIALISTS = [
     "Certified Swedish Massage Therapist",
     "Advanced Aromatherapy Practitioner"
   ],
-  experience: "11+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Known for personalized Swedish and aroma massage sessions that enhance relaxation and reduce muscle tension."
 },
 {
@@ -318,7 +318,7 @@ export const SPECIALISTS = [
     "Certified Holistic Wellness Therapist",
     "Professional Spa Management Certification"
   ],
-  experience: "8+ Years of Professional Experience",
+  experience: "5+ Years of Professional Experience",
   bio: "Dedicated to holistic wellness through customized massage therapies that promote relaxation, recovery, and overall well-being."
 }
 ];
