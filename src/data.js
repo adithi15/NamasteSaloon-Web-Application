@@ -12,7 +12,7 @@ export const BUSINESS_DETAILS = {
   email: "concierge@namastey.social",
   address: "Sea Face Plaza, Marine Drive, Charni Road, Mumbai, MH - 400004",
   mapsLink: "https://maps.google.com/?q=Marine+Drive+Charni+Road+Mumbai",
-  instagram: "https://instagram.com/namastey.wellness",
+  instagram: "https://www.instagram.com/namasteywellnessspa/",
   facebook: "https://facebook.com/namastey.wellness"
 };
 

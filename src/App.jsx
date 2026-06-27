@@ -515,7 +515,6 @@
 //   );
 // }
 
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -600,7 +599,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F5] via-[#EFECE5] to-[#E9E4DB] text-slate-800 relative overflow-x-hidden selection:bg-emerald-100 selection:text-slate-950 font-sans flex flex-col justify-between pt-20 md:pt-24">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF8F5] via-[#EFECE5] to-[#E9E4DB] text-slate-800 relative overflow-x-hidden selection:bg-emerald-100 selection:text-slate-950 font-sans flex flex-col justify-between">
       {/* Background ambient glowing spheres for sophisticated medical look */}
       <div className="absolute top-12 right-12 w-[450px] h-[450px] bg-white/50 rounded-full blur-[90px] opacity-75 ambient-glow-1 pointer-events-none" />
       <div className="absolute top-[40%] left-[-80px] w-[500px] h-[500px] bg-[#2D5446]/5 rounded-full blur-[110px] opacity-60 ambient-glow-2 pointer-events-none" />
@@ -725,6 +724,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
+              className="pt-20 md:pt-24"
             >
               <CatalogSection
                 onSelectService={(s) => handleOpenBooking(s, null)}
@@ -739,6 +739,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
+              className="pt-20 md:pt-24"
             >
               <div className="bg-[#022A24] text-[#FAF8F5] py-16 text-center border-b border-[#2D5446]/20">
                 <div className="max-w-3xl mx-auto px-4 space-y-4">
@@ -768,6 +769,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
+              className="pt-20 md:pt-24"
             >
               <MembershipsSection
                 onSelectPlan={(plan) => handleOpenBooking(null, null, plan)}
@@ -782,6 +784,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
+              className="pt-20 md:pt-24"
             >
               <BlogSection />
             </motion.div>
@@ -794,6 +797,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
+              className="pt-20 md:pt-24"
             >
               <ContactSection />
               <PoliciesSection />
@@ -807,7 +811,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
-              className="py-16 md:py-24 px-4 max-w-4xl mx-auto text-left"
+              className="pt-20 md:pt-24 py-16 md:py-24 px-4 max-w-4xl mx-auto text-left"
             >
               <div className="space-y-8">
                 <div className="border-b border-black/5 pb-6">
@@ -1003,7 +1007,7 @@ export default function App() {
       </footer>
 
       {/* WHATSAPP FLOATING BUTTON - Requested Extra Feature */}
-      <div className="fixed bottom-6 right-6 z-40 group">
+      {/* <div className="fixed bottom-6 right-6 z-40 group">
         <div className="absolute right-0 bottom-full mb-2 bg-[#022A24] text-[#FAF8F5] text-[10px] font-mono font-bold uppercase tracking-wider py-1.5 px-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-md border border-[#2D5446]/20">
           Chat With Concierge
         </div>
@@ -1011,12 +1015,12 @@ export default function App() {
           onClick={openWhatsAppGeneral}
           className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all duration-300 relative cursor-pointer"
           aria-label="Contact via WhatsApp"
-        >
+        > */}
           {/* Pulsing ring animation */}
-          <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
+          {/* <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
           <MessageSquare className="w-6 h-6 fill-white text-[#25D366]" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

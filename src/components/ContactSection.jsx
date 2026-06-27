@@ -1,5 +1,3 @@
- 
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Phone, Mail, MapPin, HelpCircle, ChevronDown, Sparkles, Send } from "lucide-react";
@@ -8,7 +6,6 @@ import { getWhatsAppUrl } from "../whatsapp.js";
 
 export default function ContactSection() {
   const [openFaq, setOpenFaq] = useState(null);
-
   const [messageText, setMessageText] = useState("");
   const [senderName, setSenderName] = useState("");
 
@@ -16,22 +13,15 @@ export default function ContactSection() {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  const activeClubs = [
-    { name: "Charni Road (Main Sanctuary)", desc: "Sea Face Plaza, Marine Drive, Charni Road, Mumbai, MH - 400004", phone: "+91 95944 01718" },
-    { name: "Mumbai Central", desc: "Elphinstone Building, Near Station Road, Mumbai Central, Mumbai, MH - 400008", phone: "+91 95944 01719" },
-    { name: "Vashi (Navi Mumbai)", desc: "Commodore Arcade, Sector 17, Vashi, Navi Mumbai, MH - 400703", phone: "+91 95944 01720" },
-    { name: "Andheri (West)", desc: "Crystal Heights, Link Road, Andheri West, Mumbai, MH - 400053", phone: "+91 95944 01721" }
-  ];
-
   const handleInquirySubmit = (e) => {
     e.preventDefault();
     if (!messageText.trim()) return;
-    
-    const preparedText = 
+
+    const preparedText =
 `*Inquiry from website*
 *Name:* ${senderName || "Valued Customer"}
 *Inquiry details:* ${messageText}`;
-    
+
     window.open(getWhatsAppUrl(preparedText), "_blank", "noopener,noreferrer");
     setMessageText("");
     setSenderName("");
@@ -40,9 +30,9 @@ export default function ContactSection() {
   return (
     <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent" id="contact-section">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(45,84,70,0.02),transparent_60%)] pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-2 mb-2">
@@ -54,45 +44,38 @@ export default function ContactSection() {
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
           <p className="text-slate-600 text-sm md:text-base font-semibold font-display">
-            Directly connect with our reservations concierge desk, browse our active city clubs, or explore our FAQ directory.
+            Directly connect with our reservations concierge desk or explore our FAQ directory.
           </p>
         </div>
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20">
-          
-          {/* Active Locations Columns (Left Side) */}
+
+          {/* Left Side */}
           <div className="lg:col-span-7 space-y-8 text-left">
-            <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl space-y-6">
+
+            {/* Single Location Card */}
+            <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl space-y-4">
               <h3 className="font-serif text-xl md:text-2xl text-slate-900 font-extrabold">
-                Active Location Clubs
+                Our Location
               </h3>
-              <p className="text-slate-600 text-xs font-display font-semibold leading-relaxed">
-                We operate custom-designed somatic thermal suites and diagnostic consultation labs across four convenient Mumbai districts. Select any club below for direct directions or localized coordinates.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {activeClubs.map((club, idx) => (
-                  <div key={idx} className="space-y-2 border-l-2 border-[#2D5446]/30 pl-4 py-1">
-                    <h4 className="font-display font-extrabold text-sm text-[#1E3E34] uppercase tracking-wide">
-                      {club.name}
-                    </h4>
-                    <p className="text-xs text-slate-700 font-display font-medium leading-relaxed">
-                      {club.desc}
-                    </p>
-                    <div className="text-[11px] font-mono text-slate-500 font-bold flex flex-col gap-0.5">
-                      <span>Direct: {club.phone}</span>
-                      <a
-                        href={BUSINESS_DETAILS.mapsLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[#2D5446] hover:underline hover:text-[#1E3E34] mt-1 inline-flex items-center gap-1 cursor-pointer"
-                      >
-                        View Google Maps &rarr;
-                      </a>
-                    </div>
-                  </div>
-                ))}
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="space-y-1.5">
+                  <p className="text-sm text-slate-700 font-display font-medium leading-relaxed">
+                    {BUSINESS_DETAILS.address}
+                  </p>
+                  <a
+                    href="https://maps.app.goo.gl/rZE24ZVNTAPSxVRu5"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] font-mono font-bold text-[#2D5446] hover:text-[#1E3E34] hover:underline inline-flex items-center gap-1"
+                  >
+                    View on Google Maps &rarr;
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -214,7 +197,7 @@ export default function ContactSection() {
                     }`}
                   />
                 </button>
-                
+
                 <AnimatePresence initial={false}>
                   {openFaq === idx && (
                     <motion.div

@@ -1,11 +1,15 @@
- 
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Menu, X, ChevronDown, Calendar, Sparkles, MapPin, Layers, Award
+  Menu,
+  X,
+  ChevronDown,
+  Calendar,
+  Sparkles,
+  MapPin,
+  Layers,
+  Award,
 } from "lucide-react";
-import BrandLogo from "./BrandLogo.jsx";
 
 export default function Header({ onNavigate, onOpenBooking, activeView }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,8 +27,19 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
 
   const navMenuItems = {
     locations: ["Charni Road", "Mumbai Central", "Vashi", "Andheri"],
-    offerings: ["Tech-Remedies", "Alternative Medicine", "Custom Massages", "Biometric Testing", "Wellness Classes"],
-    memberships: ["Somatic Day Pass", "Acoustic Tier", "Pranayama Club", "Universal VIP"]
+    offerings: [
+      "Tech-Remedies",
+      "Alternative Medicine",
+      "Custom Massages",
+      "Biometric Testing",
+      "Wellness Classes",
+    ],
+    memberships: [
+      "Somatic Day Pass",
+      "Acoustic Tier",
+      "Pranayama Club",
+      "Universal VIP",
+    ],
   };
 
   const handleNavClick = (viewName) => {
@@ -42,142 +57,152 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full text-[#FAF8F5] transition-all duration-500 ease-in-out ${
-        scrolled
-          ? "bg-[#022A24]/95 backdrop-blur shadow-lg border-b border-[#2D5446]/20"
-          : "bg-[#022A24] shadow-md border-b border-[#2D5446]/20"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 w-full text-[#FAF8F5] transition-all duration-500 ease-in-out bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 md:h-24 flex items-center justify-between">
-        
         {/* Left: Brand Logo & Title */}
         <div
           onClick={() => handleNavClick("home")}
           className="cursor-pointer group flex items-center"
           id="header-brand-trigger"
         >
-          <BrandLogo />
+          <img
+            src="/logo2.jpeg"
+            alt="Logo"
+            className="h-12 md:h-14 w-auto object-contain"
+          />
         </div>
-
         {/* Center: Desktop Navigation Links with Mega-dropdown triggers */}
-        <nav
-          className="hidden lg:flex items-center gap-8 text-[11px] font-display tracking-widest uppercase text-[#FAF8F5]/90"
-          id="desktop-navbar"
-        >
-          <button
-            onClick={() => handleNavClick("home")}
-            className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-              activeView === "home" ? "text-white" : "text-[#FAF8F5]/80"
-            }`}
-          >
-            Home
-            {activeView === "home" && (
-              <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
-            )}
-          </button>
-
-          {/* LOCATIONS Dropdown */}
-          <div
-            className="relative py-8"
-            onMouseEnter={() => setHoveredDropdown("locations")}
-            onMouseLeave={() => setHoveredDropdown(null)}
-          >
-            <button className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer">
-              <span>Locations</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
-                  hoveredDropdown === "locations" ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
-
-          {/* OFFERINGS Dropdown */}
-          <div
-            className="relative py-8"
-            onMouseEnter={() => setHoveredDropdown("offerings")}
-            onMouseLeave={() => setHoveredDropdown(null)}
+        {/* Background wrapper added ONLY around the nav links (not logo, not Book Now) */}
+        <div className=" hidden lg:block">
+          <nav
+            className="flex items-center gap-8 text-[12px] font-display tracking-widest uppercase text-[#FAF8F5]/90"
+            id="desktop-navbar"
           >
             <button
-              onClick={() => handleNavClick("services")}
-              className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer"
-            >
-              <span>Services</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
-                  hoveredDropdown === "offerings" ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
-
-          {/* MEMBERSHIPS Dropdown */}
-          <div
-            className="relative py-8"
-            onMouseEnter={() => setHoveredDropdown("memberships")}
-            onMouseLeave={() => setHoveredDropdown(null)}
-          >
-            <button
-              onClick={() => handleNavClick("memberships")}
-              className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer"
-            >
-              <span>Memberships</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
-                  hoveredDropdown === "memberships" ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
-
-          <button
-            onClick={() => handleNavClick("why-spa")}
-            className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-              activeView === "why-spa" ? "text-white" : "text-[#FAF8F5]/80"
-            }`}
-          >
-            Spa Healers
-            {activeView === "why-spa" && (
-              <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
-            )}
-          </button>
-
-          {/* <button
-            onClick={() => handleNavClick("blog")}
-            className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-              activeView === "blog" ? "text-white" : "text-[#FAF8F5]/80"
-            }`}
-          >
-            Blog
-            {activeView === "blog" && (
-              <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
-            )}
-          </button> */}
-
-          <button
-            onClick={() => handleNavClick("contact")}
-            className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-              activeView === "contact" ? "text-white" : "text-[#FAF8F5]/80"
-            }`}
-          >
-            Contact
-            {activeView === "contact" && (
-              <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
-            )}
-          </button>
-
-            {/* <button
-              onClick={() => handleNavClick("bookings")}
+              onClick={() => handleNavClick("home")}
               className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
-                activeView === "bookings" ? "text-white" : "text-[#FAF8F5]/80"
+                activeView === "home" ? "text-white" : "text-[#FAF8F5]/80"
               }`}
             >
-              Reservations
-              {activeView === "bookings" && (
-                <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
+              Home
+              {activeView === "home" && (
+                <motion.span
+                  layoutId="activeNavLine"
+                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
+                />
               )}
-            </button> */}
-        </nav>
+            </button>
+
+            {/* LOCATIONS Dropdown */}
+            {/* <div
+              className="relative py-8"
+              onMouseEnter={() => setHoveredDropdown("locations")}
+              onMouseLeave={() => setHoveredDropdown(null)}
+            >
+              <button className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer">
+                <span>Locations</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
+                    hoveredDropdown === "locations" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div> */}
+
+            {/* OFFERINGS Dropdown */}
+            <div
+              className="relative py-8"
+              onMouseEnter={() => setHoveredDropdown("offerings")}
+              onMouseLeave={() => setHoveredDropdown(null)}
+            >
+              <button
+                onClick={() => handleNavClick("services")}
+                className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer"
+              >
+                <span>Services</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
+                    hoveredDropdown === "offerings" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* MEMBERSHIPS Dropdown */}
+            <div
+              className="relative py-8"
+              onMouseEnter={() => setHoveredDropdown("memberships")}
+              onMouseLeave={() => setHoveredDropdown(null)}
+            >
+              <button
+                onClick={() => handleNavClick("memberships")}
+                className="flex items-center gap-1.5 hover:text-white transition-colors focus:outline-none font-bold cursor-pointer"
+              >
+                <span>Memberships</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-[#A1CBB4] transition-transform duration-300 ${
+                    hoveredDropdown === "memberships" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* <button
+                onClick={() => handleNavClick("why-spa")}
+                className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+                  activeView === "why-spa" ? "text-white" : "text-[#FAF8F5]/80"
+                }`}
+              >
+                Spa Healers
+                {activeView === "why-spa" && (
+                  <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
+                )}
+              </button> */}
+
+            <button
+              onClick={() => handleNavClick("blog")}
+              className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+                activeView === "blog" ? "text-white" : "text-[#FAF8F5]/80"
+              }`}
+            >
+              Blog
+              {activeView === "blog" && (
+                <motion.span
+                  layoutId="activeNavLine"
+                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
+                />
+              )}
+            </button>
+
+            <button
+              onClick={() => handleNavClick("contact")}
+              className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+                activeView === "contact" ? "text-white" : "text-[#FAF8F5]/80"
+              }`}
+            >
+              Contact
+              {activeView === "contact" && (
+                <motion.span
+                  layoutId="activeNavLine"
+                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
+                />
+              )}
+            </button>
+
+            {/* <button
+                onClick={() => handleNavClick("bookings")}
+                className={`hover:text-white transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+                  activeView === "bookings" ? "text-white" : "text-[#FAF8F5]/80"
+                }`}
+              >
+                Reservations
+                {activeView === "bookings" && (
+                  <motion.span layoutId="activeNavLine" className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]" />
+                )}
+              </button> */}
+          </nav>
+        </div>
 
         {/* Right Action buttons */}
         <div className="hidden lg:flex items-center gap-4">
@@ -234,9 +259,13 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-2">
                       <MapPin className="w-3.5 h-3.5" /> SELECT A CLUB
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">Urban Sanctuaries</h4>
+                    <h4 className="font-serif text-lg font-bold text-white mb-2">
+                      Urban Sanctuaries
+                    </h4>
                     <p className="text-[11px] text-[#FAF8F5]/70 leading-relaxed font-semibold">
-                      Handcrafted physical wellness suites, diagnostic consultation labs, and holistic thermal therapy rooms across Mumbai.
+                      Handcrafted physical wellness suites, diagnostic
+                      consultation labs, and holistic thermal therapy rooms
+                      across Mumbai.
                     </p>
                   </div>
                   <div className="col-span-3 grid grid-cols-4 gap-4">
@@ -246,9 +275,15 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                         onClick={() => handleNavClick("contact")}
                         className="p-5 rounded-2xl bg-white/5 border border-transparent hover:border-[#DECBA5]/30 hover:bg-white/10 text-left transition-all group cursor-pointer animate-fadeIn"
                       >
-                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">{loc} Club</span>
-                        <span className="text-[9px] text-[#FAF8F5]/60 mt-2 block font-mono leading-none">Luxury Healing Center</span>
-                        <span className="text-[9px] text-[#DECBA5] mt-1.5 block font-display tracking-wide uppercase font-black">View Details &rarr;</span>
+                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                          {loc} Club
+                        </span>
+                        <span className="text-[9px] text-[#FAF8F5]/60 mt-2 block font-mono leading-none">
+                          Luxury Healing Center
+                        </span>
+                        <span className="text-[9px] text-[#DECBA5] mt-1.5 block font-display tracking-wide uppercase font-black">
+                          View Details &rarr;
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -261,9 +296,13 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-2">
                       <Layers className="w-3.5 h-3.5" /> SERVICES DIRECTORY
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">Somatic Practices</h4>
+                    <h4 className="font-serif text-lg font-bold text-white mb-2">
+                      Somatic Practices
+                    </h4>
                     <p className="text-[11px] text-[#FAF8F5]/70 leading-relaxed font-semibold">
-                      Dive into clinically analytical somatic remedies, metabolic recovery mechanisms, and physiological wellness theories.
+                      Dive into clinically analytical somatic remedies,
+                      metabolic recovery mechanisms, and physiological wellness
+                      theories.
                     </p>
                   </div>
                   <div className="col-span-3 grid grid-cols-3 gap-4">
@@ -273,8 +312,12 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                         onClick={() => handleNavClick("services")}
                         className="p-4 rounded-2xl bg-white/5 border border-transparent hover:border-[#DECBA5]/30 hover:bg-white/10 text-left transition-all group cursor-pointer animate-fadeIn"
                       >
-                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">{cat}</span>
-                        <span className="text-[9px] text-[#FAF8F5]/60 mt-1.5 block font-mono leading-none">Clinical Somatics</span>
+                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                          {cat}
+                        </span>
+                        <span className="text-[9px] text-[#FAF8F5]/60 mt-1.5 block font-mono leading-none">
+                          Clinical Somatics
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -287,9 +330,13 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-2">
                       <Award className="w-3.5 h-3.5" /> COMMITMENTS & PASSES
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">Club Memberships</h4>
+                    <h4 className="font-serif text-lg font-bold text-white mb-2">
+                      Club Memberships
+                    </h4>
                     <p className="text-[11px] text-[#FAF8F5]/70 leading-relaxed font-semibold">
-                      Join any of our local clubs to secure permanent slots, unlock premium wellness suites, and consult with somatic specialists.
+                      Join any of our local clubs to secure permanent slots,
+                      unlock premium wellness suites, and consult with somatic
+                      specialists.
                     </p>
                   </div>
                   <div className="col-span-3 grid grid-cols-4 gap-4">
@@ -299,9 +346,15 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                         onClick={() => handleNavClick("memberships")}
                         className="p-5 rounded-2xl bg-white/5 border border-transparent hover:border-[#DECBA5]/30 hover:bg-white/10 text-left transition-all group cursor-pointer animate-fadeIn"
                       >
-                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">{mem}</span>
-                        <span className="text-[9px] text-[#FAF8F5]/60 mt-2 block font-mono leading-none">All-Inclusive Passes</span>
-                        <span className="text-[9px] text-[#DECBA5] mt-1.5 block font-display tracking-wide uppercase font-black">Explore Tier &rarr;</span>
+                        <span className="text-xs font-bold text-white group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                          {mem}
+                        </span>
+                        <span className="text-[9px] text-[#FAF8F5]/60 mt-2 block font-mono leading-none">
+                          All-Inclusive Passes
+                        </span>
+                        <span className="text-[9px] text-[#DECBA5] mt-1.5 block font-display tracking-wide uppercase font-black">
+                          Explore Tier &rarr;
+                        </span>
                       </button>
                     ))}
                   </div>
