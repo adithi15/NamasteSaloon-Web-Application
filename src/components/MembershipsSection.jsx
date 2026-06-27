@@ -23,8 +23,8 @@ export default function MembershipsSection({ onSelectPlan }) {
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
-            <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">SOMATIC COMMITMENTS</span>
+            {/* <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
+            <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">SOMATIC COMMITMENTS</span> */}
           </div>
           <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
             Memberships & Packages

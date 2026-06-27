@@ -196,35 +196,131 @@ export const SERVICES = [
 
 export const SPECIALISTS = [
   {
-    id: "spec-1",
-    name: "Aarya Varma",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=600",
-    rating: 4.9,
-    category: SpaCategory.MASSAGES,
-    specialtyTag: "AYURVEDIC MEDICINE & PANCHAKARMA",
-    degrees: [
-      "B.A.M.S (Govt. Ayurvedic Medical College, Bengaluru)",
-      "M.S. in Panchakarma (Global Institute of Indian Medicine)"
-    ],
-    experience: "12+ Years of Advanced Clinical Practice",
-    availableDays: ["Mon", "Tue", "Thu", "Fri", "Sat"],
-    bio: "Expert in diagnosing constitutional doshas and executing targeted deep-tissue somatic release therapy using bespoke warm organic oils."
-  },
-  {
-    id: "spec-2",
-    name: "Dr. Marcus Sterling",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600&h=600",
-    rating: 4.8,
-    category: SpaCategory.BIOMETRIC_TESTING,
-    specialtyTag: "SPORTS SCIENCE & PERFORMANCE CARDIOLOGY",
-    degrees: [
-      "M.D. (Stanford University School of Medicine)",
-      "Fellowship in Sports Recovery (Mayo Clinic, Rochester)"
-    ],
-    experience: "9+ Years coaching elite and Olympic athletes",
-    availableDays: ["Tue", "Wed", "Fri", "Sat"],
-    bio: "Specializes in biometric profiling, peak cardiac health output, hyperbaric oxygen protocols, and custom high-altitude oxygen recovery."
-  }
+  id: "spec-1",
+  name: "Arman",
+  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.9,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "DEEP TISSUE & SWEDISH MASSAGE",
+  degrees: [
+    "Certified Massage Therapist (CMT)",
+    "Advanced Spa & Wellness Certification"
+  ],
+  experience: "5+ Years of Professional Experience",
+  bio: "Specializes in deep tissue, Swedish, and relaxation therapies to relieve stress, improve circulation, and promote overall wellness."
+},
+{
+  id: "spec-2",
+  name: "Jerisa",
+  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.9,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "AROMATHERAPY & HOT STONE THERAPY",
+  degrees: [
+    "Certified Aromatherapy Practitioner",
+    "Spa Therapy Certification"
+  ],
+  experience: "6+ Years of Professional Experience",
+  bio: "Expert in aromatherapy and hot stone massage, creating deeply relaxing and rejuvenating wellness experiences."
+},
+{
+  id: "spec-3",
+  name: "Eva",
+  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.8,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "BALINESE & THAI MASSAGE",
+  degrees: [
+    "Certified Thai Massage Therapist",
+    "Balinese Massage Certification"
+  ],
+  experience: "8+ Years of Professional Experience",
+  bio: "Combines traditional Thai stretching techniques with Balinese massage for complete body relaxation."
+},
+{
+  id: "spec-4",
+  name: "Victoria",
+  image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 5.0,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "LYMPHATIC DRAINAGE & RELAXATION",
+  degrees: [
+    "Certified Lymphatic Massage Therapist",
+    "Professional Spa Therapy Certification"
+  ],
+  experience: "10+ Years of Professional Experience",
+  bio: "Experienced in lymphatic drainage, relaxation therapies, and customized wellness treatments."
+},
+{
+  id: "spec-5",
+  name: "Amy",
+  image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.9,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "REFLEXOLOGY & FOOT THERAPY",
+  degrees: [
+    "Certified Reflexologist",
+    "Holistic Wellness Certification"
+  ],
+  experience: "5+ Years of Professional Experience",
+  bio: "Provides therapeutic reflexology sessions focused on restoring balance and relieving body tension."
+},
+{
+  id: "spec-6",
+  name: "Ruby",
+  image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.8,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "SIGNATURE SPA & BODY THERAPIES",
+  degrees: [
+    "Certified Spa Therapist",
+    "Body Treatment Specialist"
+  ],
+  experience: "9+ Years of Professional Experience",
+  bio: "Specializes in luxury body treatments, exfoliation therapies, and full-body wellness rituals."
+},
+{
+  id: "spec-7",
+  name: "Juju",
+  image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.9,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "HERBAL COMPRESS & THAI THERAPY",
+  degrees: [
+    "Certified Thai Spa Therapist",
+    "Herbal Therapy Certification"
+  ],
+  experience: "6+ Years of Professional Experience",
+  bio: "Uses herbal compress treatments and traditional Thai massage techniques to restore energy and flexibility."
+},
+{
+  id: "spec-8",
+  name: "Crystal",
+  image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 5.0,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "SWEDISH & AROMA MASSAGE",
+  degrees: [
+    "Certified Swedish Massage Therapist",
+    "Advanced Aromatherapy Practitioner"
+  ],
+  experience: "11+ Years of Professional Experience",
+  bio: "Known for personalized Swedish and aroma massage sessions that enhance relaxation and reduce muscle tension."
+},
+{
+  id: "spec-9",
+  name: "Hazel",
+  image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600&h=600",
+  rating: 4.9,
+  category: SpaCategory.MASSAGES,
+  specialtyTag: "HOLISTIC WELLNESS & SPA THERAPY",
+  degrees: [
+    "Certified Holistic Wellness Therapist",
+    "Professional Spa Management Certification"
+  ],
+  experience: "8+ Years of Professional Experience",
+  bio: "Dedicated to holistic wellness through customized massage therapies that promote relaxation, recovery, and overall well-being."
+}
 ];
 
 export const PRICING_PACKAGES = [
@@ -469,7 +565,7 @@ export const TESTIMONIALS = [
   rating: 5,
   date: "May 28, 2026",
   isGoogleReview: true,
-  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150"
+  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=8 Marcus Sterling0&w=150"
 },
 
 {

@@ -1,5 +1,3 @@
- 
-
 import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight, Clock, Star, Sparkles } from "lucide-react";
 import { SERVICES } from "../data.js";
@@ -7,9 +5,9 @@ import { SERVICES } from "../data.js";
 
 export default function ServiceCarousel({ onSelectService }) {
   const carouselRef = useRef(null);
-  
+
   // Filter for featured services
-  const featuredServices = SERVICES.filter(s => s.isFeatured);
+  const featuredServices = SERVICES.filter((s) => s.isFeatured);
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -24,24 +22,30 @@ export default function ServiceCarousel({ onSelectService }) {
   };
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden" id="services-carousel">
+    <section
+      className="relative py-16 md:py-24 overflow-hidden"
+      id="services-carousel"
+    >
       {/* Decorative background radial fade */}
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#2D5446]/2 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Carousel Header block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-14">
-          <div className="flex-1">
+          <div className="flex-1  flex flex-col items-center text-center">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-[#2D5446]" />
-              <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">REMEDY DISCOVERIES</span>
+              {/* <Sparkles className="w-4 h-4 text-[#2D5446]" />
+              <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">REMEDY DISCOVERIES</span> */}
             </div>
-            <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-bold">
+            <h2 className="font-serif  text-3xl md:text-5xl text-slate-900 font-bold">
               Featured Offerings
             </h2>
-            <p className="mt-3 text-sm text-slate-600 max-w-xl font-display font-semibold">
-              Immerse yourself in our highly sought-after, practitioner-led treatments designed to restore biological vitality and elevate somatic awareness.
+            <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
+
+            <p className="mt-3 text-sm text-slate-600 max-w-xl font-display font-semibold text-center">
+              Immerse yourself in our highly sought-after, practitioner-led
+              treatments designed to restore biological vitality and elevate
+              somatic awareness.
             </p>
           </div>
 
@@ -84,15 +88,17 @@ export default function ServiceCarousel({ onSelectService }) {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Visual Glass overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-80" />
-                
+
                 {/* Rating Badge */}
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[#1E3E34] font-extrabold text-xs flex items-center gap-1 border border-[#DECBA5]/30 shadow-md">
                   <Star className="w-3.5 h-3.5 fill-[#2D5446] text-[#2D5446]" />
                   <span>{service.rating.toFixed(2)}</span>
-                  <span className="text-slate-500 text-[9px] font-normal font-sans">({service.ratingCount})</span>
+                  <span className="text-slate-500 text-[9px] font-normal font-sans">
+                    ({service.ratingCount})
+                  </span>
                 </div>
 
                 {/* Service Category Badge */}
@@ -124,7 +130,9 @@ export default function ServiceCarousel({ onSelectService }) {
                       </div>
                       {/* Price */}
                       <div className="flex items-center gap-0.5 text-slate-900 font-bold text-base font-mono">
-                        <span className="text-sm font-normal text-slate-400">$</span>
+                        <span className="text-sm font-normal text-slate-400">
+                          $
+                        </span>
                         <span className="font-extrabold">{service.price}</span>
                       </div>
                     </div>
@@ -139,11 +147,9 @@ export default function ServiceCarousel({ onSelectService }) {
                   </div>
                 </div>
               </div>
-
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -297,26 +297,28 @@ export default function TestimonialsSection() {
           {" "}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
+              {/* <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
               <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">
                 SOMATIC SOCIAL VERDICT
-              </span>
+              </span> */}
             </div>
             <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
               What Our Members Say
             </h2>
+            <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
+
             <p className="mt-3 text-slate-600 text-sm md:text-base font-semibold font-display max-w-xl">
               Discover real-life experiences of athletic recovery, nervous
               system re-balancing, and holistic thermal resets.
             </p>
           </div>
-          <button
+          {/* <button
             onClick={() => setFormOpen(!formOpen)}
             className="mt-6 md:mt-10 px-6 py-3 bg-[#1E3E34] hover:bg-[#2D5446] text-white text-xs uppercase tracking-widest font-extrabold transition-all duration-300 flex items-center gap-2 rounded-xl shadow-md cursor-pointer hover:scale-105 active:scale-95"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Write A Review</span>
-          </button>
+          </button> */}
         </div>
 
         {/* Review Submission Form */}
