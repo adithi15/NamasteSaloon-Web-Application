@@ -1,5 +1,3 @@
- 
-
 import React, { useState } from "react";
 import { Check, Sparkles, Calendar } from "lucide-react";
 import { PRICING_PACKAGES } from "../data.js";
@@ -31,7 +29,7 @@ export default function MembershipsSection({ onSelectPlan }) {
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
           <p className="text-slate-600 text-sm md:text-base font-semibold font-display">
-            Select a plan fitted for your individual recovery pace, couple alignment targets, or seasonal Solstice detoxification routines.
+            Select a membership tier, prepaid package, or couple's experience fitted to your recovery routine.
           </p>
         </div>
 
@@ -39,10 +37,10 @@ export default function MembershipsSection({ onSelectPlan }) {
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {[
             { key: "all", label: "Show All" },
-            { key: "individual", label: "Day Pass" },
-            { key: "membership", label: "Monthly Plans" },
-            { key: "couple", label: "Couples" },
-            { key: "seasonal", label: "Solstice Special" }
+            { key: "membership", label: "Memberships" },
+            { key: "package", label: "Packages" },
+            { key: "couple-spa", label: "Couple Spa" },
+            { key: "couple-celebration", label: "Couple Celebration" }
           ].map((tab) => (
             <button
               key={tab.key}
@@ -80,7 +78,7 @@ export default function MembershipsSection({ onSelectPlan }) {
               <div className="text-left space-y-4">
                 <div className="space-y-1">
                   <span className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-slate-400">
-                    {plan.type} commitment
+                    {plan.type.replace("-", " ")} commitment
                   </span>
                   <h3 className="font-serif text-lg md:text-xl text-slate-900 font-extrabold group-hover:text-[#1E3E34] transition-colors leading-snug">
                     {plan.title}
@@ -89,7 +87,7 @@ export default function MembershipsSection({ onSelectPlan }) {
 
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-slate-900 font-black text-3xl font-mono">
-                    ${plan.price}
+                    ₹{plan.price.toLocaleString("en-IN")}
                   </span>
                   <span className="text-slate-500 text-xs font-mono font-semibold">
                     / {plan.duration}

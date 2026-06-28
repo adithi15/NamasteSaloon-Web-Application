@@ -34,10 +34,10 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
       "Wellness Classes",
     ],
     memberships: [
-      "Somatic Day Pass",
-      "Acoustic Tier",
-      "Pranayama Club",
-      "Universal VIP",
+      "Memberships Pass",
+      "Packages Tier",
+      "Couple SPA",
+      "Couple Celebration",
     ],
   };
 
@@ -55,14 +55,16 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
   }`;
 
   // Shared class for plain nav buttons
-  const btnClass = `transition-colors duration-300 focus:outline-none font-bold cursor-pointer py-8 relative ${
+  const btnClass = `transition-colors duration-300 focus:outline-none  cursor-pointer py-8 relative ${
+    // font bold 
     scrolled
       ? "text-slate-900 hover:text-[#2D5446]"
       : "text-[#FAF8F5]/80 hover:text-white"
   }`;
 
   // Shared class for dropdown trigger buttons
-  const dropdownBtnClass = `flex items-center gap-1.5 transition-colors focus:outline-none font-bold cursor-pointer ${
+  const dropdownBtnClass = `flex items-center gap-1.5 transition-colors focus:outline-none  cursor-pointer ${
+    // font bold 
     scrolled
       ? "text-slate-900 hover:text-[#2D5446]"
       : "text-[#FAF8F5]/80 hover:text-white"
@@ -88,7 +90,7 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
         {/* Center: Desktop Nav */}
         <div className="hidden lg:block">
           <nav
-            className="flex items-center gap-8 text-[12px] font-display tracking-widest uppercase"
+            className="flex items-center gap-8 text-[15px] font-display tracking-widest uppercase"
             id="desktop-navbar"
           >
             <button

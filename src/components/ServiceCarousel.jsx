@@ -131,7 +131,7 @@ export default function ServiceCarousel({ onSelectService }) {
                       {/* Price */}
                       <div className="flex items-center gap-0.5 text-slate-900 font-bold text-base font-mono">
                         <span className="text-sm font-normal text-slate-400">
-                          $
+                          ₹
                         </span>
                         <span className="font-extrabold">{service.price}</span>
                       </div>
