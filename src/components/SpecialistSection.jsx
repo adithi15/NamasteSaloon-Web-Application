@@ -1184,23 +1184,17 @@ function useInView(options = {}) {
   return [ref, inView];
 }
 
-/**
- * SLOW & SMOOTH PRO MAX CONFIG
- * Duration: 1.1s (Cinematic)
- * Curve: custom cubic-bezier (Deliberate & Silky)
- */
+/* ─── Animation Config ─── */
 const SMOOTH_CURVE = "cubic-bezier(0.3, 0, 0.2, 1)";
 const DURATION = "1.1s";
 
 function getSlideStyle(distance) {
   const abs = Math.abs(distance);
-  
   const configs = {
     0: { scale: 1.0, opacity: 1, blur: 0, brightness: 1, zIndex: 10 },
-    1: { scale: 0.85, opacity: 0.45, blur: 3, brightness: 0.8, zIndex: 5 },
-    2: { scale: 0.7, opacity: 0, blur: 8, brightness: 0.5, zIndex: 1 }, // Seamless fade-out
+    1: { scale: 0.82, opacity: 0.4, blur: 4, brightness: 0.8, zIndex: 5 },
+    2: { scale: 0.6, opacity: 0, blur: 12, brightness: 0.5, zIndex: 1 }, 
   };
-
   const cfg = configs[Math.min(abs, 2)];
   
   return {
@@ -1209,85 +1203,56 @@ function getSlideStyle(distance) {
     filter: `blur(${cfg.blur}px) brightness(${cfg.brightness})`,
     zIndex: cfg.zIndex,
     transition: `all ${DURATION} ${SMOOTH_CURVE}`,
-    pointerEvents: abs === 0 ? "auto" : "none",
+    // ONLY the center card can be clicked. 
+    // This allows the mouse to "pass through" side cards to scroll the page.
+    pointerEvents: abs === 0 ? "auto" : "none", 
   };
 }
 
-/* ─── Single Card ─── */
 function HealerCard({ healer, onBook, distance }) {
   const isActive = distance === 0;
   const [btnHover, setBtnHover] = useState(false);
 
   return (
-    <div
-      style={{
-        ...getSlideStyle(distance),
-        width: "100%",
-        borderRadius: 28,
-        overflow: "hidden",
-        background: "white",
-        border: `1px solid ${isActive ? "rgba(45,84,70,0.15)" : "rgba(0,0,0,0.03)"}`,
-        boxShadow: isActive
-          ? "0 40px 90px -20px rgba(30,62,52,0.15), 0 20px 40px -10px rgba(30,62,52,0.05)"
-          : "0 10px 30px -10px rgba(0,0,0,0.04)",
-        display: "flex",
-        flexDirection: "column",
-        transformOrigin: "center center",
-      }}
-    >
-      {/* Image Wrap */}
-      <div style={{ position: "relative", width: "100%", height: 300, overflow: "hidden" }}>
-        <img
-          src={healer.image}
-          alt={healer.name}
-          draggable={false}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transform: isActive ? "scale(1)" : "scale(1.15)",
-            transition: `transform 1.4s ${SMOOTH_CURVE}`,
-          }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)" }} />
-        
-        <div style={{
-          position: "absolute", top: 20, right: 20, background: "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(8px)", padding: "6px 14px", borderRadius: 100,
-          display: "flex", alignItems: "center", gap: 5, fontSize: 13, fontWeight: 900, color: "#1E3E34",
-        }}>
-          <Star size={13} fill="#2D5446" color="#2D5446" /> {healer.rating.toFixed(1)}
-        </div>
+    <div style={{
+      ...getSlideStyle(distance),
+      width: "100%",
+      borderRadius: 32,
+      overflow: "hidden",
+      background: "white",
+      border: `1px solid ${isActive ? "rgba(45,84,70,0.1)" : "transparent"}`,
+      boxShadow: isActive ? "0 40px 100px -20px rgba(30,62,52,0.18)" : "none",
+      display: "flex",
+      flexDirection: "column",
+    }}>
+      <div style={{ position: "relative", width: "100%", height: 320, overflow: "hidden" }}>
+        <img src={healer.image} alt={healer.name} draggable={false} style={{
+          width: "100%", height: "100%", objectFit: "cover",
+          transform: isActive ? "scale(1)" : "scale(1.2)",
+          transition: `transform 1.8s ${SMOOTH_CURVE}`,
+        }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }} />
       </div>
 
       <div style={{ padding: "32px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
-        <h3 style={{ fontFamily: "Georgia, serif", fontSize: 24, fontWeight: 800, color: "#0f172a", margin: "0 0 6px" }}>
-          {healer.name}
-        </h3>
-        <p style={{ fontSize: 11, fontFamily: "monospace", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.2em", color: "#2D5446", marginBottom: 20 }}>
-          {healer.specialtyTag}
-        </p>
-
-        <p style={{ fontSize: 15, color: "#64748b", lineHeight: 1.7, fontStyle: "italic", marginBottom: 24 }}>
-          "{healer.bio}"
-        </p>
-
+        <h3 style={{ fontFamily: "Georgia, serif", fontSize: 26, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>{healer.name}</h3>
+        <p style={{ fontSize: 11, fontFamily: "monospace", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.2em", color: "#2D5446", marginBottom: 20 }}>{healer.specialtyTag}</p>
+        <p style={{ fontSize: 15, color: "#64748b", lineHeight: 1.7, fontStyle: "italic", marginBottom: 24 }}>"{healer.bio}"</p>
         <div style={{ flexGrow: 1 }} />
-
         <button
           onClick={() => isActive && onBook(healer)}
           onMouseEnter={() => setBtnHover(true)}
           onMouseLeave={() => setBtnHover(false)}
           style={{
-            width: "100%", padding: "16px 0", background: "#1E3E34", color: "white", border: "none",
+            width: "100%", padding: "18px 0", background: "#1E3E34", color: "white", border: "none",
             borderRadius: 16, fontSize: 12, fontWeight: 800, fontFamily: "monospace", textTransform: "uppercase",
-            letterSpacing: "0.12em", display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-            cursor: isActive ? "pointer" : "default", transition: "all 0.4s ease",
-            transform: btnHover && isActive ? "translateY(-3px)" : "none",
-            boxShadow: btnHover && isActive ? "0 12px 24px rgba(30,62,52,0.25)" : "none",
+            letterSpacing: "0.15em", display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+            cursor: "pointer", transition: "all 0.4s ease",
+            transform: btnHover ? "translateY(-3px)" : "none",
+            boxShadow: btnHover ? "0 15px 30px rgba(30,62,52,0.2)" : "none",
           }}
         >
-          Book Appointment <ArrowRight size={16} />
+          Book Now <ArrowRight size={16} />
         </button>
       </div>
     </div>
@@ -1299,10 +1264,7 @@ export default function SpecialistSection({ onSelectSpecialist }) {
   const [animating, setAnimating] = useState(false);
   const [sectionRef, sectionInView] = useInView();
   const total = SPECIALISTS.length;
-
   const stageRef = useRef(null);
-  const activeIndexRef = useRef(activeIndex);
-  useEffect(() => { activeIndexRef.current = activeIndex; }, [activeIndex]);
 
   const go = (dir) => {
     if (animating) return;
@@ -1310,22 +1272,32 @@ export default function SpecialistSection({ onSelectSpecialist }) {
     if (next < 0 || next >= total) return;
     setAnimating(true);
     setActiveIndex(next);
-    setTimeout(() => setAnimating(false), 1100); // Matches DURATION
+    setTimeout(() => setAnimating(false), 1100); 
   };
 
+  /* 
+     FIX: Use Horizontal Wheel only. 
+     Does NOT call preventDefault() on vertical scroll, 
+     so the website keeps moving up/down.
+  */
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
-    let lastWheel = 0;
+    let lastMove = 0;
+    
     const onWheel = (e) => {
-      e.preventDefault();
       const now = Date.now();
-      if (now - lastWheel < 1200) return; // Allow previous animation to finish
-      lastWheel = now;
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (delta > 15) go(1);
-      else if (delta < -15) go(-1);
+      // Only trigger if user moves mouse horizontally (deltaX)
+      // or if they are swiping heavily sideways.
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+        e.preventDefault(); // Block horizontal page bounce
+        if (now - lastMove < 1200) return;
+        lastMove = now;
+        go(e.deltaX > 0 ? 1 : -1);
+      }
+      // If deltaY is bigger, we do NOTHING. Browser scrolls page naturally.
     };
+
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
   }, [activeIndex, animating]);
@@ -1335,46 +1307,36 @@ export default function SpecialistSection({ onSelectSpecialist }) {
     window.open(getWhatsAppUrl(`Hi! I'd like to book ${healer.name}.`), "_blank");
   };
 
-  const SLOTS = [-2, -1, 0, 1, 2];
-
   return (
-    <section ref={sectionRef} style={{ position: "relative", padding: "120px 0", background: "white" }}>
-      {/* Title */}
+    <section ref={sectionRef} style={{ position: "relative", padding: "120px 0", background: "#fff" }}>
       <div style={{
         textAlign: "center", maxWidth: 700, margin: "0 auto 80px", padding: "0 24px",
         opacity: sectionInView ? 1 : 0, transform: sectionInView ? "translateY(0)" : "translateY(40px)",
         transition: `all 1.2s ${SMOOTH_CURVE}`,
       }}>
-        <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#0f172a", marginBottom: 20 }}>
-          The Healer's Circle
-        </h2>
-        <p style={{ fontSize: "18px", color: "#64748b", lineHeight: 1.8, fontWeight: 500 }}>
-          A specialized collective of somatic therapists and clinical practitioners.
-        </p>
+        <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#0f172a", marginBottom: 20 }}>Our Specialists</h2>
+        <p style={{ fontSize: "18px", color: "#64748b", lineHeight: 1.8 }}>Expert clinical practitioners for your holistic recovery.</p>
       </div>
 
-      {/* Slider Stage */}
       <div style={{ opacity: sectionInView ? 1 : 0, transition: "opacity 1.5s ease 0.4s" }}>
         <div ref={stageRef} style={{
-          position: "relative", width: "100%", height: 680, display: "flex", alignItems: "center", justifyContent: "center"
+          position: "relative", width: "100%", height: 700, display: "flex", alignItems: "center", justifyContent: "center",
+          touchAction: "pan-y" // Critical: tells mobile browsers vertical scroll is allowed
         }}>
-          {SLOTS.map((offset) => {
+          {[-2, -1, 0, 1, 2].map((offset) => {
             const dataIndex = activeIndex + offset;
             if (dataIndex < 0 || dataIndex >= total) return null;
             const healer = SPECIALISTS[dataIndex];
-
-            // STEP is 33% so cards are big and spaced perfectly
-            const STEP = 33; 
-            const left = 50 + offset * STEP;
-
+            const STEP = 34; // Spacing
+            
             return (
               <div
                 key={healer.id}
                 onClick={() => offset !== 0 && go(offset > 0 ? 1 : -1)}
                 style={{
                   position: "absolute",
-                  width: "clamp(300px, 32%, 420px)", // Larger card size
-                  left: `${left}%`,
+                  width: "clamp(300px, 32%, 440px)",
+                  left: `${50 + offset * STEP}%`,
                   transform: "translateX(-50%)",
                   transition: `left ${DURATION} ${SMOOTH_CURVE}`,
                   cursor: offset === 0 ? "default" : "pointer",
@@ -1387,42 +1349,33 @@ export default function SpecialistSection({ onSelectSpecialist }) {
           })}
         </div>
 
-        {/* Navigation Controls */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40, marginTop: 50 }}>
-          <NavButton onClick={() => go(-1)} disabled={activeIndex === 0}><ChevronLeft size={24} /></NavButton>
-          
+        {/* Dots & Nav */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40, marginTop: 40 }}>
+          <NavBtn onClick={() => go(-1)} disabled={activeIndex === 0}><ChevronLeft /></NavBtn>
           <div style={{ display: "flex", gap: 10 }}>
             {SPECIALISTS.map((_, i) => (
               <div key={i} style={{
-                width: i === activeIndex ? 40 : 10,
-                height: 10,
-                borderRadius: 5,
-                background: i === activeIndex ? "#1E3E34" : "rgba(30,62,52,0.15)",
+                width: i === activeIndex ? 40 : 10, height: 10, borderRadius: 5,
+                background: i === activeIndex ? "#1E3E34" : "#e2e8f0",
                 transition: `all 0.8s ${SMOOTH_CURVE}`
               }} />
             ))}
           </div>
-
-          <NavButton onClick={() => go(1)} disabled={activeIndex === total - 1}><ChevronRight size={24} /></NavButton>
+          <NavBtn onClick={() => go(1)} disabled={activeIndex === total - 1}><ChevronRight /></NavBtn>
         </div>
       </div>
     </section>
   );
 }
 
-function NavButton({ onClick, disabled, children }) {
+function NavBtn({ onClick, disabled, children }) {
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      style={{
-        width: 60, height: 60, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.06)",
-        background: "white", display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.2 : 1,
-        transition: "all 0.4s cubic-bezier(0.3, 0, 0.2, 1)", color: "#1E3E34",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
-      }}
-    >
+    <button onClick={onClick} disabled={disabled} style={{
+      width: 60, height: 60, borderRadius: "50%", border: "1px solid #f1f5f9",
+      background: "white", display: "flex", alignItems: "center", justifyContent: "center",
+      cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.3 : 1,
+      transition: "all 0.3s ease", color: "#1E3E34", boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+    }}>
       {children}
     </button>
   );
