@@ -428,7 +428,7 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
   const navMenuItems = {
     locations: ["Charni Road", "Mumbai Central", "Vashi", "Andheri"],
     offerings: [
-      "Tech-Remedies", "Alternative Medicine", "Custom Massages",
+       "Alternative Medicine", "Custom Massages",
       "Biometric Testing", "Wellness Classes",
     ],
     memberships: [
@@ -600,22 +600,22 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-3">
                       <Layers className="w-3.5 h-3.5" /> SERVICES DIRECTORY
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">Somatic Practices</h4>
-                    <p className="text-[11px] text-white/55 leading-relaxed font-semibold">
+                    <h4 className="font-serif text-lg font-bold text-black mb-5">Somatic Practices</h4>
+                    <p className="text-[11px] text-black/55 leading-relaxed font-semibold">
                       Dive into clinically analytical somatic remedies, metabolic recovery mechanisms, and physiological wellness theories.
                     </p>
                   </div>
-                  <div className="col-span-3 grid grid-cols-3 gap-3">
+                  <div className="col-span-2 grid grid-cols-2 gap-4">
                     {navMenuItems.offerings.map((cat) => (
                       <button
                         key={cat}
                         onClick={() => handleNavClick("services")}
-                        className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:border-[#DECBA5]/35 hover:bg-white/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
+                        className="p-4 rounded-xl bg-black/[0.04] border border-black/[0.07] hover:border-[#DECBA5]/35 hover:bg-black/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
                       >
-                        <span className="text-xs font-bold text-white/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                        <span className="text-xs font-bold text-black/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
                           {cat}
                         </span>
-                        <span className="text-[9px] text-white/40 mt-1.5 block font-mono leading-none">
+                        <span className="text-[9px] text-black/40 mt-1.5 block font-mono leading-none">
                           Clinical Somatics
                         </span>
                       </button>
@@ -630,8 +630,8 @@ export default function Header({ onNavigate, onOpenBooking, activeView }) {
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-3">
                       <Award className="w-3.5 h-3.5" /> COMMITMENTS & PASSES
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">Club Memberships</h4>
-                    <p className="text-[11px] text-white/55 leading-relaxed font-semibold">
+                    <h4 className="font-serif text-lg font-bold text-black mb-2">Club Memberships</h4>
+                    <p className="text-[11px] text-black/55 leading-relaxed font-semibold">
                       Join any of our local clubs to secure permanent slots, unlock premium wellness suites, and consult with somatic specialists.
                     </p>
                   </div>
