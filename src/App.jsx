@@ -554,7 +554,11 @@ export default function App() {
     }
   }, []);
 
-  const handleOpenBooking = (service = null, specialist = null, plan = null) => {
+  const handleOpenBooking = (
+    service = null,
+    specialist = null,
+    plan = null,
+  ) => {
     const lines = ["Hi Namastey Wellness Spa! I'd like to book a session."];
 
     if (service) lines.push(`*Service:* ${service.name}`);
@@ -709,6 +713,8 @@ export default function App() {
 
               {/* MEMBERSHIPS AND PRICING PREVIEW */}
               <MembershipsSection
+                preview
+                onViewAll={() => setActiveView("memberships")}
                 onSelectPlan={(plan) => handleOpenBooking(null, null, plan)}
               />
 
@@ -1016,8 +1022,8 @@ export default function App() {
           className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all duration-300 relative cursor-pointer"
           aria-label="Contact via WhatsApp"
         > */}
-          {/* Pulsing ring animation */}
-          {/* <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
+      {/* Pulsing ring animation */}
+      {/* <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
           <MessageSquare className="w-6 h-6 fill-white text-[#25D366]" />
         </button>
       </div> */}
