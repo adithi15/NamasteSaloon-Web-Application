@@ -47,14 +47,14 @@ export default function ContactSection() {
 
   return (
     <section
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
       id="contact-section"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(45,84,70,0.02),transparent_60%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
             Contact Us
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
@@ -63,18 +63,18 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-14 sm:mb-20">
           {/* Address */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl space-y-4">
+            <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4">
               <h3 className="font-serif text-xl md:text-2xl text-slate-900 font-extrabold">
                 Visit Us
               </h3>
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 min-w-0">
                   <p className="text-sm text-slate-700 font-display font-medium leading-relaxed">
                     {BUSINESS_DETAILS.address}
                   </p>
@@ -92,8 +92,8 @@ export default function ContactSection() {
 
             {/* Phone + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-6 rounded-2xl flex items-start gap-4">
-                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446]">
+              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="space-y-2 min-w-0">
@@ -120,8 +120,8 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-6 rounded-2xl flex items-start gap-4">
-                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446]">
+              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="space-y-1 min-w-0">
@@ -212,16 +212,16 @@ export default function ContactSection() {
               >
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group"
+                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3 sm:gap-4 focus:outline-none cursor-pointer group"
                 >
-                  <div className="flex items-center gap-3">
-                    <HelpCircle className="w-4 h-4 text-[#2D5446] shrink-0" />
-                    <span className="font-display font-extrabold text-sm text-slate-800 group-hover:text-[#1E3E34] transition-colors">
+                  <div className="flex items-start gap-3 min-w-0">
+                    <HelpCircle className="w-4 h-4 text-[#2D5446] shrink-0 mt-0.5" />
+                    <span className="font-display font-extrabold text-sm text-slate-800 group-hover:text-[#1E3E34] transition-colors leading-snug">
                       {faq.question}
                     </span>
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${
+                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${
                       openFaq === idx ? "rotate-180" : ""
                     }`}
                   />

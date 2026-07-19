@@ -107,21 +107,21 @@ Hi concierge! I have submitted this booking on the website and would like to con
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
       <div
-        className="relative w-full max-w-lg bg-white border border-[#DECBA5]/40 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-lg bg-white border border-[#DECBA5]/40 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 flex flex-col max-h-[min(90vh,90dvh)]"
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         
         {/* Modal Header */}
-        <div className="p-6 bg-[#022A24] text-white flex justify-between items-center border-b border-[#2D5446]/20">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-[#DECBA5]" />
-            <h3 className="font-serif text-lg tracking-wider uppercase font-bold text-white">
+        <div className="p-4 sm:p-6 bg-[#022A24] text-white flex justify-between items-center border-b border-[#2D5446]/20 gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Calendar className="w-5 h-5 text-[#DECBA5] shrink-0" />
+            <h3 className="font-serif text-sm sm:text-base md:text-lg tracking-wider uppercase font-bold text-white truncate">
               Request A Reservation
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-white/80 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1 text-white/80 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -129,7 +129,7 @@ Hi concierge! I have submitted this booking on the website and would like to con
         </div>
 
         {/* Modal Body */}
-        <div className="flex-grow overflow-y-auto p-6 md:p-8 space-y-6 bg-[#FAF8F5]">
+        <div className="flex-grow overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6 bg-[#FAF8F5]">
           {success ? (
             <div className="text-center py-8 space-y-4">
               <CheckCircle className="w-16 h-16 text-[#2D5446] mx-auto" />
@@ -194,7 +194,7 @@ Hi concierge! I have submitted this booking on the website and would like to con
               </div>
 
               {/* Date & Time Grid */}
-              <div className="grid grid-cols-2 gap-4 text-left">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                 <div className="space-y-1.5">
                   <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-extrabold flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-[#2D5446]" /> Preferred Date
@@ -244,7 +244,7 @@ Hi concierge! I have submitted this booking on the website and would like to con
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-extrabold flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-[#2D5446]" /> Email Address

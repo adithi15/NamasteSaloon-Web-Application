@@ -3,7 +3,7 @@ import { BUSINESS_DETAILS } from "@/src/common/data";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#2D5446]/20 py-16 text-[#FAF8F5]/80 text-xs overflow-hidden">
+    <footer className="relative border-t border-[#2D5446]/20 py-12 sm:py-16 text-[#FAF8F5]/80 text-xs overflow-hidden">
       {/* Client background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -11,7 +11,7 @@ export default function Footer() {
       />
       <div className="absolute inset-0 bg-[#022A24]/82" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 text-left">
         {/* Col 1 */}
         <div className="space-y-4">
           <span className="font-serif text-lg tracking-[0.25em] font-semibold text-white leading-none block">
@@ -49,7 +49,7 @@ export default function Footer() {
             Monday — Saturday: 07:00 AM — 09:30 PM <br />
             Sunday: 08:30 AM — 08:00 PM <br />
             Direct intake:{" "}
-            <span className="text-white font-mono font-bold">
+            <span className="text-white font-mono font-bold break-all">
               {BUSINESS_DETAILS.email}
             </span>
           </p>
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-[#2D5446]/30 flex flex-col sm:flex-row items-center justify-between text-[11px] text-emerald-200/50 font-mono font-bold">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 pt-6 border-t border-[#2D5446]/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[10px] sm:text-[11px] text-emerald-200/50 font-mono font-bold">
         <span>
           &copy; {new Date().getFullYear()} {BUSINESS_DETAILS.name}. All Rights
           Reserved.

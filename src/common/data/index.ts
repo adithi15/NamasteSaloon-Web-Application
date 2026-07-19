@@ -205,7 +205,7 @@ export const SERVICES: Service[] = [
     price: 7000,
     rating: 5.0,
     ratingCount: 64,
-    image: svc("massage", 1),
+    image: svc("massage", 3),
     isFeatured: true
   },
   {

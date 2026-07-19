@@ -72,31 +72,31 @@ export default function PoliciesSection() {
   const currentPolicy = getPolicyContent()!;
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent" id="policies-section">
+    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent" id="policies-section">
       <div className="max-w-5xl mx-auto relative z-10">
         
         {/* Header Block */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
             <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">LEGAL COMPLIANCE</span>
           </div>
-          <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
             Sanctuary Policies
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4" />
         </div>
 
         {/* Dynamic Multi-tab layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 md:gap-12">
           
           {/* Tab buttons column */}
-          <div className="md:col-span-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0">
+          <div className="md:col-span-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0 -mx-1 px-1 scrollbar-thin">
             {tabItems.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center gap-3 px-5 py-4 rounded-xl text-xs uppercase tracking-widest font-bold border transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest font-bold border transition-all duration-300 whitespace-nowrap cursor-pointer shrink-0 ${
                   activeTab === tab.key
                     ? "bg-[#1E3E34] text-white border-[#1E3E34] shadow-md shadow-[#1E3E34]/15"
                     : "bg-white/60 border-white/60 hover:bg-white text-slate-800"
@@ -109,12 +109,12 @@ export default function PoliciesSection() {
           </div>
 
           {/* Policy Text panel */}
-          <div className="md:col-span-8 text-left bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-6 md:p-10 rounded-3xl space-y-6">
+          <div className="md:col-span-8 text-left bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-5 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl space-y-6">
             <div className="space-y-2">
               <span className="text-[9px] font-mono tracking-widest text-[#2D5446] font-black uppercase">
                 {activeTab} framework
               </span>
-              <h3 className="font-serif text-2xl md:text-3xl text-slate-900 font-extrabold leading-tight">
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-slate-900 font-extrabold leading-tight">
                 {currentPolicy.title}
               </h3>
               <p className="text-[#1E3E34] font-display font-semibold text-sm md:text-base border-l-2 border-[#2D5446]/40 pl-4 py-1">

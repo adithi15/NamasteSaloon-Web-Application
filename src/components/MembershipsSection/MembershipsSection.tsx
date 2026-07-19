@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Check, Sparkles, Calendar, ArrowRight } from "lucide-react";
+import { Check, Sparkles, ArrowRight } from "lucide-react";
 import FadeIn, { softEase } from "@/src/components/FadeIn";
 import { PRICING_PACKAGES } from "@/src/common/data";
-import type { PackageType } from "@/src/common/types";
+import type { PackageType, PricingPackage } from "@/src/common/types";
 
 interface MembershipsSectionProps {
   onSelectPlan: (plan: string) => void;
   preview?: boolean;
   onViewAll?: () => void;
   initialFilter?: PackageType | "all";
+  /** Home preview: Know More → open memberships page for this plan type */
+  onKnowMore?: (plan: PricingPackage) => void;
+  onFilterChange?: (filter: PackageType | "all") => void;
 }
 
 export default function MembershipsSection({
@@ -17,6 +20,8 @@ export default function MembershipsSection({
   preview = false,
   onViewAll,
   initialFilter = "all",
+  onKnowMore,
+  onFilterChange,
 }: MembershipsSectionProps) {
   const [filterType, setFilterType] =
     useState<PackageType | "all">(initialFilter);
@@ -39,26 +44,26 @@ export default function MembershipsSection({
 
   return (
     <section
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
       id="memberships-section"
     >
-      <div className="absolute top-12 right-12 w-[450px] h-[450px] bg-white/50 rounded-full blur-[90px] opacity-75 pointer-events-none" />
-      <div className="absolute bottom-12 left-12 w-[450px] h-[450px] bg-[#DECBA5]/10 rounded-full blur-[100px] opacity-60 pointer-events-none" />
+      <div className="absolute top-12 right-12 w-[min(450px,80vw)] h-[min(450px,80vw)] bg-white/50 rounded-full blur-[90px] opacity-75 pointer-events-none" />
+      <div className="absolute bottom-12 left-12 w-[min(450px,80vw)] h-[min(450px,80vw)] bg-[#DECBA5]/10 rounded-full blur-[100px] opacity-60 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <FadeIn className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
+        <FadeIn className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide px-1">
             Memberships & Packages
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
-          <p className="text-slate-600 text-sm md:text-base font-semibold font-display">
+          <p className="text-slate-600 text-sm md:text-base font-semibold font-display px-1">
             Select a membership tier, prepaid package, or couple&apos;s
             experience fitted to your recovery routine.
           </p>
         </FadeIn>
 
         {!preview && (
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-12">
             {[
               { key: "all" as const, label: "Show All" },
               { key: "membership" as const, label: "Memberships" },
@@ -71,8 +76,11 @@ export default function MembershipsSection({
             ].map((tab) => (
               <button
                 key={tab.key}
-                onClick={() => setFilterType(tab.key)}
-                className={`px-5 py-2.5 text-[10px] uppercase tracking-widest font-bold transition-all duration-500 ease-out cursor-pointer rounded-lg border ${
+                onClick={() => {
+                  setFilterType(tab.key);
+                  onFilterChange?.(tab.key);
+                }}
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 text-[9px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold transition-all duration-500 ease-out cursor-pointer rounded-lg border ${
                   filterType === tab.key
                     ? "bg-[#1E3E34] text-white border-[#1E3E34] shadow-lg shadow-[#1E3E34]/15"
                     : "bg-white/60 border-slate-200 text-slate-800 hover:bg-white hover:text-slate-950"
@@ -84,7 +92,7 @@ export default function MembershipsSection({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
           {displayedPlans.map((plan, index) => (
             <motion.div
               key={plan.id}
@@ -102,15 +110,16 @@ export default function MembershipsSection({
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-              className={`relative border rounded-[2rem] p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group transition-transform duration-700 ease-out hover:scale-[1.015] ${
+              className={`relative border rounded-[2rem] p-5 sm:p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group transition-transform duration-700 ease-out hover:scale-[1.015] overflow-visible ${
                 plan.popular
                   ? "border-[#DECBA5] ring-1 ring-[#DECBA5]/40"
                   : "border-[#DECBA5]/25 hover:border-[#DECBA5]/50"
               }`}
             >
               {plan.popular && (
-                <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-[#DECBA5] text-[#1E3E34] text-[9px] uppercase tracking-widest font-black px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" /> Highly Recommended
+                <div className="absolute top-0 right-4 sm:right-8 transform -translate-y-1/2 bg-[#DECBA5] text-[#1E3E34] text-[9px] uppercase tracking-widest font-black px-3 sm:px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1 max-w-[calc(100%-2rem)]">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0" />{" "}
+                  <span className="truncate">Highly Recommended</span>
                 </div>
               )}
 
@@ -124,8 +133,8 @@ export default function MembershipsSection({
                   </h3>
                 </div>
 
-                <div className="flex items-baseline gap-1.5">
-                  <span className="text-[#DECBA5] font-black text-3xl font-mono">
+                <div className="flex flex-wrap items-baseline gap-1.5">
+                  <span className="text-[#DECBA5] font-black text-2xl sm:text-3xl font-mono">
                     ₹{plan.price.toLocaleString("en-IN")}
                   </span>
                   <span className="text-[#E9E4DB]/55 text-xs font-mono font-semibold">
@@ -153,17 +162,25 @@ export default function MembershipsSection({
 
               <div className="pt-8 text-left">
                 <button
-                  onClick={() => onSelectPlan(plan.title)}
+                  type="button"
+                  onClick={() => {
+                    if (onKnowMore) {
+                      onKnowMore(plan);
+                      return;
+                    }
+                    onSelectPlan(plan.title);
+                  }}
                   className="w-full py-3 bg-[#DECBA5] text-[#1E3E34] text-xs uppercase tracking-widest font-extrabold transition-all duration-500 ease-out flex items-center justify-center gap-2 rounded-xl shadow-sm cursor-pointer hover:bg-[#E9E4DB] hover:scale-[1.02] active:scale-95"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Secure Commitment</span>
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Know More</span>
                 </button>
               </div>
             </motion.div>
           ))}
         </div>
 
+        {/* See All — hidden; Know More already opens memberships
         {preview && (
           <FadeIn delay={0.15} className="flex justify-center mt-14">
             <button
@@ -175,6 +192,7 @@ export default function MembershipsSection({
             </button>
           </FadeIn>
         )}
+        */}
       </div>
     </section>
   );

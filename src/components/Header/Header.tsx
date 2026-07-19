@@ -74,10 +74,8 @@ export default function Header({
     return () => window.removeEventListener("scroll", onScroll);
   }, [mobileMenuOpen, hoveredDropdown]);
 
-  // Only home page has a dark hero — all other pages are bg-white
-  const isHomePage = activeView === "home";
-  // Blur + black text once scrolled (any page)
-  const useSolidHeader = scrolled || !isHomePage;
+  // Every route starts transparent (home-top look); solid green glass only after scroll
+  const useSolidHeader = scrolled;
 
   const navMenuItems = {
     offerings: Object.values(SpaCategory),
@@ -132,29 +130,39 @@ export default function Header({
 
   const dropdownBase = [
     "absolute top-full left-0 right-0 w-full",
-    "backdrop-blur-[28px]",
-    "bg-[#071a15]/15",
-    "border-b border-white/8",
-    "shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5)]",
-    "text-[#FAF8F5] overflow-hidden",
+    "backdrop-blur-lg",
+    "bg-[#2D5446]/20",
+    "border-b border-[#2D5446]/15",
+    "text-black overflow-hidden",
   ].join(" ");
 
-  // Text color logic:
-  // - home top → white over video
-  // - scrolled / other pages → black + blur bar
-  const navTextBase = useSolidHeader
-    ? "text-slate-900 hover:text-black"
+  const dropdownCardClass =
+    "p-4 rounded-xl bg-white/40 border border-[#2D5446]/15 hover:border-[#DECBA5]/50 hover:bg-white/60 text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm";
+
+  const dropdownMemCardClass =
+    "p-5 rounded-xl bg-white/40 border border-[#2D5446]/15 hover:border-[#DECBA5]/50 hover:bg-white/60 text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm";
+
+  // Black nav on light pages (memberships/blog/contact) always;
+  // elsewhere cream until scroll, then black
+  const useDarkNavText =
+    scrolled ||
+    activeView === "memberships" ||
+    activeView === "blog" ||
+    activeView === "contact";
+
+  const navTextBase = useDarkNavText
+    ? "text-black hover:text-black/70"
     : "text-[#FAF8F5]/80 hover:text-white";
 
-  const activeTextColor = useSolidHeader ? "!text-black" : "!text-white";
+  const activeTextColor = useDarkNavText ? "!text-black" : "!text-white";
 
   const btnClass = `transition-colors duration-300 focus:outline-none cursor-pointer py-8 relative ${navTextBase}`;
 
   const dropdownBtnClass = `flex items-center gap-1.5 transition-colors focus:outline-none cursor-pointer relative py-8 ${navTextBase}`;
 
-  const chevronColor = useSolidHeader ? "text-[#2D5446]" : "text-[#A1CBB4]";
+  const chevronColor = useDarkNavText ? "text-black" : "text-[#A1CBB4]";
 
-  const mobileToggleColor = useSolidHeader ? "text-slate-900" : "text-white";
+  const mobileToggleColor = useDarkNavText ? "text-black" : "text-white";
 
   const underlinedNav =
     hoveredDropdown === "offerings"
@@ -184,7 +192,7 @@ export default function Header({
         hidden && !mobileMenuOpen ? "-translate-y-full" : "translate-y-0"
       } ${
         useSolidHeader
-          ? "bg-[#FAF8F5]/50 border-b border-[#DECBA5]/20 shadow-sm"
+          ? "bg-[#2D5446]/20 backdrop-blur-lg border-b border-[#2D5446]/15 shadow-none"
           : "bg-transparent"
       }`}
     >
@@ -192,20 +200,20 @@ export default function Header({
         {/* Logo */}
         <div
           onClick={() => handleNavClick("home")}
-          className="cursor-pointer group flex items-center"
+          className="cursor-pointer group flex items-center min-w-0 mr-2"
           id="header-brand-trigger"
         >
           <img
             src="/logo.png"
             alt="Namastey Salon & Spa"
-            className="h-12 md:h-14 w-auto object-contain"
+            className="h-10 sm:h-12 md:h-14 w-auto max-w-[min(48vw,200px)] sm:max-w-[min(52vw,220px)] object-contain"
           />
         </div>
 
         {/* Desktop Nav */}
         <div className="hidden lg:block">
           <nav
-            className="flex items-center gap-8 text-[15px] font-display tracking-widest uppercase"
+            className="flex items-center gap-5 xl:gap-8 text-[13px] xl:text-[15px] font-display tracking-widest uppercase"
             id="desktop-navbar"
             onMouseLeave={() => setHoveredNav(null)}
           >
@@ -292,17 +300,17 @@ export default function Header({
         </div>
 
         {/* Mobile trigger */}
-        <div className="lg:hidden flex items-center gap-3">
+      <div className="lg:hidden flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             onClick={onOpenBooking}
-            className="bg-[#DECBA5] text-[#1E3E34] p-2.5 rounded-none shadow-md active:scale-95 transition-transform cursor-pointer font-bold"
+            className="bg-[#DECBA5] text-[#1E3E34] p-2 sm:p-2.5 rounded-none shadow-md active:scale-95 transition-transform cursor-pointer font-bold"
             aria-label="Quick Reserve"
           >
             <Calendar className="w-4 h-4 text-[#1E3E34]" />
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`relative p-2.5 focus:outline-none cursor-pointer transform hover:scale-105 transition-transform ${mobileToggleColor}`}
+            className={`relative p-2 sm:p-2.5 focus:outline-none cursor-pointer transform hover:scale-105 transition-transform ${mobileToggleColor}`}
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
@@ -339,36 +347,36 @@ export default function Header({
             {/* thin gold top highlight line */}
             <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#DECBA5]/30 to-transparent" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
               {hoveredDropdown === "offerings" && (
-                <div className="grid grid-cols-4 gap-8 text-left">
-                  <div className="col-span-1 border-r border-white/10 pr-6">
-                    <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-3">
+                <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8 text-left">
+                  <div className="xl:col-span-1 xl:border-r border-[#2D5446]/15 xl:pr-6">
+                    <div className="text-[10px] font-mono tracking-widest text-[#1E3E34] uppercase font-black flex items-center gap-1.5 mb-3">
                       <Layers className="w-3.5 h-3.5" /> SERVICES DIRECTORY
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-5">
+                    <h4 className="font-serif text-lg font-bold text-black mb-3 xl:mb-5">
                       Somatic Practices
                     </h4>
-                    <p className="text-[11px] text-white/55 leading-relaxed font-semibold">
+                    <p className="text-[11px] text-black/55 leading-relaxed font-semibold max-w-md">
                       Dive into clinically analytical somatic remedies,
                       metabolic recovery mechanisms, and physiological wellness
                       theories.
                     </p>
                   </div>
-                  <div className="col-span-2 grid grid-cols-2 gap-4">
+                  <div className="xl:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {navMenuItems.offerings.map((cat) => (
                       <button
                         key={cat}
                         onClick={() => handleServiceCategoryClick(cat)}
-                        className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:border-[#DECBA5]/35 hover:bg-white/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
+                        className={dropdownCardClass}
                       >
-                        <span className="text-xs font-bold text-white/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                        <span className="text-xs font-bold text-black/90 group-hover:text-[#1E3E34] transition-colors block uppercase tracking-wider leading-snug">
                           {cat}
                         </span>
-                        <span className="text-[9px] text-white/40 mt-1.5 block font-mono leading-none">
+                        <span className="text-[9px] text-black/40 mt-1.5 block font-mono leading-none">
                           Clinical Somatics
                         </span>
-                        <span className="text-[9px] text-[#DECBA5]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#DECBA5] transition-colors">
+                        <span className="text-[9px] text-[#1E3E34]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#1E3E34] transition-colors">
                           Explore →
                         </span>
                       </button>
@@ -378,34 +386,34 @@ export default function Header({
               )}
 
               {hoveredDropdown === "memberships" && (
-                <div className="grid grid-cols-4 gap-8 text-left">
-                  <div className="col-span-1 border-r border-white/10 pr-6">
-                    <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-3">
+                <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8 text-left">
+                  <div className="xl:col-span-1 xl:border-r border-[#2D5446]/15 xl:pr-6">
+                    <div className="text-[10px] font-mono tracking-widest text-[#1E3E34] uppercase font-black flex items-center gap-1.5 mb-3">
                       <Award className="w-3.5 h-3.5" /> COMMITMENTS & PASSES
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-white mb-2">
+                    <h4 className="font-serif text-lg font-bold text-black mb-2">
                       Club Memberships
                     </h4>
-                    <p className="text-[11px] text-white/55 leading-relaxed font-semibold">
+                    <p className="text-[11px] text-black/55 leading-relaxed font-semibold max-w-md">
                       Join any of our local clubs to secure permanent slots,
                       unlock premium wellness suites, and consult with somatic
                       specialists.
                     </p>
                   </div>
-                  <div className="col-span-3 grid grid-cols-4 gap-3">
+                  <div className="xl:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
                     {navMenuItems.memberships.map((mem) => (
                       <button
                         key={mem.type}
                         onClick={() => handleMembershipCategoryClick(mem.type)}
-                        className="p-5 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:border-[#DECBA5]/35 hover:bg-white/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
+                        className={dropdownMemCardClass}
                       >
-                        <span className="text-xs font-bold text-white/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                        <span className="text-xs font-bold text-black/90 group-hover:text-[#1E3E34] transition-colors block uppercase tracking-wider leading-snug">
                           {mem.label}
                         </span>
-                        <span className="text-[9px] text-white/40 mt-2 block font-mono leading-none">
+                        <span className="text-[9px] text-black/40 mt-2 block font-mono leading-none">
                           All-Inclusive Passes
                         </span>
-                        <span className="text-[9px] text-[#DECBA5]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#DECBA5] transition-colors">
+                        <span className="text-[9px] text-[#1E3E34]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#1E3E34] transition-colors">
                           Explore Tier →
                         </span>
                       </button>
@@ -429,61 +437,61 @@ export default function Header({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden absolute top-full left-0 right-0 backdrop-blur-[28px] bg-[#071a15]/15 border-b border-white/8 shadow-2xl overflow-hidden"
+            className="lg:hidden absolute top-full left-0 right-0 backdrop-blur-lg bg-[#2D5446]/20 border-b border-[#2D5446]/15 overflow-hidden max-h-[calc(100dvh-5rem)] overflow-y-auto"
             id="mobile-dropdown-menu"
           >
             {/* gold top line */}
             <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#DECBA5]/30 to-transparent" />
 
-            <div className="p-6 flex flex-col gap-5 text-sm uppercase tracking-widest font-display text-white/90">
-              <div className="flex flex-col gap-2 pb-4 border-b border-white/10">
-                <span className="text-[9px] font-extrabold text-[#DECBA5] tracking-[0.2em]">
+            <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-5 text-sm uppercase tracking-widest font-display text-black">
+              <div className="flex flex-col gap-1 sm:gap-2 pb-4 border-b border-[#2D5446]/15">
+                <span className="text-[9px] font-extrabold text-[#1E3E34] tracking-[0.2em]">
                   Quick Paths
                 </span>
                 {[
                   {
                     label: "Home Studio",
                     view: "home" as const,
-                    icon: <Sparkles className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Sparkles className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "Our Somatic Services",
                     view: "services" as const,
-                    icon: <Layers className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Layers className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "Memberships & Pricing",
                     view: "memberships" as const,
-                    icon: <Award className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Award className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "Our Spa Healers",
                     view: "why-spa" as const,
-                    icon: <Sparkles className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Sparkles className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "Wellness Blog",
                     view: "blog" as const,
-                    icon: <Sparkles className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Sparkles className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "Contact & FAQ",
                     view: "contact" as const,
-                    icon: <Sparkles className="w-4 h-4 text-[#DECBA5]" />,
+                    icon: <Sparkles className="w-4 h-4 text-[#1E3E34]" />,
                   },
                   {
                     label: "My Reservations",
                     view: "bookings" as const,
-                    icon: <Calendar className="w-4 h-4 text-white" />,
+                    icon: <Calendar className="w-4 h-4 text-black" />,
                   },
                 ].map(({ label, view, icon }) => (
                   <button
                     key={view}
                     onClick={() => handleNavClick(view)}
-                    className="w-full text-left py-2 font-bold flex items-center justify-between text-white hover:text-[#DECBA5] transition-colors"
+                    className="w-full text-left py-2.5 sm:py-2 font-bold flex items-center justify-between gap-3 text-black hover:text-[#1E3E34] transition-colors text-xs sm:text-sm"
                   >
-                    <span>{label}</span>
-                    {icon}
+                    <span className="leading-snug">{label}</span>
+                    <span className="shrink-0">{icon}</span>
                   </button>
                 ))}
               </div>

@@ -62,7 +62,7 @@ function HealerCard({ healer, onBook, distance }: { healer: Specialist; onBook: 
       display: "flex",
       flexDirection: "column",
     }}>
-      <div style={{ position: "relative", width: "100%", height: 200, overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", height: "clamp(160px, 42vw, 200px)", overflow: "hidden" }}>
         <img
           src={healer.image}
           alt={healer.name}
@@ -85,7 +85,7 @@ function HealerCard({ healer, onBook, distance }: { healer: Specialist; onBook: 
         <p style={{ fontSize: 10, fontFamily: "Gilroy, sans-serif", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.15em", color: "#2D5446", marginBottom: 12 }}>
           {healer.specialtyTag}
         </p>
-        <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6, fontStyle: "italic", marginBottom: 16 }}>
+        <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6, fontStyle: "italic", marginBottom: 16, display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           "{healer.bio}"
         </p>
         <div style={{ flexGrow: 1 }} />
@@ -167,16 +167,25 @@ export default function SpecialistSection({ onSelectSpecialist }: SpecialistSect
   };
 
   return (
-    <section ref={sectionRef} style={{ position: "relative", padding: "120px 0", background: "#fff" }}>
-      <div style={{
-        textAlign: "center", maxWidth: 700, margin: "0 auto 80px", padding: "0 24px",
-        opacity: sectionInView ? 1 : 0, transform: sectionInView ? "translateY(0)" : "translateY(40px)",
-        transition: `all 1.2s ${SMOOTH_CURVE}`,
-      }}>
-        <h2 style={{ fontFamily: "Calgary, Gilroy, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#0f172a", marginBottom: 20 }}>
+    <section
+      ref={sectionRef}
+      className="relative py-16 sm:py-20 md:py-[120px] bg-white overflow-x-hidden"
+    >
+      <div
+        className="text-center max-w-[700px] mx-auto mb-10 sm:mb-14 md:mb-20 px-4 sm:px-6"
+        style={{
+          opacity: sectionInView ? 1 : 0,
+          transform: sectionInView ? "translateY(0)" : "translateY(40px)",
+          transition: `all 1.2s ${SMOOTH_CURVE}`,
+        }}
+      >
+        <h2
+          className="font-serif font-extrabold text-slate-900 mb-4 sm:mb-5"
+          style={{ fontSize: "clamp(1.75rem, 5vw, 3.5rem)" }}
+        >
           Our Specialists
         </h2>
-        <p style={{ fontSize: "18px", color: "#64748b", lineHeight: 1.8 }}>
+        <p className="text-sm sm:text-base md:text-lg text-slate-500 leading-relaxed px-1">
           Expert clinical practitioners for your holistic recovery.
         </p>
       </div>
@@ -184,15 +193,8 @@ export default function SpecialistSection({ onSelectSpecialist }: SpecialistSect
       <div style={{ opacity: sectionInView ? 1 : 0, transition: "opacity 1.5s ease 0.4s" }}>
         <div
           ref={stageRef}
-          style={{
-            position: "relative",
-            width: "100%",
-            height: 480,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            touchAction: "pan-y",
-          }}
+          className="relative w-full h-[380px] sm:h-[420px] md:h-[480px] flex items-center justify-center px-2 overflow-hidden"
+          style={{ touchAction: "pan-y" }}
         >
           {[-2, -1, 0, 1, 2].map((offset) => {
             const dataIndex = activeIndex + offset;
@@ -204,9 +206,12 @@ export default function SpecialistSection({ onSelectSpecialist }: SpecialistSect
               <div
                 key={healer.id}
                 onClick={() => offset !== 0 && go(offset > 0 ? 1 : -1)}
+                className={
+                  offset === 0
+                    ? "absolute w-[min(88vw,300px)] sm:w-[min(70vw,300px)] md:w-[clamp(220px,24%,320px)]"
+                    : "absolute hidden md:block w-[clamp(220px,24%,320px)]"
+                }
                 style={{
-                  position: "absolute",
-                  width: "clamp(220px, 24%, 320px)",
                   left: `${50 + offset * STEP}%`,
                   transform: "translateX(-50%)",
                   transition: `left ${DURATION} ${SMOOTH_CURVE}`,
@@ -221,15 +226,15 @@ export default function SpecialistSection({ onSelectSpecialist }: SpecialistSect
         </div>
 
         {/* Dots & Nav */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40, marginTop: 40 }}>
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 md:gap-10 mt-8 sm:mt-10 px-4">
           <NavBtn onClick={() => go(-1)} disabled={activeIndex === 0}><ChevronLeft /></NavBtn>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 max-w-[60vw] sm:max-w-none">
             {SPECIALISTS.map((_, i) => (
               <div
                 key={i}
                 style={{
-                  width: i === activeIndex ? 40 : 10,
-                  height: 10,
+                  width: i === activeIndex ? 32 : 8,
+                  height: 8,
                   borderRadius: 5,
                   background: i === activeIndex ? "#1E3E34" : "#e2e8f0",
                   transition: `all 0.8s ${SMOOTH_CURVE}`,
@@ -249,20 +254,10 @@ function NavBtn({ onClick, disabled, children }: { onClick: () => void; disabled
     <button
       onClick={onClick}
       disabled={disabled}
+      className="w-11 h-11 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] rounded-full border border-slate-100 bg-white flex items-center justify-center text-[#1E3E34] shadow-sm transition-all duration-300 shrink-0"
       style={{
-        width: 60,
-        height: 60,
-        borderRadius: "50%",
-        border: "1px solid #f1f5f9",
-        background: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.3 : 1,
-        transition: "all 0.3s ease",
-        color: "#1E3E34",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
       }}
     >
       {children}

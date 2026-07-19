@@ -54,13 +54,13 @@ export default function TestimonialsSection() {
 
   return (
     <section
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
       id="testimonials-section"
     >
       <div className="max-w-5xl mx-auto relative z-10">
-        <FadeIn className="flex flex-col items-center text-center mb-14">
+        <FadeIn className="flex flex-col items-center text-center mb-10 sm:mb-14">
           <div>
-            <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide px-1">
               What Our Members Say
             </h2>
             <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
@@ -72,7 +72,7 @@ export default function TestimonialsSection() {
         </FadeIn>
 
         {formOpen && (
-          <div className="max-w-xl mx-auto mb-14 bg-white/95 backdrop-blur border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl text-left space-y-4">
+          <div className="max-w-xl mx-auto mb-10 sm:mb-14 bg-white/95 backdrop-blur border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl text-left space-y-4">
             <h3 className="font-serif text-lg font-bold text-slate-900">
               Share your healing experience
             </h3>
@@ -130,7 +130,7 @@ export default function TestimonialsSection() {
                   />
                 </div>
               </div>
-              <div className="pt-2 flex gap-4">
+              <div className="pt-2 flex flex-wrap gap-3">
                 <button
                   type="submit"
                   className="px-6 h-11 bg-[#1E3E34] hover:bg-[#2D5446] text-white text-xs uppercase tracking-widest font-extrabold transition-all cursor-pointer rounded-xl flex items-center justify-center gap-1.5"
@@ -164,7 +164,7 @@ export default function TestimonialsSection() {
         >
           <div className="flex flex-col md:flex-row min-h-[280px]">
             {/* Left Panel — Avatar, Stars, Name */}
-            <div className="flex flex-col items-center justify-center gap-4 px-10 py-10 md:py-0 md:w-[280px] shrink-0 border-b md:border-b-0 md:border-r border-[#DECBA5]/30">
+            <div className="flex flex-col items-center justify-center gap-4 px-6 sm:px-10 py-10 md:py-0 md:w-[280px] shrink-0 border-b md:border-b-0 md:border-r border-[#DECBA5]/30">
               {/* Avatar */}
               {rev.avatar ? (
                 <img
@@ -211,7 +211,7 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Right Panel — Quote */}
-            <div className="relative flex flex-col justify-center px-10 md:px-12 py-10 flex-1 bg-[#2D5446]/5">
+            <div className="relative flex flex-col justify-center px-6 sm:px-10 md:px-12 py-10 flex-1 bg-[#2D5446]/5">
               {/* Classic decorative quote — just above the text */}
               <svg
                 className="w-12 h-12 md:w-14 md:h-14 text-[#DECBA5]/60 mb-4 select-none pointer-events-none shrink-0"
@@ -222,7 +222,7 @@ export default function TestimonialsSection() {
                 <path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.5v-6.5H5.17A2.67 2.67 0 0 1 7.83 8.83L9.5 6H7.17zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.5v-6.5h-3.33a2.67 2.67 0 0 1 2.66-2.67L19.5 6h-2.33z" />
               </svg>
 
-              <p className="relative z-10 text-slate-700 text-base md:text-lg font-display font-medium leading-relaxed italic">
+              <p className="relative z-10 text-slate-700 text-sm sm:text-base md:text-lg font-display font-medium leading-relaxed italic">
                 {rev.review}
               </p>
             </div>
@@ -230,17 +230,17 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center justify-center gap-4 mt-8">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-8">
           <button
             onClick={() => goTo("left")}
             aria-label="Previous review"
-            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm shrink-0"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
 
           {/* Dot indicators */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-2 max-w-[50vw] sm:max-w-none">
             {reviews.map((_, i) => (
               <button
                 key={i}
@@ -264,7 +264,7 @@ export default function TestimonialsSection() {
           <button
             onClick={() => goTo("right")}
             aria-label="Next review"
-            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm shrink-0"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

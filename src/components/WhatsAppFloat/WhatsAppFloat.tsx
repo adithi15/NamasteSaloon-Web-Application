@@ -17,18 +17,18 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export default function WhatsAppFloat({ onClick }: WhatsAppFloatProps) {
   return (
-    <div className="fixed bottom-6 right-6 z-40 group">
-      <div className="absolute right-0 bottom-full mb-2 bg-[#022A24] text-[#FAF8F5] text-[10px] font-mono font-bold uppercase tracking-wider py-1.5 px-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none whitespace-nowrap shadow-md border border-[#2D5446]/20">
+    <div className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-3 sm:right-6 z-40 group">
+      <div className="absolute right-0 bottom-full mb-2 bg-[#022A24] text-[#FAF8F5] text-[10px] font-mono font-bold uppercase tracking-wider py-1.5 px-3 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out pointer-events-none whitespace-nowrap shadow-md border border-[#2D5446]/20 max-sm:hidden">
         Chat on WhatsApp
       </div>
       <button
         type="button"
         onClick={onClick}
-        className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all duration-500 ease-out relative cursor-pointer"
+        className="w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all duration-500 ease-out relative cursor-pointer"
         aria-label="Contact via WhatsApp"
       >
         <span className="absolute inset-0 rounded-full bg-[#25D366]/30 animate-ping [animation-duration:2.8s] pointer-events-none" />
-        <WhatsAppIcon className="w-8 h-8 text-white relative z-10" />
+        <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8 text-white relative z-10" />
       </button>
     </div>
   );
