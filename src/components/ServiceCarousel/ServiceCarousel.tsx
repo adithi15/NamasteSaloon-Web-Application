@@ -52,20 +52,20 @@ export default function ServiceCarousel({ onKnowMore }: ServiceCarouselProps) {
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#2D5446]/2 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="flex flex-col items-center mb-10 md:mb-14">
-          <div className="flex flex-col items-center text-center w-full">
+        <FadeIn className="relative mb-6 md:mb-8">
+          <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-bold px-1">
               Featured Offerings
             </h2>
-            <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
-            <p className="mt-3 text-sm text-slate-600 max-w-xl font-display font-semibold text-center px-2">
+            <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-3 mb-3" />
+            <p className="mt-1 text-sm text-slate-600 max-w-xl font-display font-semibold text-center px-2">
               Immerse yourself in our highly sought-after, practitioner-led
               treatments designed to restore biological vitality and elevate
               somatic awareness.
             </p>
           </div>
 
-          <div className="flex items-center justify-center gap-3 mt-6 select-none">
+          <div className="flex items-center justify-end gap-3 mt-4 md:mt-0 md:absolute md:right-0 md:bottom-0 select-none">
             <button
               onClick={scrollLeft}
               className="p-3 rounded-full border border-[#DECBA5]/30 bg-white/60 text-slate-800 hover:bg-[#1E3E34] hover:text-white transition-all duration-500 ease-out active:scale-95 cursor-pointer shadow-sm"

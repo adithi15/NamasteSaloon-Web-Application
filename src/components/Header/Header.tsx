@@ -206,7 +206,7 @@ export default function Header({
           <img
             src="/logo.png"
             alt="Namastey Salon & Spa"
-            className="h-10 sm:h-12 md:h-14 w-auto max-w-[min(48vw,200px)] sm:max-w-[min(52vw,220px)] object-contain"
+            className="h-11 sm:h-12 md:h-14 w-auto max-w-[min(58vw,260px)] sm:max-w-[min(55vw,300px)] object-contain"
           />
         </div>
 
