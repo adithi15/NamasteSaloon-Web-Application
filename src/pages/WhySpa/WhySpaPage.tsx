@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import SpecialistSection from "@/src/components/SpecialistSection";
+import { pageTransition } from "@/src/components/FadeIn";
 import { BUSINESS_DETAILS } from "@/src/common/data";
 import type { Specialist } from "@/src/common/types";
 
@@ -11,10 +12,7 @@ export default function WhySpaPage({ onSelectSpecialist }: WhySpaPageProps) {
   return (
     <motion.div
       key="why-spa"
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.3 }}
+      {...pageTransition}
       className="pt-20 md:pt-24"
     >
       <div className="bg-[#022A24] text-[#FAF8F5] py-16 text-center border-b border-[#2D5446]/20">

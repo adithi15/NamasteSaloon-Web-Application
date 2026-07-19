@@ -79,7 +79,7 @@ function HealerCard({ healer, onBook, distance }: { healer: Specialist; onBook: 
       </div>
 
       <div style={{ padding: "20px", display: "flex", flexDirection: "column", flexGrow: 1 }}>
-        <h3 style={{ fontFamily: "Georgia, serif", fontSize: 18, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>
+        <h3 style={{ fontFamily: "Calgary, Gilroy, serif", fontSize: 18, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>
           {healer.name}
         </h3>
         <p style={{ fontSize: 10, fontFamily: "monospace", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.15em", color: "#2D5446", marginBottom: 12 }}>
@@ -173,7 +173,7 @@ export default function SpecialistSection({ onSelectSpecialist }: SpecialistSect
         opacity: sectionInView ? 1 : 0, transform: sectionInView ? "translateY(0)" : "translateY(40px)",
         transition: `all 1.2s ${SMOOTH_CURVE}`,
       }}>
-        <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#0f172a", marginBottom: 20 }}>
+        <h2 style={{ fontFamily: "Calgary, Gilroy, serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, color: "#0f172a", marginBottom: 20 }}>
           Our Specialists
         </h2>
         <p style={{ fontSize: "18px", color: "#64748b", lineHeight: 1.8 }}>

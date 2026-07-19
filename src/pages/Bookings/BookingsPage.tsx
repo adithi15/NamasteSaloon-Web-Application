@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { AlertCircle } from "lucide-react";
+import { pageTransition } from "@/src/components/FadeIn";
 import type { Booking, Service, Specialist } from "@/src/common/types";
 
 interface BookingsPageProps {
@@ -24,10 +25,7 @@ export default function BookingsPage({
   return (
     <motion.div
       key="bookings"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      transition={{ duration: 0.3 }}
+      {...pageTransition}
       className="pt-20 md:pt-24 py-16 md:py-24 px-4 max-w-4xl mx-auto text-left"
     >
       <div className="space-y-8">

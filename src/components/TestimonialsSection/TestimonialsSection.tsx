@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  Star,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
-  PlusCircle,
-} from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import FadeIn from "@/src/components/FadeIn";
 import { TESTIMONIALS } from "@/src/common/data";
 
 import type { Testimonial } from "@/src/common/types";
@@ -29,7 +24,7 @@ export default function TestimonialsSection() {
           : (prev - 1 + reviews.length) % reviews.length,
       );
       setAnimDir(null);
-    }, 200);
+    }, 380);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,36 +58,19 @@ export default function TestimonialsSection() {
       id="testimonials-section"
     >
       <div className="max-w-5xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-14">
-          {" "}
+        <FadeIn className="flex flex-col items-center text-center mb-14">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              {/* <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
-              <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">
-                SOMATIC SOCIAL VERDICT
-              </span> */}
-            </div>
             <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
               What Our Members Say
             </h2>
             <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
-
             <p className="mt-3 text-slate-600 text-sm md:text-base font-semibold font-display max-w-xl">
               Discover real-life experiences of athletic recovery, nervous
               system re-balancing, and holistic thermal resets.
             </p>
           </div>
-          {/* <button
-            onClick={() => setFormOpen(!formOpen)}
-            className="mt-6 md:mt-10 px-6 py-3 bg-[#1E3E34] hover:bg-[#2D5446] text-white text-xs uppercase tracking-widest font-extrabold transition-all duration-300 flex items-center gap-2 rounded-xl shadow-md cursor-pointer hover:scale-105 active:scale-95"
-          >
-            <PlusCircle className="w-4 h-4" />
-            <span>Write A Review</span>
-          </button> */}
-        </div>
+        </FadeIn>
 
-        {/* Review Submission Form */}
         {formOpen && (
           <div className="max-w-xl mx-auto mb-14 bg-white/95 backdrop-blur border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl text-left space-y-4">
             <h3 className="font-serif text-lg font-bold text-slate-900">
@@ -171,15 +149,17 @@ export default function TestimonialsSection() {
           </div>
         )}
 
+        <FadeIn delay={0.1}>
         {/* Slider Card */}
         <div
           className="bg-white/70 backdrop-blur-sm border border-[#DECBA5]/30 rounded-3xl shadow-sm overflow-hidden"
           style={{
             opacity: animDir ? 0 : 1,
             transform: animDir
-              ? `translateX(${animDir === "right" ? "-24px" : "24px"})`
+              ? `translateX(${animDir === "right" ? "-18px" : "18px"})`
               : "translateX(0)",
-            transition: "opacity 0.2s ease, transform 0.2s ease",
+            transition:
+              "opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           <div className="flex flex-col md:flex-row min-h-[280px]">
@@ -231,18 +211,19 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Right Panel — Quote */}
-            <div className="relative flex items-center px-10 py-10 flex-1 bg-[#2D5446]/5">
-              {/* Decorative quote mark */}
-              <span
-                className="absolute top-15 left-3 text-[#2D5446]/20 font-serif leading-none select-none pointer-events-none"
-                style={{ fontSize: "10rem", lineHeight: 1 }}
+            <div className="relative flex flex-col justify-center px-10 md:px-12 py-10 flex-1 bg-[#2D5446]/5">
+              {/* Classic decorative quote — just above the text */}
+              <svg
+                className="w-12 h-12 md:w-14 md:h-14 text-[#DECBA5]/60 mb-4 select-none pointer-events-none shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
                 aria-hidden="true"
               >
-                &ldquo;
-              </span>
+                <path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.5v-6.5H5.17A2.67 2.67 0 0 1 7.83 8.83L9.5 6H7.17zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.5v-6.5h-3.33a2.67 2.67 0 0 1 2.66-2.67L19.5 6h-2.33z" />
+              </svg>
 
-              <p className="relative z-10 text-slate-700 text-base md:text-lg font-display font-medium italic leading-relaxed pt-6">
-                &ldquo;{rev.review}&rdquo;
+              <p className="relative z-10 text-slate-700 text-base md:text-lg font-display font-medium leading-relaxed italic">
+                {rev.review}
               </p>
             </div>
           </div>
@@ -253,7 +234,7 @@ export default function TestimonialsSection() {
           <button
             onClick={() => goTo("left")}
             aria-label="Previous review"
-            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm"
+            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -268,10 +249,10 @@ export default function TestimonialsSection() {
                   setTimeout(() => {
                     setCurrent(i);
                     setAnimDir(null);
-                  }, 200);
+                  }, 380);
                 }}
                 aria-label={`Go to review ${i + 1}`}
-                className={`rounded-full transition-all duration-300 cursor-pointer ${
+                className={`rounded-full transition-all duration-500 ease-out cursor-pointer ${
                   i === current
                     ? "w-6 h-2.5 bg-[#1E3E34]"
                     : "w-2.5 h-2.5 bg-[#DECBA5]/60 hover:bg-[#2D5446]/40"
@@ -283,11 +264,12 @@ export default function TestimonialsSection() {
           <button
             onClick={() => goTo("right")}
             aria-label="Next review"
-            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm"
+            className="w-11 h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
+        </FadeIn>
 
         {/* Counter */}
         {/* <p className="text-center mt-3 text-[10px] font-mono text-slate-400 font-bold">

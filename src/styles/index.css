@@ -1,11 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Client brand fonts — from Website-Logo-Font-Photos (served via /public/fonts) */
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Calgary";
+  src: url("/fonts/Calgary.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Allura";
+  src: url("/fonts/Allura.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-serif: "Cinzel", serif;
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Outfit", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  /* Title → Calgary | Subtitle/script → Allura | Body/UI → Gilroy */
+  --font-serif: "Calgary", "Gilroy", serif;
+  --font-sans: "Gilroy", sans-serif;
+  --font-display: "Gilroy", sans-serif;
+  --font-mono: "Gilroy", sans-serif;
+  --font-script: "Allura", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  font-family: "Gilroy", sans-serif;
+}
+
+/* Calm, even scrolling feel */
+body {
+  overscroll-behavior-y: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ambient-glow-1,
+  .ambient-glow-2 {
+    animation: none !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif {
+  font-family: "Calgary", "Gilroy", serif;
 }
 
 /* Custom gorgeous responsive scrollbars for the luxury carousel */
@@ -33,26 +143,35 @@
   background: rgba(30, 62, 52, 0.5);
 }
 
-/* Ambient animations for somatic theme */
+/* Ambient animations — slower, softer drift */
 @keyframes float {
   0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-8px) scale(1.01); }
+  50% { transform: translateY(-6px) scale(1.008); }
 }
 
 .ambient-glow-1 {
-  animation: float 14s ease-in-out infinite;
+  animation: float 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
 .ambient-glow-2 {
-  animation: float 20s ease-in-out infinite reverse;
+  animation: float 26s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.35s ease-out forwards;
+  animation: fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Horizontal carousels — silky native scroll */
+.smooth-x-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}

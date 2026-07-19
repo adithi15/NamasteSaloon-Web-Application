@@ -9,26 +9,69 @@ import {
   Layers,
   Award,
 } from "lucide-react";
+import type { SpaCategoryValue, ViewName } from "@/src/common/types";
+import { SpaCategory } from "@/src/common/types";
 
 interface HeaderProps {
-  onNavigate: (view: import("@/src/common/types").ViewName) => void;
+  onNavigate: (view: ViewName) => void;
   onOpenBooking: () => void;
-  activeView: import("@/src/common/types").ViewName;
+  activeView: ViewName;
+  onOpenServicesCategory?: (category: SpaCategoryValue | "All") => void;
 }
 
-export default function Header({ onNavigate, onOpenBooking, activeView }: HeaderProps) {
+export default function Header({
+  onNavigate,
+  onOpenBooking,
+  activeView,
+  onOpenServicesCategory,
+}: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredDropdown, setHoveredDropdown] = useState<"offerings" | "memberships" | null>(null);
+  const [hoveredNav, setHoveredNav] = useState<
+    "home" | "services" | "memberships" | "blog" | "contact" | null
+  >(null);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+
+      // Near top — always show
+      if (y < 40) {
+        setHidden(false);
+        lastY = y;
+        return;
+      }
+
+      // Keep visible while menu / dropdown open
+      if (mobileMenuOpen || hoveredDropdown) {
+        setHidden(false);
+        lastY = y;
+        return;
+      }
+
+      const delta = y - lastY;
+      if (Math.abs(delta) < 6) return;
+
+      // Scroll down → hide | Scroll up → show
+      if (delta > 0) setHidden(true);
+      else setHidden(false);
+
+      lastY = y;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [mobileMenuOpen, hoveredDropdown]);
 
   // Only home page has a dark hero — all other pages are bg-white
   const isHomePage = activeView === "home";
+  // Blur + black text once scrolled (any page)
+  const useSolidHeader = scrolled || !isHomePage;
 
   const navMenuItems = {
     offerings: [
@@ -45,15 +88,30 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
     ],
   };
 
-  const handleNavClick = (viewName: import("@/src/common/types").ViewName) => {
+  const handleNavClick = (viewName: ViewName) => {
     onNavigate(viewName);
     setHoveredDropdown(null);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleServiceCategoryClick = (cat: string) => {
+    const category =
+      (Object.values(SpaCategory) as string[]).includes(cat)
+        ? (cat as SpaCategoryValue)
+        : "All";
+    if (onOpenServicesCategory) {
+      onOpenServicesCategory(category);
+    } else {
+      onNavigate("services");
+    }
+    setHoveredDropdown(null);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const dropdownTransition = {
-    duration: 0.45,
+    duration: 0.55,
     ease: [0.22, 1, 0.36, 1] as const,
   };
 
@@ -67,29 +125,54 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
   ].join(" ");
 
   // Text color logic:
-  // - home page + not scrolled → white (dark hero behind)
-  // - home page + scrolled    → dark (original scrolled behavior)
-  // - any other page          → always dark (white bg pages)
-  const navTextBase =
-    isHomePage && !scrolled
-      ? "text-[#FAF8F5]/80 hover:text-white"
-      : "text-slate-900 hover:text-slate-900";
+  // - home top → white over video
+  // - scrolled / other pages → black + blur bar
+  const navTextBase = useSolidHeader
+    ? "text-slate-900 hover:text-black"
+    : "text-[#FAF8F5]/80 hover:text-white";
 
-  const activeTextColor =
-    isHomePage && !scrolled ? "!text-white" : "!text-[#000000]";
+  const activeTextColor = useSolidHeader ? "!text-black" : "!text-white";
 
   const btnClass = `transition-colors duration-300 focus:outline-none cursor-pointer py-8 relative ${navTextBase}`;
 
-  const dropdownBtnClass = `flex items-center gap-1.5 transition-colors focus:outline-none cursor-pointer ${navTextBase}`;
+  const dropdownBtnClass = `flex items-center gap-1.5 transition-colors focus:outline-none cursor-pointer relative py-8 ${navTextBase}`;
 
-  const chevronColor =
-    isHomePage && !scrolled ? "text-[#A1CBB4]" : "text-[#2D5446]";
+  const chevronColor = useSolidHeader ? "text-[#2D5446]" : "text-[#A1CBB4]";
 
-  const mobileToggleColor =
-    isHomePage && !scrolled ? "text-white" : "text-slate-900";
+  const mobileToggleColor = useSolidHeader ? "text-slate-900" : "text-white";
+
+  const underlinedNav =
+    hoveredDropdown === "offerings"
+      ? "services"
+      : hoveredDropdown === "memberships"
+        ? "memberships"
+        : hoveredNav ??
+    (activeView === "services" ||
+    activeView === "memberships" ||
+    activeView === "home" ||
+    activeView === "blog" ||
+    activeView === "contact"
+      ? activeView
+      : null);
+
+  const navLine = (
+    <motion.span
+      layoutId="activeNavLine"
+      className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
+      transition={{ type: "spring", stiffness: 280, damping: 32, mass: 0.8 }}
+    />
+  );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out bg-transparent">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        hidden && !mobileMenuOpen ? "-translate-y-full" : "translate-y-0"
+      } ${
+        useSolidHeader
+          ? "bg-[#FAF8F5]/50 border-b border-[#DECBA5]/20 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 md:h-24 flex items-center justify-between">
         {/* Logo */}
         <div
@@ -98,8 +181,8 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
           id="header-brand-trigger"
         >
           <img
-            src="/logo2.jpeg"
-            alt="Logo"
+            src="/logo.png"
+            alt="Namastey Salon & Spa"
             className="h-12 md:h-14 w-auto object-contain"
           />
         </div>
@@ -109,78 +192,75 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
           <nav
             className="flex items-center gap-8 text-[15px] font-display tracking-widest uppercase"
             id="desktop-navbar"
+            onMouseLeave={() => setHoveredNav(null)}
           >
             <button
               onClick={() => handleNavClick("home")}
-              className={`${btnClass} ${activeView === "home" ? activeTextColor : ""}`}
+              onMouseEnter={() => setHoveredNav("home")}
+              className={`${btnClass} ${activeView === "home" || hoveredNav === "home" ? activeTextColor : ""}`}
             >
               Home
-              {activeView === "home" && (
-                <motion.span
-                  layoutId="activeNavLine"
-                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
-                />
-              )}
+              {underlinedNav === "home" && navLine}
             </button>
 
             {/* Services dropdown */}
             <div
-              className="relative py-8"
-              onMouseEnter={() => setHoveredDropdown("offerings")}
+              className="relative"
+              onMouseEnter={() => {
+                setHoveredDropdown("offerings");
+                setHoveredNav("services");
+              }}
               onMouseLeave={() => setHoveredDropdown(null)}
             >
               <button
-                onClick={() => handleNavClick("services")}
-                className={dropdownBtnClass}
+                onClick={() => handleServiceCategoryClick("All")}
+                className={`${dropdownBtnClass} ${activeView === "services" || hoveredNav === "services" ? activeTextColor : ""}`}
               >
                 <span>Services</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredDropdown === "offerings" ? "rotate-180" : ""} ${chevronColor}`}
                 />
+                {underlinedNav === "services" && navLine}
               </button>
             </div>
 
             {/* Memberships dropdown */}
             <div
-              className="relative py-8"
-              onMouseEnter={() => setHoveredDropdown("memberships")}
+              className="relative"
+              onMouseEnter={() => {
+                setHoveredDropdown("memberships");
+                setHoveredNav("memberships");
+              }}
               onMouseLeave={() => setHoveredDropdown(null)}
             >
               <button
                 onClick={() => handleNavClick("memberships")}
-                className={dropdownBtnClass}
+                className={`${dropdownBtnClass} ${activeView === "memberships" || hoveredNav === "memberships" ? activeTextColor : ""}`}
               >
                 <span>Memberships</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredDropdown === "memberships" ? "rotate-180" : ""} ${chevronColor}`}
                 />
+                {underlinedNav === "memberships" && navLine}
               </button>
             </div>
 
             <button
               onClick={() => handleNavClick("blog")}
-              className={`${btnClass} ${activeView === "blog" ? activeTextColor : ""}`}
+              onMouseEnter={() => setHoveredNav("blog")}
+              className={`${btnClass} ${activeView === "blog" || hoveredNav === "blog" ? activeTextColor : ""}`}
             >
               Blog
-              {activeView === "blog" && (
-                <motion.span
-                  layoutId="activeNavLine"
-                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
-                />
-              )}
+              {underlinedNav === "blog" && navLine}
             </button>
 
             <button
               onClick={() => handleNavClick("contact")}
-              className={`${btnClass} ${activeView === "contact" ? activeTextColor : ""}`}
+              onMouseEnter={() => setHoveredNav("contact")}
+              className={`${btnClass} ${activeView === "contact" || hoveredNav === "contact" ? activeTextColor : ""}`}
             >
               Contact
-              {activeView === "contact" && (
-                <motion.span
-                  layoutId="activeNavLine"
-                  className="absolute bottom-6 left-0 right-0 h-[2px] bg-[#DECBA5]"
-                />
-              )}
+              {underlinedNav === "contact" && navLine}
             </button>
           </nav>
         </div>
@@ -189,7 +269,7 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
         <div className="hidden lg:flex items-center gap-4">
           <button
             onClick={onOpenBooking}
-            className="bg-[#DECBA5] text-[#1E3E34] hover:bg-white px-6 py-2.5 rounded-none font-bold shadow-md hover:scale-105 transition-all duration-300 text-xs uppercase tracking-widest flex items-center gap-2 cursor-pointer"
+            className="bg-[#DECBA5] text-[#1E3E34] px-6 py-2.5 rounded-none font-bold shadow-md text-xs uppercase tracking-widest flex items-center gap-2 cursor-pointer"
           >
             <Calendar className="w-4 h-4 text-[#1E3E34]" />
             <span>Book Now</span>
@@ -229,8 +309,16 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
             exit={{ opacity: 0, y: -8 }}
             transition={dropdownTransition}
             className={`hidden lg:block ${dropdownBase}`}
-            onMouseEnter={() => setHoveredDropdown(hoveredDropdown)}
-            onMouseLeave={() => setHoveredDropdown(null)}
+            onMouseEnter={() => {
+              setHoveredDropdown(hoveredDropdown);
+              setHoveredNav(
+                hoveredDropdown === "offerings" ? "services" : "memberships",
+              );
+            }}
+            onMouseLeave={() => {
+              setHoveredDropdown(null);
+              setHoveredNav(null);
+            }}
             id="desktop-mega-dropdown"
           >
             {/* thin gold top highlight line */}
@@ -243,10 +331,10 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
                     <div className="text-[10px] font-mono tracking-widest text-[#DECBA5] uppercase font-black flex items-center gap-1.5 mb-3">
                       <Layers className="w-3.5 h-3.5" /> SERVICES DIRECTORY
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-black mb-5">
+                    <h4 className="font-serif text-lg font-bold text-white mb-5">
                       Somatic Practices
                     </h4>
-                    <p className="text-[11px] text-black/55 leading-relaxed font-semibold">
+                    <p className="text-[11px] text-white/55 leading-relaxed font-semibold">
                       Dive into clinically analytical somatic remedies,
                       metabolic recovery mechanisms, and physiological wellness
                       theories.
@@ -256,14 +344,17 @@ export default function Header({ onNavigate, onOpenBooking, activeView }: Header
                     {navMenuItems.offerings.map((cat) => (
                       <button
                         key={cat}
-                        onClick={() => handleNavClick("services")}
-                        className="p-4 rounded-xl bg-black/[0.04] border border-black/[0.07] hover:border-[#DECBA5]/35 hover:bg-black/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
+                        onClick={() => handleServiceCategoryClick(cat)}
+                        className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:border-[#DECBA5]/35 hover:bg-white/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
                       >
-                        <span className="text-xs font-bold text-black/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
+                        <span className="text-xs font-bold text-white/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
                           {cat}
                         </span>
-                        <span className="text-[9px] text-black/40 mt-1.5 block font-mono leading-none">
+                        <span className="text-[9px] text-white/40 mt-1.5 block font-mono leading-none">
                           Clinical Somatics
+                        </span>
+                        <span className="text-[9px] text-[#DECBA5]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#DECBA5] transition-colors">
+                          Explore →
                         </span>
                       </button>
                     ))}

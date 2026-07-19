@@ -58,7 +58,7 @@ export default function ContactSection() {
                     {BUSINESS_DETAILS.address}
                   </p>
                   <a
-                    href="https://maps.app.goo.gl/rZE24ZVNTAPSxVRu5"
+                    href={BUSINESS_DETAILS.mapsLink}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[11px] font-mono font-bold text-[#2D5446] hover:text-[#1E3E34] hover:underline inline-flex items-center gap-1"

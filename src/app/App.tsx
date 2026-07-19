@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence } from "motion/react";
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
+import WhatsAppFloat from "@/src/components/WhatsAppFloat";
 import HomePage from "@/src/pages/Home";
 import ServicesPage from "@/src/pages/Services";
 import WhySpaPage from "@/src/pages/WhySpa";
@@ -21,6 +22,16 @@ import type {
 export default function App() {
   const [activeView, setActiveView] = useState<ViewName>("home");
   const [bookingsList, setBookingsList] = useState<Booking[]>([]);
+  const [serviceCategory, setServiceCategory] = useState<
+    "All" | import("@/src/common/types").SpaCategoryValue
+  >("All");
+
+  const openServices = (
+    category: "All" | import("@/src/common/types").SpaCategoryValue = "All",
+  ) => {
+    setServiceCategory(category);
+    setActiveView("services");
+  };
 
   // Load bookings from localStorage on mount
   useEffect(() => {
@@ -85,7 +96,14 @@ export default function App() {
       <div className="absolute top-[40%] left-[-80px] w-[500px] h-[500px] bg-[#2D5446]/5 rounded-full blur-[110px] opacity-60 ambient-glow-2 pointer-events-none" />
 
       <Header
-        onNavigate={(view) => setActiveView(view)}
+        onNavigate={(view) => {
+          if (view === "services") {
+            openServices("All");
+            return;
+          }
+          setActiveView(view);
+        }}
+        onOpenServicesCategory={openServices}
         onOpenBooking={openWhatsAppGeneral}
         activeView={activeView}
       />
@@ -103,6 +121,7 @@ export default function App() {
 
           {activeView === "services" && (
             <ServicesPage
+              initialCategory={serviceCategory}
               onSelectService={(s) => handleOpenBooking(s, null)}
             />
           )}
@@ -136,6 +155,8 @@ export default function App() {
       </main>
 
       <Footer />
+
+      <WhatsAppFloat onClick={openWhatsAppGeneral} />
     </div>
   );
 }

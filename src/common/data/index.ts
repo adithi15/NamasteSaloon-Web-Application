@@ -19,8 +19,8 @@ export const BUSINESS_DETAILS: BusinessDetails = {
   phone: "+91 7888803331 / +91 7888803332",
   whatsapp: "917888803331 / 917888803332",
   email: "concierge@namastey.social",
-  address: "Sea Face Plaza, Marine Drive, Charni Road, Mumbai, MH - 400004",
-  mapsLink: "https://maps.google.com/?q=Marine+Drive+Charni+Road+Mumbai",
+  address: "1st Floor, The Pacific, Block 107/108/109, Shilp Chowk, next to McDonald's, Block G, Sector 13, Kharghar, Navi Mumbai, Panvel, Maharashtra 410210",
+  mapsLink: "https://maps.google.com/?q=The+Pacific+Shilp+Chowk+Sector+13+Kharghar+Navi+Mumbai",
   instagram: "https://www.instagram.com/namasteywellnessspa/",
   facebook: "https://facebook.com/namastey.wellness"
 };
@@ -30,9 +30,7 @@ export const BUSINESS_DETAILS: BusinessDetails = {
   Notes:
   - Prices are in ₹ (INR), stored as plain numbers (e.g. 3800 not "3800/-").
     ServiceCarousel.jsx's "$" symbol needs to be swapped for "₹" separately.
-  - Images/rating/ratingCount are PLACEHOLDERS (rotated from the existing
-    stock photo set) since none were provided per-service — swap these for
-    real photos/review data whenever you have them.
+  - Images use client Service-Photos copied to /public/images/services.
   - Categories are mapped onto the existing SpaCategory enum:
       MASSAGES -> straight massage therapies
       CLASSES  -> rituals, baths, facials, jacuzzi/spa experiences
@@ -43,18 +41,11 @@ export const BUSINESS_DETAILS: BusinessDetails = {
     below with a comment; change `durationMinutes` on that entry if wrong.
 */
 
-const PLACEHOLDER_IMAGES = [
-  "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1519823551279-64bc75d44f47?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=800",
-];
-
-function img(i: number): string {
-  return PLACEHOLDER_IMAGES[i % PLACEHOLDER_IMAGES.length];
+/** Client service photos under /public/images/services (copied from Website-Logo-Font-Photos) */
+function svc(folder: string, n: number, ext: "jpg" | "png" = "jpg"): string {
+  return `/images/services/${folder}/${n}.${ext}`;
 }
+
 
 export const SERVICES: Service[] = [
   {
@@ -67,7 +58,7 @@ export const SERVICES: Service[] = [
     price: 3800,
     rating: 4.9, // placeholder
     ratingCount: 120, // placeholder
-    image: img(0),
+    image: svc("massage", 1),
     isFeatured: true
   },
   {
@@ -80,7 +71,7 @@ export const SERVICES: Service[] = [
     price: 3200,
     rating: 4.8,
     ratingCount: 64,
-    image: img(1)
+    image: svc("massage", 2)
   },
   {
     id: "service-3",
@@ -92,7 +83,7 @@ export const SERVICES: Service[] = [
     price: 3500,
     rating: 4.9,
     ratingCount: 88,
-    image: img(2)
+    image: svc("thai", 3)
   },
   {
     id: "service-4",
@@ -104,7 +95,7 @@ export const SERVICES: Service[] = [
     price: 1800,
     rating: 4.7,
     ratingCount: 95,
-    image: img(3)
+    image: svc("massage", 4)
   },
   {
     id: "service-5",
@@ -116,7 +107,7 @@ export const SERVICES: Service[] = [
     price: 1800,
     rating: 4.7,
     ratingCount: 70,
-    image: img(4)
+    image: svc("massage", 1)
   },
   {
     id: "service-6",
@@ -128,7 +119,7 @@ export const SERVICES: Service[] = [
     price: 2000,
     rating: 4.8,
     ratingCount: 102,
-    image: img(5)
+    image: svc("massage", 2)
   },
   {
     id: "service-7",
@@ -140,7 +131,7 @@ export const SERVICES: Service[] = [
     price: 4500,
     rating: 4.9,
     ratingCount: 140,
-    image: img(0)
+    image: svc("massage", 3)
   },
   {
     id: "service-8",
@@ -152,7 +143,7 @@ export const SERVICES: Service[] = [
     price: 4500,
     rating: 4.85,
     ratingCount: 77,
-    image: img(1)
+    image: svc("massage", 4)
   },
   {
     id: "service-9",
@@ -164,7 +155,7 @@ export const SERVICES: Service[] = [
     price: 5000,
     rating: 4.9,
     ratingCount: 110,
-    image: img(2)
+    image: svc("hot-stone", 1)
   },
   {
     id: "service-10",
@@ -176,7 +167,7 @@ export const SERVICES: Service[] = [
     price: 5500,
     rating: 4.9,
     ratingCount: 130,
-    image: img(3),
+    image: svc("sports", 2),
     isFeatured: true
   },
   {
@@ -189,7 +180,7 @@ export const SERVICES: Service[] = [
     price: 6000,
     rating: 4.9,
     ratingCount: 98,
-    image: img(4)
+    image: svc("potli", 3)
   },
   {
     id: "service-12",
@@ -201,7 +192,7 @@ export const SERVICES: Service[] = [
     price: 2500,
     rating: 4.7,
     ratingCount: 56,
-    image: img(5)
+    image: svc("massage", 4)
   },
   {
     id: "service-13",
@@ -213,7 +204,7 @@ export const SERVICES: Service[] = [
     price: 7000,
     rating: 5.0,
     ratingCount: 64,
-    image: img(0),
+    image: svc("massage", 1),
     isFeatured: true
   },
   {
@@ -226,7 +217,7 @@ export const SERVICES: Service[] = [
     price: 5500,
     rating: 4.9,
     ratingCount: 145,
-    image: img(1),
+    image: svc("korean", 2, "png"),
     isFeatured: true
   },
   {
@@ -241,7 +232,7 @@ export const SERVICES: Service[] = [
     price: 9000,
     rating: 4.9,
     ratingCount: 52,
-    image: img(2)
+    image: svc("korean", 3, "png")
   },
   {
     id: "service-16",
@@ -253,7 +244,7 @@ export const SERVICES: Service[] = [
     price: 10000,
     rating: 5.0,
     ratingCount: 41,
-    image: img(3),
+    image: svc("korean", 4, "png"),
     isFeatured: true
   },
   {
@@ -266,7 +257,7 @@ export const SERVICES: Service[] = [
     price: 4500,
     rating: 4.8,
     ratingCount: 68,
-    image: img(4)
+    image: svc("korean", 1, "png")
   },
   {
     id: "service-18",
@@ -278,7 +269,7 @@ export const SERVICES: Service[] = [
     price: 5000,
     rating: 4.85,
     ratingCount: 59,
-    image: img(5)
+    image: svc("korean", 2, "png")
   },
   {
     id: "service-19",
@@ -290,7 +281,7 @@ export const SERVICES: Service[] = [
     price: 7000,
     rating: 4.9,
     ratingCount: 47,
-    image: img(0)
+    image: svc("korean", 3, "png")
   },
   {
     id: "service-20",
@@ -302,7 +293,7 @@ export const SERVICES: Service[] = [
     price: 8000,
     rating: 4.9,
     ratingCount: 38,
-    image: img(1)
+    image: svc("korean", 4, "png")
   },
   {
     id: "service-21",
@@ -314,7 +305,7 @@ export const SERVICES: Service[] = [
     price: 9000,
     rating: 4.9,
     ratingCount: 33,
-    image: img(2)
+    image: svc("korean", 1, "png")
   },
   {
     id: "service-22",
@@ -326,7 +317,7 @@ export const SERVICES: Service[] = [
     price: 4800,
     rating: 4.95,
     ratingCount: 156,
-    image: img(3),
+    image: svc("shirodhara", 2),
     isFeatured: true
   },
   {
@@ -339,7 +330,7 @@ export const SERVICES: Service[] = [
     price: 7500,
     rating: 4.9,
     ratingCount: 44,
-    image: img(4)
+    image: svc("shirodhara", 3)
   },
   {
     id: "service-24",
@@ -351,7 +342,7 @@ export const SERVICES: Service[] = [
     price: 6500,
     rating: 4.8,
     ratingCount: 29,
-    image: img(5)
+    image: svc("moxibustion", 4)
   },
   {
     id: "service-25",
@@ -363,7 +354,7 @@ export const SERVICES: Service[] = [
     price: 9000,
     rating: 4.85,
     ratingCount: 21,
-    image: img(0)
+    image: svc("korean", 1, "png")
   },
   {
     id: "service-26",
@@ -375,7 +366,7 @@ export const SERVICES: Service[] = [
     price: 6500,
     rating: 4.9,
     ratingCount: 87,
-    image: img(1)
+    image: svc("hammam", 2)
   },
   {
     id: "service-27",
@@ -387,7 +378,7 @@ export const SERVICES: Service[] = [
     price: 11000,
     rating: 4.95,
     ratingCount: 53,
-    image: img(2),
+    image: svc("hammam", 3),
     isFeatured: true
   },
   {
@@ -400,7 +391,7 @@ export const SERVICES: Service[] = [
     price: 4000,
     rating: 4.8,
     ratingCount: 35,
-    image: img(3)
+    image: svc("shirodhara", 4)
   },
   {
     id: "service-29",
@@ -412,7 +403,7 @@ export const SERVICES: Service[] = [
     price: 8500,
     rating: 4.85,
     ratingCount: 22,
-    image: img(4)
+    image: svc("shirodhara", 1)
   },
   {
     id: "service-30",
@@ -424,7 +415,7 @@ export const SERVICES: Service[] = [
     price: 11000,
     rating: 4.9,
     ratingCount: 31,
-    image: img(5)
+    image: svc("product", 2)
   },
   {
     id: "service-31",
@@ -436,7 +427,7 @@ export const SERVICES: Service[] = [
     price: 1500,
     rating: 4.7,
     ratingCount: 90,
-    image: img(0)
+    image: svc("product", 3)
   },
   {
     id: "service-32",
@@ -448,7 +439,7 @@ export const SERVICES: Service[] = [
     price: 2500,
     rating: 4.7,
     ratingCount: 48,
-    image: img(1)
+    image: svc("product", 4)
   },
   {
     id: "service-33",
@@ -460,7 +451,7 @@ export const SERVICES: Service[] = [
     price: 5000,
     rating: 4.8,
     ratingCount: 37,
-    image: img(2)
+    image: svc("product", 1)
   },
   {
     id: "service-34",
@@ -472,7 +463,7 @@ export const SERVICES: Service[] = [
     price: 10000,
     rating: 4.95,
     ratingCount: 40,
-    image: img(3),
+    image: svc("couple", 2),
     isFeatured: true
   },
   {
@@ -485,7 +476,7 @@ export const SERVICES: Service[] = [
     price: 16000,
     rating: 5.0,
     ratingCount: 25,
-    image: img(4),
+    image: svc("couple", 3),
     isFeatured: true
   },
   {
@@ -498,7 +489,7 @@ export const SERVICES: Service[] = [
     price: 4000,
     rating: 4.8,
     ratingCount: 18,
-    image: img(5)
+    image: svc("couple", 4)
   },
   {
     id: "service-37",
@@ -510,7 +501,7 @@ export const SERVICES: Service[] = [
     price: 6000,
     rating: 4.85,
     ratingCount: 23,
-    image: img(0)
+    image: svc("couple", 1)
   },
   {
     id: "service-38",
@@ -522,7 +513,7 @@ export const SERVICES: Service[] = [
     price: 1000,
     rating: 4.6,
     ratingCount: 60,
-    image: img(1)
+    image: svc("jacuzzi", 2)
   },
   {
     id: "service-39",
@@ -534,7 +525,7 @@ export const SERVICES: Service[] = [
     price: 1200,
     rating: 4.7,
     ratingCount: 51,
-    image: img(2)
+    image: svc("jacuzzi", 3)
   },
   {
     id: "service-40",
@@ -546,7 +537,7 @@ export const SERVICES: Service[] = [
     price: 1400,
     rating: 4.7,
     ratingCount: 39,
-    image: img(3)
+    image: svc("jacuzzi", 4)
   },
   {
     id: "service-41",
@@ -558,7 +549,7 @@ export const SERVICES: Service[] = [
     price: 1600,
     rating: 4.6,
     ratingCount: 34,
-    image: img(4)
+    image: svc("jacuzzi", 1)
   },
   {
     id: "service-42",
@@ -570,7 +561,7 @@ export const SERVICES: Service[] = [
     price: 1800,
     rating: 4.7,
     ratingCount: 28,
-    image: img(5)
+    image: svc("ice-bath", 2)
   },
   {
     id: "service-43",
@@ -582,7 +573,7 @@ export const SERVICES: Service[] = [
     price: 2000,
     rating: 4.8,
     ratingCount: 30,
-    image: img(0)
+    image: svc("jacuzzi", 3)
   },
   {
     id: "service-44",
@@ -594,7 +585,7 @@ export const SERVICES: Service[] = [
     price: 1400,
     rating: 4.8,
     ratingCount: 76,
-    image: img(1)
+    image: svc("feet", 4)
   },
   {
     id: "service-45",
@@ -606,7 +597,7 @@ export const SERVICES: Service[] = [
     price: 1600,
     rating: 4.7,
     ratingCount: 42,
-    image: img(2)
+    image: svc("massage", 1)
   },
   {
     id: "service-46",
@@ -618,7 +609,7 @@ export const SERVICES: Service[] = [
     price: 1800,
     rating: 4.75,
     ratingCount: 38,
-    image: img(3)
+    image: svc("feet", 2)
   },
   {
     id: "service-47",
@@ -630,7 +621,7 @@ export const SERVICES: Service[] = [
     price: 2000,
     rating: 4.8,
     ratingCount: 45,
-    image: img(4)
+    image: svc("hot-stone", 3)
   },
   {
     id: "service-48",
@@ -642,7 +633,7 @@ export const SERVICES: Service[] = [
     price: 2300,
     rating: 4.8,
     ratingCount: 33,
-    image: img(5)
+    image: svc("potli", 4)
   },
   {
     id: "service-49",
@@ -654,7 +645,7 @@ export const SERVICES: Service[] = [
     price: 2300,
     rating: 4.8,
     ratingCount: 27,
-    image: img(0)
+    image: svc("feet", 1)
   },
   {
     id: "service-50",
@@ -666,7 +657,7 @@ export const SERVICES: Service[] = [
     price: 500,
     rating: 4.6,
     ratingCount: 19,
-    image: img(1)
+    image: svc("feet", 2)
   }
 ];
 
@@ -1065,7 +1056,7 @@ In this guide, we break down how to properly structure your cold contrast interv
 3. **The Rewarm**: Relying on natural thermogenesis rather than immediate hot showers. Let your core temperature raise itself naturally for optimum mitochondrial benefit.`,
     author: "Dr. Marcus Sterling",
     date: "June 18, 2026",
-    image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&q=80&w=800",
+    image: "/images/services/ice-bath/1.jpg",
     readTime: "5 min read"
   },
   {
@@ -1079,7 +1070,7 @@ Our signature Abhyanga and Marma point massage therapies utilize warm, herbal-in
 The immediate result is a lighter, more integrated skeletal alignment and a profound release of structural holding patterns in the mind.`,
     author: "Aarya Varma",
     date: "May 14, 2026",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600",
+    image: "/images/services/shirodhara/2.jpg",
     readTime: "7 min read"
   }
 ];
