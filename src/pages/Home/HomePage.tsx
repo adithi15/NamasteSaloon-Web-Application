@@ -67,6 +67,7 @@ export default function HomePage({
             </motion.h1>
           </div>
 
+          {/* Reservations CTA — hidden for now
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,6 +80,7 @@ export default function HomePage({
               Reservations
             </button>
           </motion.div>
+          */}
         </div>
       </section>
 
