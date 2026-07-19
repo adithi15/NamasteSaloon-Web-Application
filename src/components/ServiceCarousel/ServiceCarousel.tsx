@@ -114,7 +114,7 @@ export default function ServiceCarousel({ onSelectService }: ServiceCarouselProp
 
               <div className="p-6 flex-grow flex flex-col justify-between">
                 <div>
-                  <h3 className="font-extrabold text-[#FAF8F5] text-lg md:text-xl font-display tracking-tight mb-2 group-hover:text-[#DECBA5] transition-colors duration-500">
+                  <h3 className="font-serif font-extrabold text-[#FAF8F5] text-lg md:text-xl tracking-tight mb-2 group-hover:text-[#DECBA5] transition-colors duration-500">
                     {service.name}
                   </h3>
                   <p className="text-xs text-[#FAF8F5]/70 line-clamp-3 leading-relaxed mb-6 font-display font-medium">

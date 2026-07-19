@@ -15,14 +15,15 @@ export const BUSINESS_DETAILS: BusinessDetails = {
   name: "NAMASTEY Wellness SPA",
   // tagline: "SELF-CARE MADE SOCIAL",
   about: "Elevating cellular recovery, sensory re-alignment, and communal heat/cold somatic practice in a premium high-end light frosted space.",
-  yearEstablished: 2014,
-  phone: "+91 7888803331 / +91 7888803332",
-  whatsapp: "917888803331 / 917888803332",
-  email: "concierge@namastey.social",
-  address: "1st Floor, The Pacific, Block 107/108/109, Shilp Chowk, next to McDonald's, Block G, Sector 13, Kharghar, Navi Mumbai, Panvel, Maharashtra 410210",
-  mapsLink: "https://maps.google.com/?q=The+Pacific+Shilp+Chowk+Sector+13+Kharghar+Navi+Mumbai",
+  yearEstablished: 2024,
+  phone: "7888803331 / 7888803332",
+  whatsapp: "917888803331",
+  email: "namasteysalon@gmail.com",
+  address:
+    "64/65, Ground Floor, Patel Heritage, Sector-07, Kharghar, Navi Mumbai",
+  mapsLink: "https://maps.app.goo.gl/ytL61x5pZKJD1jsL8?g_st=com.google.maps.preview.copy",
   instagram: "https://www.instagram.com/namasteywellnessspa/",
-  facebook: "https://facebook.com/namastey.wellness"
+  facebook: "https://facebook.com/namastey.wellness",
 };
 
 /*
@@ -31,11 +32,11 @@ export const BUSINESS_DETAILS: BusinessDetails = {
   - Prices are in ₹ (INR), stored as plain numbers (e.g. 3800 not "3800/-").
     ServiceCarousel.jsx's "$" symbol needs to be swapped for "₹" separately.
   - Images use client Service-Photos copied to /public/images/services.
-  - Categories are mapped onto the existing SpaCategory enum:
-      MASSAGES -> straight massage therapies
-      CLASSES  -> rituals, baths, facials, jacuzzi/spa experiences
-    If your types.js has more specific categories (e.g. BATHS, FACIALS,
-    HAMMAM), tell me and I'll remap these.
+  - Categories are grouped by the treatment guests would logically expect:
+      MASSAGES             -> body, back, and foot massage therapies
+      BIOMETRIC_TESTING    -> head and face spa treatments
+      ALTERNATIVE_MEDICINE -> wellness rituals, Hammam, and holistic therapies
+      CLASSES              -> baths, Jacuzzi, and celebration experiences
   - "Korean Head with Facial Spa" had no duration in the source list — I
     used 75 min (same as the closest sibling, "Korean Head Spa"). Flagged
     below with a comment; change `durationMinutes` on that entry if wrong.
@@ -212,7 +213,7 @@ export const SERVICES: Service[] = [
     name: "Korean Head Spa",
     description: "A scalp-focused spa ritual combining cleansing, massage, and scalp therapy for ultimate head relaxation.",
     benefits: ["Deep scalp cleansing", "Relieves tension headaches", "Promotes scalp & hair health"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.BIOMETRIC_TESTING,
     durationMinutes: 75,
     price: 5500,
     rating: 4.9,
@@ -227,7 +228,7 @@ export const SERVICES: Service[] = [
     // match its closest sibling ("Korean Head Spa"). Adjust if incorrect.
     description: "Combines our Korean Head Spa ritual with a rejuvenating facial for complete head-to-face renewal.",
     benefits: ["Combined scalp and facial renewal", "Deep relaxation and glow", "All-in-one head & face ritual"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.BIOMETRIC_TESTING,
     durationMinutes: 75,
     price: 9000,
     rating: 4.9,
@@ -312,7 +313,7 @@ export const SERVICES: Service[] = [
     name: "Shirodhara",
     description: "A classic Ayurvedic ritual involving a continuous, gentle stream of warm oil poured over the forehead.",
     benefits: ["Deeply calms the nervous system", "Eases mental fatigue and anxiety", "Traditional Ayurvedic ritual"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 60,
     price: 4800,
     rating: 4.95,
@@ -325,7 +326,7 @@ export const SERVICES: Service[] = [
     name: "Sukhdhara",
     description: "An extended Shirodhara-style ritual offering deeper relaxation and mental clarity.",
     benefits: ["Extended deep relaxation ritual", "Mental clarity and calm", "Premium Ayurvedic experience"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 90,
     price: 7500,
     rating: 4.9,
@@ -361,7 +362,7 @@ export const SERVICES: Service[] = [
     name: "Classic Turkish Hammam",
     description: "A traditional Turkish bath ritual featuring deep cleansing, steam, and exfoliation.",
     benefits: ["Deep skin cleansing & exfoliation", "Steam-based detoxification", "Traditional hammam ritual"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 90,
     price: 6500,
     rating: 4.9,
@@ -373,7 +374,7 @@ export const SERVICES: Service[] = [
     name: "Signature Turkish Hammam",
     description: "Our extended, premium Turkish Hammam ritual offering the most comprehensive cleansing experience.",
     benefits: ["Premium extended hammam ritual", "Comprehensive deep cleansing", "Signature luxury bathing experience"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 150,
     price: 11000,
     rating: 4.95,
@@ -386,7 +387,7 @@ export const SERVICES: Service[] = [
     name: "Shaan Abhishekam",
     description: "A ceremonial Abhishekam ritual involving warm oil pouring for purification and relaxation.",
     benefits: ["Ceremonial purification ritual", "Deep relaxation", "Traditional Abhishekam experience"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 60,
     price: 4000,
     rating: 4.8,
@@ -398,7 +399,7 @@ export const SERVICES: Service[] = [
     name: "Vishuddhi Abhishekam",
     description: "An extended, comprehensive Abhishekam ritual designed for deep purification and renewal.",
     benefits: ["Extended ceremonial ritual", "Deep purification focus", "Comprehensive renewal experience"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 120,
     price: 8500,
     rating: 4.85,
@@ -410,7 +411,7 @@ export const SERVICES: Service[] = [
     name: "Bodicial with Body Facial",
     description: "A full-body facial treatment that exfoliates, nourishes, and revitalizes skin from head to toe.",
     benefits: ["Full-body skin renewal", "Deep exfoliation and nourishment", "Comprehensive facial-body treatment"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 150,
     price: 11000,
     rating: 4.9,
@@ -422,7 +423,7 @@ export const SERVICES: Service[] = [
     name: "Body Scrub",
     description: "An invigorating full-body exfoliation treatment to remove dead skin and reveal smoother skin.",
     benefits: ["Removes dead skin cells", "Leaves skin smooth and refreshed", "Quick invigorating treatment"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 30,
     price: 1500,
     rating: 4.7,
@@ -434,7 +435,7 @@ export const SERVICES: Service[] = [
     name: "Face Fit Gym",
     description: "A facial workout treatment using targeted techniques to tone and firm facial muscles.",
     benefits: ["Tones and firms facial muscles", "Improves facial circulation", "Quick facial fitness session"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.BIOMETRIC_TESTING,
     durationMinutes: 30,
     price: 2500,
     rating: 4.7,
@@ -446,7 +447,7 @@ export const SERVICES: Service[] = [
     name: "Face Lift Gym",
     description: "An extended facial toning treatment designed to firm and lift facial contours.",
     benefits: ["Lifts and firms facial contours", "Extended toning session", "Visible facial rejuvenation"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.BIOMETRIC_TESTING,
     durationMinutes: 60,
     price: 5000,
     rating: 4.8,
@@ -458,7 +459,7 @@ export const SERVICES: Service[] = [
     name: "Blissful Retreat",
     description: "A comprehensive wellness retreat session combining multiple therapies for total relaxation.",
     benefits: ["Combines multiple relaxation therapies", "Extended retreat-style session", "Comprehensive total-body relaxation"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 105,
     price: 10000,
     rating: 4.95,
@@ -471,7 +472,7 @@ export const SERVICES: Service[] = [
     name: "Soul Reconnect",
     description: "Our most comprehensive wellness journey, combining deep bodywork, ritual, and restorative therapies.",
     benefits: ["Most comprehensive signature journey", "Combines bodywork & ritual therapies", "Ultimate restorative experience"],
-    category: SpaCategory.CLASSES,
+    category: SpaCategory.ALTERNATIVE_MEDICINE,
     durationMinutes: 150,
     price: 16000,
     rating: 5.0,

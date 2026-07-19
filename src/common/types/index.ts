@@ -1,8 +1,8 @@
 export const SpaCategory = {
-  ALTERNATIVE_MEDICINE: "Alternative Medicine",
+  ALTERNATIVE_MEDICINE: "Wellness Rituals",
   MASSAGES: "Custom Massages",
-  BIOMETRIC_TESTING: "Biometric Testing",
-  CLASSES: "Wellness Classes",
+  BIOMETRIC_TESTING: "Head & Face Spa",
+  CLASSES: "Baths & Celebrations",
 } as const;
 
 export type SpaCategoryValue =

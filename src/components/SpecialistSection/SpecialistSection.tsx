@@ -82,7 +82,7 @@ function HealerCard({ healer, onBook, distance }: { healer: Specialist; onBook: 
         <h3 style={{ fontFamily: "Calgary, Gilroy, serif", fontSize: 18, fontWeight: 800, color: "#0f172a", margin: "0 0 4px" }}>
           {healer.name}
         </h3>
-        <p style={{ fontSize: 10, fontFamily: "monospace", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.15em", color: "#2D5446", marginBottom: 12 }}>
+        <p style={{ fontSize: 10, fontFamily: "Gilroy, sans-serif", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.15em", color: "#2D5446", marginBottom: 12 }}>
           {healer.specialtyTag}
         </p>
         <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6, fontStyle: "italic", marginBottom: 16 }}>
@@ -102,7 +102,7 @@ function HealerCard({ healer, onBook, distance }: { healer: Specialist; onBook: 
             borderRadius: 12,
             fontSize: 10,
             fontWeight: 800,
-            fontFamily: "monospace",
+            fontFamily: "Gilroy, sans-serif",
             textTransform: "uppercase",
             letterSpacing: "0.12em",
             display: "flex",

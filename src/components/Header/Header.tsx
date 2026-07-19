@@ -9,7 +9,11 @@ import {
   Layers,
   Award,
 } from "lucide-react";
-import type { SpaCategoryValue, ViewName } from "@/src/common/types";
+import type {
+  PackageType,
+  SpaCategoryValue,
+  ViewName,
+} from "@/src/common/types";
 import { SpaCategory } from "@/src/common/types";
 
 interface HeaderProps {
@@ -17,6 +21,7 @@ interface HeaderProps {
   onOpenBooking: () => void;
   activeView: ViewName;
   onOpenServicesCategory?: (category: SpaCategoryValue | "All") => void;
+  onOpenMembershipCategory?: (category: PackageType | "all") => void;
 }
 
 export default function Header({
@@ -24,6 +29,7 @@ export default function Header({
   onOpenBooking,
   activeView,
   onOpenServicesCategory,
+  onOpenMembershipCategory,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredDropdown, setHoveredDropdown] = useState<"offerings" | "memberships" | null>(null);
@@ -74,17 +80,15 @@ export default function Header({
   const useSolidHeader = scrolled || !isHomePage;
 
   const navMenuItems = {
-    offerings: [
-      "Alternative Medicine",
-      "Custom Massages",
-      "Biometric Testing",
-      "Wellness Classes",
-    ],
+    offerings: Object.values(SpaCategory),
     memberships: [
-      "Memberships Pass",
-      "Packages Tier",
-      "Couple SPA",
-      "Couple Celebration",
+      { label: "Membership Plans", type: "membership" as const },
+      { label: "Prepaid Packages", type: "package" as const },
+      { label: "Couple SPA", type: "couple-spa" as const },
+      {
+        label: "Couple Celebration",
+        type: "couple-celebration" as const,
+      },
     ],
   };
 
@@ -104,6 +108,17 @@ export default function Header({
       onOpenServicesCategory(category);
     } else {
       onNavigate("services");
+    }
+    setHoveredDropdown(null);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleMembershipCategoryClick = (category: PackageType) => {
+    if (onOpenMembershipCategory) {
+      onOpenMembershipCategory(category);
+    } else {
+      onNavigate("memberships");
     }
     setHoveredDropdown(null);
     setMobileMenuOpen(false);
@@ -380,12 +395,12 @@ export default function Header({
                   <div className="col-span-3 grid grid-cols-4 gap-3">
                     {navMenuItems.memberships.map((mem) => (
                       <button
-                        key={mem}
-                        onClick={() => handleNavClick("memberships")}
+                        key={mem.type}
+                        onClick={() => handleMembershipCategoryClick(mem.type)}
                         className="p-5 rounded-xl bg-white/[0.04] border border-white/[0.07] hover:border-[#DECBA5]/35 hover:bg-white/[0.09] text-left transition-all duration-250 group cursor-pointer backdrop-blur-sm"
                       >
                         <span className="text-xs font-bold text-white/90 group-hover:text-[#DECBA5] transition-colors block uppercase tracking-wider">
-                          {mem}
+                          {mem.label}
                         </span>
                         <span className="text-[9px] text-white/40 mt-2 block font-mono leading-none">
                           All-Inclusive Passes

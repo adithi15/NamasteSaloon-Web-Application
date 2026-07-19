@@ -14,6 +14,7 @@ import { SERVICES, SPECIALISTS } from "@/src/common/data";
 import { getWhatsAppUrl } from "@/src/common/utils/whatsapp";
 import type {
   Booking,
+  PackageType,
   Service,
   Specialist,
   ViewName,
@@ -25,12 +26,20 @@ export default function App() {
   const [serviceCategory, setServiceCategory] = useState<
     "All" | import("@/src/common/types").SpaCategoryValue
   >("All");
+  const [membershipCategory, setMembershipCategory] = useState<
+    PackageType | "all"
+  >("all");
 
   const openServices = (
     category: "All" | import("@/src/common/types").SpaCategoryValue = "All",
   ) => {
     setServiceCategory(category);
     setActiveView("services");
+  };
+
+  const openMemberships = (category: PackageType | "all" = "all") => {
+    setMembershipCategory(category);
+    setActiveView("memberships");
   };
 
   // Load bookings from localStorage on mount
@@ -101,9 +110,14 @@ export default function App() {
             openServices("All");
             return;
           }
+          if (view === "memberships") {
+            openMemberships("all");
+            return;
+          }
           setActiveView(view);
         }}
         onOpenServicesCategory={openServices}
+        onOpenMembershipCategory={openMemberships}
         onOpenBooking={openWhatsAppGeneral}
         activeView={activeView}
       />
@@ -115,7 +129,13 @@ export default function App() {
             <HomePage
               onOpenBooking={handleOpenBooking}
               openWhatsAppGeneral={openWhatsAppGeneral}
-              onNavigate={setActiveView}
+              onNavigate={(view) => {
+                if (view === "memberships") {
+                  openMemberships("all");
+                  return;
+                }
+                setActiveView(view);
+              }}
             />
           )}
 
@@ -134,6 +154,7 @@ export default function App() {
 
           {activeView === "memberships" && (
             <MembershipsPage
+              initialCategory={membershipCategory}
               onSelectPlan={(plan) => handleOpenBooking(null, null, plan)}
             />
           )}

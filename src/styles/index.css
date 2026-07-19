@@ -65,8 +65,20 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  /* Title → Calgary | Subtitle/script → Allura | Body/UI → Gilroy */
+  /* Brand font map (client-provided):
+     Calgary  → titles / headings  (font-serif)
+     Allura   → script / accent    (font-script)
+     Gilroy   → body, UI, labels   (font-sans, font-display, font-mono)
+  */
   --font-serif: "Calgary", "Gilroy", serif;
   --font-sans: "Gilroy", sans-serif;
   --font-display: "Gilroy", sans-serif;

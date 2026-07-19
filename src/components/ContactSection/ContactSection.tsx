@@ -1,8 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, Mail, MapPin, HelpCircle, ChevronDown, Sparkles, MessageCircle } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  HelpCircle,
+  ChevronDown,
+  MessageCircle,
+  Instagram,
+} from "lucide-react";
 import { BUSINESS_DETAILS, FAQS } from "@/src/common/data";
 import { getWhatsAppUrl } from "@/src/common/utils/whatsapp";
+
+const PHONES = [
+  { label: "7888803331", tel: "+917888803331", wa: "917888803331" },
+  { label: "7888803332", tel: "+917888803332", wa: "917888803332" },
+] as const;
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.4V9.84c0-2.37 1.41-3.68 3.57-3.68 1.03 0 2.12.18 2.12.18v2.33h-1.2c-1.18 0-1.55.73-1.55 1.48v1.78h2.64l-.42 2.91h-2.22V22c4.78-.75 8.44-4.91 8.44-9.93z" />
+    </svg>
+  );
+}
 
 export default function ContactSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -11,43 +32,43 @@ export default function ContactSection() {
     setOpenFaq(openFaq === idx ? null : idx);
   };
 
-  const handleBookNowClick = () => {
-    // TODO: customize this message once wp.js / your WhatsApp number is wired up
-    const preparedText = "Hi! I'd like to book an appointment.";
+  const handleWhatsApp = (number?: string) => {
+    const preparedText = "Hi Namastey Wellness Spa! I'd like to get in touch.";
+    if (number) {
+      window.open(
+        `https://wa.me/${number}?text=${encodeURIComponent(preparedText)}`,
+        "_blank",
+        "noopener,noreferrer",
+      );
+      return;
+    }
     window.open(getWhatsAppUrl(preparedText), "_blank", "noopener,noreferrer");
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent" id="contact-section">
+    <section
+      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      id="contact-section"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(45,84,70,0.02),transparent_60%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
-            <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">COMMUNAL INTAKE</span>
-          </div>
           <h2 className="font-serif text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
-            Intake & Contact
+            Contact Us
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
           <p className="text-slate-600 text-sm md:text-base font-semibold font-display">
-            Directly connect with our reservations concierge desk or explore our FAQ directory.
+            Reach us by phone, WhatsApp, email, or visit our Kharghar spa.
           </p>
         </div>
 
-        {/* Info Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20">
-
-          {/* Left Side */}
-          <div className="lg:col-span-7 space-y-8 text-left">
-
-            {/* Single Location Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          {/* Address */}
+          <div className="lg:col-span-7 space-y-6 text-left">
             <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-6 md:p-8 rounded-3xl space-y-4">
               <h3 className="font-serif text-xl md:text-2xl text-slate-900 font-extrabold">
-                Our Location
+                Visit Us
               </h3>
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
@@ -63,24 +84,39 @@ export default function ContactSection() {
                     rel="noreferrer"
                     className="text-[11px] font-mono font-bold text-[#2D5446] hover:text-[#1E3E34] hover:underline inline-flex items-center gap-1"
                   >
-                    View on Google Maps &rarr;
+                    Open in Google Maps →
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Direct Intake Box */}
+            {/* Phone + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-6 rounded-2xl flex items-start gap-4">
                 <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446]">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div className="space-y-1">
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">CALL OR WHATSAPP</span>
-                  <a href={`tel:${BUSINESS_DETAILS.phone}`} className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors">
-                    {BUSINESS_DETAILS.phone}
-                  </a>
-                  <span className="text-[10px] text-slate-500 block leading-none mt-0.5">Concierge intake desk</span>
+                <div className="space-y-2 min-w-0">
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">
+                    Call / WhatsApp
+                  </span>
+                  {PHONES.map((p) => (
+                    <div key={p.label} className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <a
+                        href={`tel:${p.tel}`}
+                        className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors"
+                      >
+                        {p.label}
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => handleWhatsApp(p.wa)}
+                        className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#2D5446] hover:underline cursor-pointer"
+                      >
+                        WhatsApp
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -88,53 +124,83 @@ export default function ContactSection() {
                 <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446]">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div className="space-y-1">
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">EMAIL INQUIRIES</span>
-                  <a href={`mailto:${BUSINESS_DETAILS.email}`} className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors">
+                <div className="space-y-1 min-w-0">
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">
+                    Email
+                  </span>
+                  <a
+                    href={`mailto:${BUSINESS_DETAILS.email}`}
+                    className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors break-all"
+                  >
                     {BUSINESS_DETAILS.email}
                   </a>
-                  <span className="text-[10px] text-slate-500 block leading-none mt-0.5">Response within 4 hours</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Social */}
+            <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-6 rounded-2xl">
+              <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block mb-4">
+                Follow Us
+              </span>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={BUSINESS_DETAILS.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-white/70 text-[#1E3E34] text-xs font-extrabold uppercase tracking-wider hover:bg-[#1E3E34] hover:text-white transition-colors"
+                >
+                  <Instagram className="w-4 h-4" />
+                  Instagram
+                </a>
+                <a
+                  href={BUSINESS_DETAILS.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-white/70 text-[#1E3E34] text-xs font-extrabold uppercase tracking-wider hover:bg-[#1E3E34] hover:text-white transition-colors"
+                >
+                  <FacebookIcon className="w-4 h-4" />
+                  Facebook
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Book Now / WhatsApp CTA (Right Side) — replaces the old Quick Inquiry form */}
-          <div className="lg:col-span-5 text-left">
-            <div className="bg-[#022A24] text-white p-6 md:p-8 rounded-3xl space-y-6 shadow-xl border border-[#2D5446]/20 h-full flex flex-col justify-center">
-              <div className="space-y-2">
+          {/* WhatsApp CTA — compact, centered */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="w-full max-w-sm bg-[#022A24] text-white p-5 rounded-2xl space-y-4 shadow-xl border border-[#2D5446]/20">
+              <div className="space-y-1.5 text-center">
                 <span className="text-[9px] font-mono tracking-widest text-[#DECBA5] font-black uppercase">
-                  MESSAGE CONCIERGE DIRECTLY
+                  Quick Connect
                 </span>
-                <h3 className="font-serif text-xl md:text-2xl font-bold">
-                  Ready to Book?
+                <h3 className="font-serif text-lg font-bold">
+                  Message Us on WhatsApp
                 </h3>
-                <p className="text-[#FAF8F5]/80 text-xs font-display leading-relaxed">
-                  Tap below to start a WhatsApp chat with our front desk and lock in your appointment.
+                <p className="text-[#FAF8F5]/75 text-[11px] font-display leading-relaxed">
+                  Prefer a quick chat? Tap below to message our front desk.
                 </p>
               </div>
 
               <button
                 type="button"
-                onClick={handleBookNowClick}
-                className="w-full h-12 bg-[#DECBA5] hover:bg-[#FAF8F5] text-neutral-950 text-xs uppercase tracking-widest font-extrabold transition-all hover:scale-[1.02] shadow-md flex items-center justify-center gap-2 cursor-pointer rounded-xl"
+                onClick={() => handleWhatsApp()}
+                className="w-full h-11 bg-[#DECBA5] text-[#1E3E34] text-[11px] uppercase tracking-widest font-extrabold transition-transform duration-500 ease-out shadow-md flex items-center justify-center gap-2 cursor-pointer rounded-xl active:scale-95"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Book Now on WhatsApp</span>
+                <span>Chat on WhatsApp</span>
               </button>
             </div>
           </div>
-
         </div>
 
-        {/* FAQs Section */}
+        {/* FAQs */}
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center">
             <h3 className="font-serif text-2xl md:text-3xl text-slate-900 font-extrabold">
               Frequently Asked Questions
             </h3>
             <p className="text-slate-600 text-xs font-display font-semibold mt-2">
-              Our standard guidelines regarding contrast bath protocols, medical forms, and reservations.
+              Quick answers about bookings, visits, and spa guidelines.
             </p>
           </div>
 
@@ -179,7 +245,6 @@ export default function ContactSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
