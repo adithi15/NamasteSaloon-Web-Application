@@ -28,7 +28,7 @@ export default function ServiceCarousel({ onSelectService }: ServiceCarouselProp
 
   return (
     <section
-      className="relative py-16 md:py-24 overflow-hidden bg-[#E9E4DB]"
+      className="relative py-16 md:py-24 overflow-hidden bg-transparent"
       id="services-carousel"
     >
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#2D5446]/2 rounded-full blur-[100px] pointer-events-none" />

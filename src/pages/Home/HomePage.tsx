@@ -84,25 +84,28 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 2. SERVICES */}
-      <ServiceCarousel
-        onSelectService={(s) => onOpenBooking(s, null)}
-      />
+      {/* Below-hero content — one sober beige plane (hero video untouched) */}
+      <div className="bg-[#E9E4DB]">
+        {/* 2. SERVICES */}
+        <ServiceCarousel
+          onSelectService={(s) => onOpenBooking(s, null)}
+        />
 
-      {/* 3. SPECIALISTS — commented out for now */}
-      {/* <SpecialistSection
-        onSelectSpecialist={(sp) => onOpenBooking(null, sp)}
-      /> */}
+        {/* 3. SPECIALISTS — commented out for now */}
+        {/* <SpecialistSection
+          onSelectSpecialist={(sp) => onOpenBooking(null, sp)}
+        /> */}
 
-      {/* 4. TESTIMONIALS / REVIEWS */}
-      <TestimonialsSection />
+        {/* 4. TESTIMONIALS / REVIEWS */}
+        <TestimonialsSection />
 
-      {/* 5. MEMBERSHIPS */}
-      <MembershipsSection
-        preview
-        onViewAll={() => onNavigate("memberships")}
-        onSelectPlan={(plan) => onOpenBooking(null, null, plan)}
-      />
+        {/* 5. MEMBERSHIPS */}
+        <MembershipsSection
+          preview
+          onViewAll={() => onNavigate("memberships")}
+          onSelectPlan={(plan) => onOpenBooking(null, null, plan)}
+        />
+      </div>
     </motion.div>
   );
 }
