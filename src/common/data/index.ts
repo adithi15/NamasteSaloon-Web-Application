@@ -2,7 +2,6 @@ import { SpaCategory } from "@/src/common/types";
 
 import type {
   BusinessDetails,
-  Service,
   Specialist,
   PricingPackage,
   BlogPost,
@@ -10,6 +9,8 @@ import type {
   Testimonial,
   Policies,
 } from "@/src/common/types";
+
+export { SERVICES, SERVICE_CHAPTERS } from "./services";
 
 export const BUSINESS_DETAILS: BusinessDetails = {
   name: "NAMASTEY Wellness SPA",
@@ -26,649 +27,13 @@ export const BUSINESS_DETAILS: BusinessDetails = {
   facebook: "https://facebook.com/namastey.wellness",
 };
 
-/*
-  SERVICES — replaced with the client-provided price list (49 services).
-  Notes:
-  - Prices are in ₹ (INR), stored as plain numbers (e.g. 3800 not "3800/-").
-    ServiceCarousel.jsx's "$" symbol needs to be swapped for "₹" separately.
-  - Images use client Service-Photos copied to /public/images/services.
-  - Categories are grouped by the treatment guests would logically expect:
-      MASSAGES             -> body, back, and foot massage therapies
-      BIOMETRIC_TESTING    -> head and face spa treatments
-      ALTERNATIVE_MEDICINE -> wellness rituals, Hammam, and holistic therapies
-      CLASSES              -> baths, Jacuzzi, and celebration experiences
-  - "Korean Head with Facial Spa" had no duration in the source list — I
-    used 75 min (same as the closest sibling, "Korean Head Spa"). Flagged
-    below with a comment; change `durationMinutes` on that entry if wrong.
-*/
-
-/** Client service photos under /public/images/services (copied from Website-Logo-Font-Photos) */
-function svc(folder: string, n: number, ext: "jpg" | "png" = "jpg"): string {
-  return `/images/services/${folder}/${n}.${ext}`;
-}
-
-
-export const SERVICES: Service[] = [
-  {
-    id: "service-1",
-    name: "Signature Classic Body Massage",
-    description: "Our flagship full-body massage, blending classic techniques to release tension and restore total-body relaxation.",
-    benefits: ["Relieves full-body muscular tension", "Improves circulation", "Deeply relaxing signature experience"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 3800,
-    rating: 4.9, // placeholder
-    ratingCount: 120, // placeholder
-    image: svc("massage", 1),
-    isFeatured: true
-  },
-  {
-    id: "service-2",
-    name: "Vishrama",
-    description: "A calming, traditional-style massage focused on grounding the body and quieting the mind.",
-    benefits: ["Eases everyday stress", "Promotes deep rest", "Balances nervous system tone"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 60,
-    price: 3200,
-    rating: 4.8,
-    ratingCount: 64,
-    image: svc("massage", 2)
-  },
-  {
-    id: "service-3",
-    name: "Sukho Thai",
-    description: "Traditional Thai-style massage combining stretching and rhythmic pressure to improve flexibility and flow.",
-    benefits: ["Improves flexibility and joint mobility", "Boosts energy flow", "Relieves stiffness"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 60,
-    price: 3500,
-    rating: 4.9,
-    ratingCount: 88,
-    image: svc("thai", 3)
-  },
-  {
-    id: "service-4",
-    name: "Head Massage",
-    description: "A focused scalp and head massage to relieve tension headaches and mental fatigue.",
-    benefits: ["Relieves tension headaches", "Calms the mind", "Improves scalp circulation"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 1800,
-    rating: 4.7,
-    ratingCount: 95,
-    image: svc("massage", 4)
-  },
-  {
-    id: "service-5",
-    name: "Back Massage",
-    description: "A targeted massage addressing tightness across the upper and lower back.",
-    benefits: ["Relieves back tension", "Improves posture comfort", "Quick, focused relief"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 1800,
-    rating: 4.7,
-    ratingCount: 70,
-    image: svc("massage", 1)
-  },
-  {
-    id: "service-6",
-    name: "Head, Shoulder and Back Massage",
-    description: "A combined upper-body massage targeting the head, shoulders, and back in one session.",
-    benefits: ["Relieves upper-body tension holistically", "Eases shoulder stiffness", "Quick full-upper-body reset"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 2000,
-    rating: 4.8,
-    ratingCount: 102,
-    image: svc("massage", 2)
-  },
-  {
-    id: "service-7",
-    name: "Deep Abhyangam Massage",
-    description: "A traditional warm-oil Ayurvedic massage focused on deep tissue release and energetic balance.",
-    benefits: ["Deeply nourishes skin and muscles", "Balances energy channels", "Relieves chronic tension"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 4500,
-    rating: 4.9,
-    ratingCount: 140,
-    image: svc("massage", 3)
-  },
-  {
-    id: "service-8",
-    name: "Hot Candle Oil Massage",
-    description: "A sensory massage using warm, melted candle oil to soothe muscles and moisturize skin.",
-    benefits: ["Deeply moisturizes skin", "Warmth relieves muscle tightness", "Sensory, calming ritual"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 4500,
-    rating: 4.85,
-    ratingCount: 77,
-    image: svc("massage", 4)
-  },
-  {
-    id: "service-9",
-    name: "Hot Healing Stone Massage",
-    description: "Heated stones are used to ease deep muscular knots and promote relaxation.",
-    benefits: ["Penetrating heat relieves deep knots", "Improves circulation", "Long-lasting relaxation"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 5000,
-    rating: 4.9,
-    ratingCount: 110,
-    image: svc("hot-stone", 1)
-  },
-  {
-    id: "service-10",
-    name: "Sports Deep Tissue",
-    description: "A firm, targeted massage designed for athletes and active individuals to relieve deep muscular tension.",
-    benefits: ["Targets deep muscle layers", "Speeds up recovery", "Improves range of motion"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 5500,
-    rating: 4.9,
-    ratingCount: 130,
-    image: svc("sports", 2),
-    isFeatured: true
-  },
-  {
-    id: "service-11",
-    name: "Herbal Potli Massage",
-    description: "Heated herbal pouches (potli) are pressed and rolled over the body to relieve pain and detoxify muscles.",
-    benefits: ["Relieves joint and muscle pain", "Herbal detoxification", "Deeply warming therapy"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 6000,
-    rating: 4.9,
-    ratingCount: 98,
-    image: svc("potli", 3)
-  },
-  {
-    id: "service-12",
-    name: "Holistic Back Massage",
-    description: "A comprehensive back-focused massage addressing both surface tension and deeper muscular stress.",
-    benefits: ["Relieves chronic back tension", "Improves spinal comfort", "Calming, restorative focus"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 2500,
-    rating: 4.7,
-    ratingCount: 56,
-    image: svc("massage", 4)
-  },
-  {
-    id: "service-13",
-    name: "Four Hand Body Massage",
-    description: "Two therapists work in synchronized rhythm for an intensely relaxing, immersive full-body massage.",
-    benefits: ["Doubled relaxation intensity", "Synchronized full-body coverage", "Signature luxury experience"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 60,
-    price: 7000,
-    rating: 5.0,
-    ratingCount: 64,
-    image: svc("massage", 3),
-    isFeatured: true
-  },
-  {
-    id: "service-14",
-    name: "Korean Head Spa",
-    description: "A scalp-focused spa ritual combining cleansing, massage, and scalp therapy for ultimate head relaxation.",
-    benefits: ["Deep scalp cleansing", "Relieves tension headaches", "Promotes scalp & hair health"],
-    category: SpaCategory.BIOMETRIC_TESTING,
-    durationMinutes: 75,
-    price: 5500,
-    rating: 4.9,
-    ratingCount: 145,
-    image: svc("korean", 2, "png"),
-    isFeatured: true
-  },
-  {
-    id: "service-15",
-    name: "Korean Head with Facial Spa",
-    // NOTE: source list had no duration for this item — set to 75 min to
-    // match its closest sibling ("Korean Head Spa"). Adjust if incorrect.
-    description: "Combines our Korean Head Spa ritual with a rejuvenating facial for complete head-to-face renewal.",
-    benefits: ["Combined scalp and facial renewal", "Deep relaxation and glow", "All-in-one head & face ritual"],
-    category: SpaCategory.BIOMETRIC_TESTING,
-    durationMinutes: 75,
-    price: 9000,
-    rating: 4.9,
-    ratingCount: 52,
-    image: svc("korean", 3, "png")
-  },
-  {
-    id: "service-16",
-    name: "Four Hand Asian & Korean Blend",
-    description: "A four-handed massage blending Asian massage techniques with Korean head spa elements.",
-    benefits: ["Dual-therapist synchronized session", "Combines two signature traditions", "Premium full-body & scalp care"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 90,
-    price: 10000,
-    rating: 5.0,
-    ratingCount: 41,
-    image: svc("korean", 4, "png"),
-    isFeatured: true
-  },
-  {
-    id: "service-17",
-    name: "Foot Massage with Korean Head Spa",
-    description: "A relaxing foot massage paired with our signature Korean head spa ritual.",
-    benefits: ["Relieves tired feet", "Combined scalp & foot relaxation", "Great for travel recovery"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 4500,
-    rating: 4.8,
-    ratingCount: 68,
-    image: svc("korean", 1, "png")
-  },
-  {
-    id: "service-18",
-    name: "Hot Stone Back Massage with Korean Head Spa",
-    description: "Heated stone back therapy combined with our Korean head spa for full upper-body renewal.",
-    benefits: ["Deep heat relief for the back", "Scalp & head relaxation included", "Comprehensive upper-body reset"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 75,
-    price: 5000,
-    rating: 4.85,
-    ratingCount: 59,
-    image: svc("korean", 2, "png")
-  },
-  {
-    id: "service-19",
-    name: "Asian Blend Body Massage with Korean Head Spa",
-    description: "A full-body Asian-style massage combined with our signature Korean head spa ritual.",
-    benefits: ["Full-body & scalp combined care", "Blended traditional techniques", "Extended deep relaxation"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 105,
-    price: 7000,
-    rating: 4.9,
-    ratingCount: 47,
-    image: svc("korean", 3, "png")
-  },
-  {
-    id: "service-20",
-    name: "Hot Stone Body Massage with Korean Head Spa",
-    description: "Full-body hot stone therapy paired with our Korean head spa for an extended luxury session.",
-    benefits: ["Full-body heat therapy", "Scalp renewal included", "Extended luxury treatment"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 120,
-    price: 8000,
-    rating: 4.9,
-    ratingCount: 38,
-    image: svc("korean", 4, "png")
-  },
-  {
-    id: "service-21",
-    name: "Herbal Potli Massage with Korean Head Spa",
-    description: "Our full Herbal Potli massage extended with the Korean head spa ritual for complete-body care.",
-    benefits: ["Herbal detox & scalp renewal combined", "Extended deep therapy", "Comprehensive wellness session"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 120,
-    price: 9000,
-    rating: 4.9,
-    ratingCount: 33,
-    image: svc("korean", 1, "png")
-  },
-  {
-    id: "service-22",
-    name: "Shirodhara",
-    description: "A classic Ayurvedic ritual involving a continuous, gentle stream of warm oil poured over the forehead.",
-    benefits: ["Deeply calms the nervous system", "Eases mental fatigue and anxiety", "Traditional Ayurvedic ritual"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 60,
-    price: 4800,
-    rating: 4.95,
-    ratingCount: 156,
-    image: svc("shirodhara", 2),
-    isFeatured: true
-  },
-  {
-    id: "service-23",
-    name: "Sukhdhara",
-    description: "An extended Shirodhara-style ritual offering deeper relaxation and mental clarity.",
-    benefits: ["Extended deep relaxation ritual", "Mental clarity and calm", "Premium Ayurvedic experience"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 90,
-    price: 7500,
-    rating: 4.9,
-    ratingCount: 44,
-    image: svc("shirodhara", 3)
-  },
-  {
-    id: "service-24",
-    name: "Moxibustion",
-    description: "A traditional heat therapy using burning herbal sticks near acupressure points to relieve pain and improve flow.",
-    benefits: ["Relieves chronic muscular pain", "Improves energy and blood flow", "Traditional heat therapy"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 105,
-    price: 6500,
-    rating: 4.8,
-    ratingCount: 29,
-    image: svc("moxibustion", 4)
-  },
-  {
-    id: "service-25",
-    name: "Moxibustion with Korean Therapy",
-    description: "Our Moxibustion treatment extended with Korean therapy techniques for comprehensive relief.",
-    benefits: ["Combined traditional heat & Korean therapy", "Extended pain relief session", "Comprehensive wellness combination"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 135,
-    price: 9000,
-    rating: 4.85,
-    ratingCount: 21,
-    image: svc("korean", 1, "png")
-  },
-  {
-    id: "service-26",
-    name: "Classic Turkish Hammam",
-    description: "A traditional Turkish bath ritual featuring deep cleansing, steam, and exfoliation.",
-    benefits: ["Deep skin cleansing & exfoliation", "Steam-based detoxification", "Traditional hammam ritual"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 90,
-    price: 6500,
-    rating: 4.9,
-    ratingCount: 87,
-    image: svc("hammam", 2)
-  },
-  {
-    id: "service-27",
-    name: "Signature Turkish Hammam",
-    description: "Our extended, premium Turkish Hammam ritual offering the most comprehensive cleansing experience.",
-    benefits: ["Premium extended hammam ritual", "Comprehensive deep cleansing", "Signature luxury bathing experience"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 150,
-    price: 11000,
-    rating: 4.95,
-    ratingCount: 53,
-    image: svc("hammam", 3),
-    isFeatured: true
-  },
-  {
-    id: "service-28",
-    name: "Shaan Abhishekam",
-    description: "A ceremonial Abhishekam ritual involving warm oil pouring for purification and relaxation.",
-    benefits: ["Ceremonial purification ritual", "Deep relaxation", "Traditional Abhishekam experience"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 60,
-    price: 4000,
-    rating: 4.8,
-    ratingCount: 35,
-    image: svc("shirodhara", 4)
-  },
-  {
-    id: "service-29",
-    name: "Vishuddhi Abhishekam",
-    description: "An extended, comprehensive Abhishekam ritual designed for deep purification and renewal.",
-    benefits: ["Extended ceremonial ritual", "Deep purification focus", "Comprehensive renewal experience"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 120,
-    price: 8500,
-    rating: 4.85,
-    ratingCount: 22,
-    image: svc("shirodhara", 1)
-  },
-  {
-    id: "service-30",
-    name: "Bodicial with Body Facial",
-    description: "A full-body facial treatment that exfoliates, nourishes, and revitalizes skin from head to toe.",
-    benefits: ["Full-body skin renewal", "Deep exfoliation and nourishment", "Comprehensive facial-body treatment"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 150,
-    price: 11000,
-    rating: 4.9,
-    ratingCount: 31,
-    image: svc("product", 2)
-  },
-  {
-    id: "service-31",
-    name: "Body Scrub",
-    description: "An invigorating full-body exfoliation treatment to remove dead skin and reveal smoother skin.",
-    benefits: ["Removes dead skin cells", "Leaves skin smooth and refreshed", "Quick invigorating treatment"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 30,
-    price: 1500,
-    rating: 4.7,
-    ratingCount: 90,
-    image: svc("product", 3)
-  },
-  {
-    id: "service-32",
-    name: "Face Fit Gym",
-    description: "A facial workout treatment using targeted techniques to tone and firm facial muscles.",
-    benefits: ["Tones and firms facial muscles", "Improves facial circulation", "Quick facial fitness session"],
-    category: SpaCategory.BIOMETRIC_TESTING,
-    durationMinutes: 30,
-    price: 2500,
-    rating: 4.7,
-    ratingCount: 48,
-    image: svc("product", 4)
-  },
-  {
-    id: "service-33",
-    name: "Face Lift Gym",
-    description: "An extended facial toning treatment designed to firm and lift facial contours.",
-    benefits: ["Lifts and firms facial contours", "Extended toning session", "Visible facial rejuvenation"],
-    category: SpaCategory.BIOMETRIC_TESTING,
-    durationMinutes: 60,
-    price: 5000,
-    rating: 4.8,
-    ratingCount: 37,
-    image: svc("product", 1)
-  },
-  {
-    id: "service-34",
-    name: "Blissful Retreat",
-    description: "A comprehensive wellness retreat session combining multiple therapies for total relaxation.",
-    benefits: ["Combines multiple relaxation therapies", "Extended retreat-style session", "Comprehensive total-body relaxation"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 105,
-    price: 10000,
-    rating: 4.95,
-    ratingCount: 40,
-    image: svc("couple", 2),
-    isFeatured: true
-  },
-  {
-    id: "service-35",
-    name: "Soul Reconnect",
-    description: "Our most comprehensive wellness journey, combining deep bodywork, ritual, and restorative therapies.",
-    benefits: ["Most comprehensive signature journey", "Combines bodywork & ritual therapies", "Ultimate restorative experience"],
-    category: SpaCategory.ALTERNATIVE_MEDICINE,
-    durationMinutes: 150,
-    price: 16000,
-    rating: 5.0,
-    ratingCount: 25,
-    image: svc("couple", 3),
-    isFeatured: true
-  },
-  {
-    id: "service-36",
-    name: "Classic Celebration",
-    description: "A short celebratory wellness session designed to mark special occasions with relaxation.",
-    benefits: ["Quick celebratory wellness session", "Perfect for special occasions", "Light, joyful relaxation"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 4000,
-    rating: 4.8,
-    ratingCount: 18,
-    image: svc("couple", 4)
-  },
-  {
-    id: "service-37",
-    name: "Signature Celebration",
-    description: "An extended celebratory wellness ritual for marking milestones with full relaxation.",
-    benefits: ["Extended celebratory experience", "Ideal for milestone occasions", "Full relaxation ritual"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 60,
-    price: 6000,
-    rating: 4.85,
-    ratingCount: 23,
-    image: svc("couple", 1)
-  },
-  {
-    id: "service-38",
-    name: "Bubble Jacuzzi",
-    description: "A relaxing soak in our bubble jacuzzi, easing muscle tension through warm water massage jets.",
-    benefits: ["Soothing warm water massage", "Eases muscle tension", "Quick relaxing soak"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 1000,
-    rating: 4.6,
-    ratingCount: 60,
-    image: svc("jacuzzi", 2)
-  },
-  {
-    id: "service-39",
-    name: "Pink Himalayan Salt Bath",
-    description: "A mineral-rich salt bath using Pink Himalayan salt to detoxify and soften skin.",
-    benefits: ["Mineral-rich detoxification", "Softens and nourishes skin", "Calming bath ritual"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 1200,
-    rating: 4.7,
-    ratingCount: 51,
-    image: svc("jacuzzi", 3)
-  },
-  {
-    id: "service-40",
-    name: "Honey Bath",
-    description: "A nourishing honey-infused bath that hydrates and softens skin naturally.",
-    benefits: ["Naturally hydrates skin", "Antibacterial honey benefits", "Soothing soak"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 1400,
-    rating: 4.7,
-    ratingCount: 39,
-    image: svc("jacuzzi", 4)
-  },
-  {
-    id: "service-41",
-    name: "Ice Cream Bomb Jacuzzi",
-    description: "A playful, cooling jacuzzi experience designed to refresh and invigorate the body.",
-    benefits: ["Refreshing cool-down soak", "Invigorates the senses", "Fun, signature jacuzzi experience"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 1600,
-    rating: 4.6,
-    ratingCount: 34,
-    image: svc("jacuzzi", 1)
-  },
-  {
-    id: "service-42",
-    name: "Ice Cold Water Jacuzzi Therapy",
-    description: "A cold-water jacuzzi therapy designed to reduce inflammation and energize the body.",
-    benefits: ["Reduces inflammation", "Energizes and revitalizes", "Cold-therapy recovery"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 1800,
-    rating: 4.7,
-    ratingCount: 28,
-    image: svc("ice-bath", 2)
-  },
-  {
-    id: "service-43",
-    name: "Shahi Milk Bath",
-    description: "A royal-style milk bath ritual that softens and nourishes the skin deeply.",
-    benefits: ["Deeply nourishes and softens skin", "Royal, indulgent ritual", "Calming sensory experience"],
-    category: SpaCategory.CLASSES,
-    durationMinutes: 30,
-    price: 2000,
-    rating: 4.8,
-    ratingCount: 30,
-    image: svc("jacuzzi", 3)
-  },
-  {
-    id: "service-44",
-    name: "Thai Foot Reflexology Massage",
-    description: "A traditional Thai reflexology massage targeting pressure points on the feet for full-body benefit.",
-    benefits: ["Stimulates full-body reflex points", "Relieves foot fatigue", "Traditional Thai technique"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 1400,
-    rating: 4.8,
-    ratingCount: 76,
-    image: svc("feet", 4)
-  },
-  {
-    id: "service-45",
-    name: "Pain Relief Balm Massage",
-    description: "A therapeutic foot and leg massage using medicated balm to relieve aches and stiffness.",
-    benefits: ["Relieves muscular aches", "Medicated balm for deeper relief", "Quick therapeutic session"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 1600,
-    rating: 4.7,
-    ratingCount: 42,
-    image: svc("massage", 1)
-  },
-  {
-    id: "service-46",
-    name: "Sport Foot Massage",
-    description: "A firm, targeted foot massage designed for active individuals to relieve strain and fatigue.",
-    benefits: ["Relieves foot strain from activity", "Speeds up recovery", "Firm, targeted technique"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 1800,
-    rating: 4.75,
-    ratingCount: 38,
-    image: svc("feet", 2)
-  },
-  {
-    id: "service-47",
-    name: "Hot Stone Foot Massage",
-    description: "Heated stones are used on the feet to relieve tension and improve circulation.",
-    benefits: ["Deep heat relief for tired feet", "Improves foot circulation", "Relaxing heated therapy"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 2000,
-    rating: 4.8,
-    ratingCount: 45,
-    image: svc("hot-stone", 3)
-  },
-  {
-    id: "service-48",
-    name: "Herbal Potli Foot Massage",
-    description: "Heated herbal pouches are used on the feet to relieve pain and promote circulation.",
-    benefits: ["Herbal detoxification for feet", "Relieves joint and muscle pain", "Warming therapeutic treatment"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 30,
-    price: 2300,
-    rating: 4.8,
-    ratingCount: 33,
-    image: svc("potli", 4)
-  },
-  {
-    id: "service-49",
-    name: "Kansa Thali Foot Massage",
-    description: "A traditional Kansa metal plate massage on the feet to balance energy and soothe the nervous system.",
-    benefits: ["Balances body energy", "Soothes nervous system", "Traditional Kansa metal therapy"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 60,
-    price: 2300,
-    rating: 4.8,
-    ratingCount: 27,
-    image: svc("feet", 1)
-  },
-  {
-    id: "service-50",
-    name: "Kansa Thali Therapy",
-    description: "A quick Kansa metal plate therapy session for energetic balance and relaxation.",
-    benefits: ["Quick energetic balancing session", "Traditional Kansa therapy", "Calming short treatment"],
-    category: SpaCategory.MASSAGES,
-    durationMinutes: 15,
-    price: 500,
-    rating: 4.6,
-    ratingCount: 19,
-    image: svc("feet", 2)
-  }
-];
-
 export const SPECIALISTS: Specialist[] = [
   {
   id: "spec-1",
   name: "Arman",
   image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.9,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "DEEP TISSUE & SWEDISH MASSAGE",
   degrees: [
     "Certified Massage Therapist (CMT)",
@@ -682,7 +47,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Jerisa",
   image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.9,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "AROMATHERAPY & HOT STONE THERAPY",
   degrees: [
     "Certified Aromatherapy Practitioner",
@@ -696,7 +61,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Eva",
   image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.8,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "BALINESE & THAI MASSAGE",
   degrees: [
     "Certified Thai Massage Therapist",
@@ -710,7 +75,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Victoria",
   image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 5.0,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "LYMPHATIC DRAINAGE & RELAXATION",
   degrees: [
     "Certified Lymphatic Massage Therapist",
@@ -724,7 +89,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Amy",
   image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.9,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "REFLEXOLOGY & FOOT THERAPY",
   degrees: [
     "Certified Reflexologist",
@@ -738,7 +103,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Ruby",
   image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.8,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "SIGNATURE SPA & BODY THERAPIES",
   degrees: [
     "Certified Spa Therapist",
@@ -752,7 +117,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Juju",
   image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.9,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "HERBAL COMPRESS & THAI THERAPY",
   degrees: [
     "Certified Thai Spa Therapist",
@@ -766,7 +131,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Crystal",
   image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 5.0,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "SWEDISH & AROMA MASSAGE",
   degrees: [
     "Certified Swedish Massage Therapist",
@@ -780,7 +145,7 @@ export const SPECIALISTS: Specialist[] = [
   name: "Hazel",
   image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600&h=600",
   rating: 4.9,
-  category: SpaCategory.MASSAGES,
+  category: SpaCategory.CLASSIC_BODY,
   specialtyTag: "HOLISTIC WELLNESS & SPA THERAPY",
   degrees: [
     "Certified Holistic Wellness Therapist",

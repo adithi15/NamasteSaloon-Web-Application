@@ -1,8 +1,14 @@
+/** Brochure chapters — display order matches Object.values() */
 export const SpaCategory = {
-  ALTERNATIVE_MEDICINE: "Wellness Rituals",
-  MASSAGES: "Custom Massages",
-  BIOMETRIC_TESTING: "Head & Face Spa",
-  CLASSES: "Baths & Celebrations",
+  KOREAN_BLENDS: "Korean Blends",
+  TURKISH_HAMMAM: "Turkish Hammam",
+  COUPLE_SPA: "Couple Spa",
+  HOLISTIC_MASSAGE: "Holistic Massage",
+  AYURVEDIC_THERAPY: "Ayurvedic Therapy",
+  CLASSIC_BODY: "Classic Body Massages",
+  FACE_GYM: "Face GYM",
+  FOOT_MASSAGE: "Foot Massage",
+  JACUZZI: "Jacuzzi",
 } as const;
 
 export type SpaCategoryValue =
@@ -23,18 +29,37 @@ export type PackageType =
   | "couple-spa"
   | "couple-celebration";
 
+export interface ServicePriceTier {
+  durationMinutes: number;
+  price: number;
+  /** Optional label e.g. "Couple" when duration alone is not enough */
+  label?: string;
+}
+
 export interface Service {
   id: string;
   name: string;
   description: string;
   benefits: string[];
   category: SpaCategoryValue;
+  /** Default / primary tier (WhatsApp booking uses these) */
   durationMinutes: number;
   price: number;
+  /** Brochure multi-tier pricing when available */
+  priceTiers?: ServicePriceTier[];
+  steps?: string[];
+  koreanName?: string;
   rating: number;
   ratingCount: number;
   image: string;
   isFeatured?: boolean;
+}
+
+export interface ServiceChapterMeta {
+  category: SpaCategoryValue;
+  number: string;
+  image: string;
+  intro: string;
 }
 
 export interface Specialist {

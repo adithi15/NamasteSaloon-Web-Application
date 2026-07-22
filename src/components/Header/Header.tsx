@@ -355,15 +355,15 @@ export default function Header({
                       <Layers className="w-3.5 h-3.5" /> SERVICES DIRECTORY
                     </div>
                     <h4 className="font-serif text-lg font-bold text-black mb-3 xl:mb-5">
-                      Somatic Practices
+                      Treatment Chapters
                     </h4>
                     <p className="text-[11px] text-black/55 leading-relaxed font-semibold max-w-md">
-                      Dive into clinically analytical somatic remedies,
-                      metabolic recovery mechanisms, and physiological wellness
-                      theories.
+                      Nine brochure collections — from Korean blends and hammam
+                      to jacuzzi rituals. Explore each chapter on our Services
+                      page.
                     </p>
                   </div>
-                  <div className="xl:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="xl:col-span-3 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     {navMenuItems.offerings.map((cat) => (
                       <button
                         key={cat}
@@ -374,7 +374,7 @@ export default function Header({
                           {cat}
                         </span>
                         <span className="text-[9px] text-black/40 mt-1.5 block font-mono leading-none">
-                          Clinical Somatics
+                          Rate card chapter
                         </span>
                         <span className="text-[9px] text-[#1E3E34]/70 mt-1.5 block font-display tracking-wide uppercase font-black group-hover:text-[#1E3E34] transition-colors">
                           Explore →
