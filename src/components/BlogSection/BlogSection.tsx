@@ -87,7 +87,7 @@ export default function BlogSection() {
                 <div
                   key={blog.id}
                   onClick={() => setSelectedBlog(blog)}
-                  className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+                  className="card-leaf-bg border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg shadow-[#022A24]/25 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between group"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <img
@@ -96,34 +96,34 @@ export default function BlogSection() {
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-white/90 backdrop-blur border border-[#DECBA5]/30 px-2.5 sm:px-3 py-1 rounded text-[9px] uppercase tracking-wider font-extrabold text-[#1E3E34]">
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#DECBA5] border border-[#DECBA5]/40 px-2.5 sm:px-3 py-1 rounded text-[9px] uppercase tracking-wider font-extrabold text-[#1E3E34]">
                       Scientific Insights
                     </div>
                   </div>
  
                   <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
                     <div className="text-left">
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-500 text-[10px] font-mono font-bold mb-3">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[#FAF8F5]/55 text-[10px] font-mono font-bold mb-3">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#2D5446] shrink-0" />
+                          <Calendar className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
                           {blog.date}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-[#2D5446] shrink-0" />
+                          <Clock className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
                           {blog.readTime}
                         </span>
                       </div>
-                      <h3 className="font-serif text-slate-900 text-base sm:text-lg font-bold group-hover:text-[#1E3E34] transition-colors mb-2.5 line-clamp-2 leading-snug">
+                      <h3 className="font-serif text-[#FAF8F5] text-base sm:text-lg font-bold group-hover:text-[#DECBA5] transition-colors mb-2.5 line-clamp-2 leading-snug">
                         {blog.title}
                       </h3>
-                      <p className="text-xs text-slate-600 font-display font-medium mb-4 line-clamp-3 leading-relaxed">
+                      <p className="text-xs text-[#FAF8F5]/70 font-display font-medium mb-4 line-clamp-3 leading-relaxed">
                         {blog.summary}
                       </p>
                     </div>
  
-                    <div className="h-[1px] bg-slate-200/60 w-full mb-4" />
+                    <div className="h-[1px] bg-[#DECBA5]/25 w-full mb-4" />
                     
-                    <div className="flex items-center justify-between text-xs font-mono font-bold uppercase text-[#1E3E34] group-hover:text-[#2D5446] transition-colors">
+                    <div className="flex items-center justify-between text-xs font-mono font-bold uppercase text-[#DECBA5] group-hover:text-[#E9E4DB] transition-colors">
                       <span className="flex items-center gap-1.5">
                         <BookOpen className="w-4 h-4" /> Read Article
                       </span>

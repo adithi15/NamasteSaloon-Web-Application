@@ -211,7 +211,7 @@ export default function ServicesPage({
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
             >
               {/* Treatment list */}
-              <div className="lg:col-span-7 xl:col-span-7 space-y-5 sm:space-y-6 order-2 lg:order-1">
+              <div className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-5 order-2 lg:order-1">
                 {filteredServices.length === 0 ? (
                   <p className="text-center text-slate-500 font-display text-sm py-16">
                     No treatments in this chapter yet.
@@ -241,20 +241,20 @@ export default function ServicesPage({
                             : Math.min(index * 0.07, 0.35),
                           ease: softEase,
                         }}
-                        className={`border-b border-[#DECBA5]/35 pb-5 sm:pb-6 last:border-b-0 ${
+                        className={`card-leaf-bg border border-[#DECBA5]/30 rounded-2xl p-4 sm:p-5 shadow-lg shadow-[#022A24]/15 ${
                           highlightServiceId === service.id
-                            ? "ring-1 ring-[#DECBA5]/60 rounded-xl px-3 -mx-1"
+                            ? "ring-1 ring-[#DECBA5]/70"
                             : ""
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
                           <div className="flex-1 min-w-0 text-left">
                             {service.koreanName ? (
-                              <p className="text-[10px] font-mono tracking-wider text-[#2D5446]/70 font-bold mb-0.5">
+                              <p className="text-[10px] font-mono tracking-wider text-[#DECBA5]/80 font-bold mb-0.5">
                                 {service.koreanName}
                               </p>
                             ) : null}
-                            <h3 className="font-display text-sm sm:text-base font-extrabold uppercase tracking-wide text-[#1E3E34]">
+                            <h3 className="font-display text-sm sm:text-base font-extrabold uppercase tracking-wide text-[#FAF8F5]">
                               {service.name}
                             </h3>
                             {activeCategory === "All" ? (
@@ -262,7 +262,7 @@ export default function ServicesPage({
                                 {service.category}
                               </p>
                             ) : null}
-                            <p className="mt-2 text-xs sm:text-sm text-slate-600 font-display font-medium leading-relaxed">
+                            <p className="mt-2 text-xs sm:text-sm text-[#FAF8F5]/70 font-display font-medium leading-relaxed">
                               {service.description}
                             </p>
 
@@ -271,9 +271,9 @@ export default function ServicesPage({
                                 {service.steps.map((step) => (
                                   <li
                                     key={step}
-                                    className="flex items-start gap-1.5 text-[11px] text-slate-600 font-semibold"
+                                    className="flex items-start gap-1.5 text-[11px] text-[#FAF8F5]/75 font-semibold"
                                   >
-                                    <Check className="w-3 h-3 text-[#2D5446] shrink-0 mt-0.5" />
+                                    <Check className="w-3 h-3 text-[#DECBA5] shrink-0 mt-0.5" />
                                     <span>{step}</span>
                                   </li>
                                 ))}

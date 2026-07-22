@@ -66,23 +66,23 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-14 sm:mb-20">
           {/* Address */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4">
-              <h3 className="font-serif text-xl md:text-2xl text-slate-900 font-extrabold">
+            <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4">
+              <h3 className="font-serif text-xl md:text-2xl text-[#FAF8F5] font-extrabold">
                 Visit Us
               </h3>
               <div className="flex items-start gap-3 sm:gap-4">
-                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
+                <div className="p-3 bg-[#DECBA5]/15 rounded-xl text-[#DECBA5] shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="space-y-1.5 min-w-0">
-                  <p className="text-sm text-slate-700 font-display font-medium leading-relaxed">
+                  <p className="text-sm text-[#FAF8F5]/85 font-display font-medium leading-relaxed">
                     {BUSINESS_DETAILS.address}
                   </p>
                   <a
                     href={BUSINESS_DETAILS.mapsLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[11px] font-mono font-bold text-[#2D5446] hover:text-[#1E3E34] hover:underline inline-flex items-center gap-1"
+                    className="text-[11px] font-mono font-bold text-[#DECBA5] hover:text-[#E9E4DB] hover:underline inline-flex items-center gap-1"
                   >
                     Open in Google Maps →
                   </a>
@@ -92,26 +92,26 @@ export default function ContactSection() {
 
             {/* Phone + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
-                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
+              <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+                <div className="p-3 bg-[#DECBA5]/15 rounded-xl text-[#DECBA5] shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="space-y-2 min-w-0">
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#DECBA5] font-black block">
                     Call / WhatsApp
                   </span>
                   {PHONES.map((p) => (
                     <div key={p.label} className="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <a
                         href={`tel:${p.tel}`}
-                        className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors"
+                        className="font-mono text-sm font-extrabold text-[#FAF8F5] hover:text-[#DECBA5] transition-colors"
                       >
                         {p.label}
                       </a>
                       <button
                         type="button"
                         onClick={() => handleWhatsApp(p.wa)}
-                        className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#2D5446] hover:underline cursor-pointer"
+                        className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#DECBA5] hover:underline cursor-pointer"
                       >
                         WhatsApp
                       </button>
@@ -120,17 +120,17 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
-                <div className="p-3 bg-[#2D5446]/10 rounded-xl text-[#2D5446] shrink-0">
+              <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+                <div className="p-3 bg-[#DECBA5]/15 rounded-xl text-[#DECBA5] shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="space-y-1 min-w-0">
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block">
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-[#DECBA5] font-black block">
                     Email
                   </span>
                   <a
                     href={`mailto:${BUSINESS_DETAILS.email}`}
-                    className="font-mono text-sm font-extrabold text-slate-900 hover:text-[#2D5446] transition-colors break-all"
+                    className="font-mono text-sm font-extrabold text-[#FAF8F5] hover:text-[#DECBA5] transition-colors break-all"
                   >
                     {BUSINESS_DETAILS.email}
                   </a>
@@ -139,8 +139,8 @@ export default function ContactSection() {
             </div>
 
             {/* Social */}
-            <div className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 p-6 rounded-2xl">
-              <span className="text-[9px] uppercase font-mono tracking-widest text-[#2D5446] font-black block mb-4">
+            <div className="card-leaf-bg border border-[#DECBA5]/30 p-6 rounded-2xl">
+              <span className="text-[9px] uppercase font-mono tracking-widest text-[#DECBA5] font-black block mb-4">
                 Follow Us
               </span>
               <div className="flex flex-wrap gap-3">
@@ -148,7 +148,7 @@ export default function ContactSection() {
                   href={BUSINESS_DETAILS.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-white/70 text-[#1E3E34] text-xs font-extrabold uppercase tracking-wider hover:bg-[#1E3E34] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-[#DECBA5]/15 text-[#DECBA5] text-xs font-extrabold uppercase tracking-wider hover:bg-[#DECBA5] hover:text-[#1E3E34] transition-colors"
                 >
                   <Instagram className="w-4 h-4" />
                   Instagram
@@ -157,7 +157,7 @@ export default function ContactSection() {
                   href={BUSINESS_DETAILS.facebook}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-white/70 text-[#1E3E34] text-xs font-extrabold uppercase tracking-wider hover:bg-[#1E3E34] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#DECBA5]/40 bg-[#DECBA5]/15 text-[#DECBA5] text-xs font-extrabold uppercase tracking-wider hover:bg-[#DECBA5] hover:text-[#1E3E34] transition-colors"
                 >
                   <FacebookIcon className="w-4 h-4" />
                   Facebook
@@ -168,7 +168,7 @@ export default function ContactSection() {
 
           {/* WhatsApp CTA — compact, centered */}
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="w-full max-w-sm bg-[#022A24] text-white p-5 rounded-2xl space-y-4 shadow-xl border border-[#2D5446]/20">
+            <div className="w-full max-w-sm card-leaf-bg text-white p-5 rounded-2xl space-y-4 shadow-xl border border-[#DECBA5]/30">
               <div className="space-y-1.5 text-center">
                 <span className="text-[9px] font-mono tracking-widest text-[#DECBA5] font-black uppercase">
                   Quick Connect
@@ -208,20 +208,20 @@ export default function ContactSection() {
             {FAQS.map((faq, idx) => (
               <div
                 key={idx}
-                className="bg-white/60 backdrop-blur border border-[#DECBA5]/30 rounded-2xl overflow-hidden shadow-sm"
+                className="card-leaf-bg border border-[#DECBA5]/30 rounded-2xl overflow-hidden shadow-lg shadow-[#022A24]/20"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3 sm:gap-4 focus:outline-none cursor-pointer group"
                 >
                   <div className="flex items-start gap-3 min-w-0">
-                    <HelpCircle className="w-4 h-4 text-[#2D5446] shrink-0 mt-0.5" />
-                    <span className="font-display font-extrabold text-sm text-slate-800 group-hover:text-[#1E3E34] transition-colors leading-snug">
+                    <HelpCircle className="w-4 h-4 text-[#DECBA5] shrink-0 mt-0.5" />
+                    <span className="font-display font-extrabold text-sm text-[#FAF8F5] group-hover:text-[#DECBA5] transition-colors leading-snug">
                       {faq.question}
                     </span>
                   </div>
                   <ChevronDown
-                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${
+                    className={`w-4 h-4 text-[#FAF8F5]/50 shrink-0 transition-transform duration-300 ${
                       openFaq === idx ? "rotate-180" : ""
                     }`}
                   />
@@ -235,7 +235,7 @@ export default function ContactSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-5 pb-5 pt-1 text-slate-600 text-xs font-display font-semibold leading-relaxed border-t border-slate-200/60">
+                      <div className="px-5 pb-5 pt-1 text-[#FAF8F5]/75 text-xs font-display font-semibold leading-relaxed border-t border-[#DECBA5]/20">
                         {faq.answer}
                       </div>
                     </motion.div>

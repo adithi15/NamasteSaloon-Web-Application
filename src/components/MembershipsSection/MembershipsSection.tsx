@@ -104,13 +104,7 @@ export default function MembershipsSection({
                 delay: Math.min(index * 0.1, 0.35),
                 ease: softEase,
               }}
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(2,42,36,0.90), rgba(2,42,36,0.94)), url('/background.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              className={`relative border rounded-[2rem] p-5 sm:p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group transition-transform duration-700 ease-out hover:scale-[1.015] overflow-visible ${
+              className={`card-leaf-bg relative border rounded-[2rem] p-5 sm:p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group transition-transform duration-700 ease-out hover:scale-[1.015] overflow-visible ${
                 plan.popular
                   ? "border-[#DECBA5] ring-1 ring-[#DECBA5]/40"
                   : "border-[#DECBA5]/25 hover:border-[#DECBA5]/50"

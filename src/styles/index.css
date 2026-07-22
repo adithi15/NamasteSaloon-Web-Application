@@ -187,3 +187,13 @@ h6,
 .font-script {
   font-family: var(--font-script);
 }
+
+/* Shared leaf texture for home / section cards */
+.card-leaf-bg {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.48)),
+    url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

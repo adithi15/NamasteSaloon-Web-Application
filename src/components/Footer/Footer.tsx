@@ -3,13 +3,14 @@ import { BUSINESS_DETAILS } from "@/src/common/data";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#2D5446]/20 py-12 sm:py-16 text-[#FAF8F5]/80 text-xs overflow-hidden">
-      {/* Client background image */}
+    <footer className="relative border-t border-[#DECBA5]/20 py-12 sm:py-16 text-[#FAF8F5]/85 text-xs overflow-hidden">
+      {/* Leaf background photo — no solid green wash */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/background.jpg')" }}
       />
-      <div className="absolute inset-0 bg-[#022A24]/82" />
+      {/* Light scrim only — keeps text readable, photo stays visible */}
+      <div className="absolute inset-0 bg-black/35" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 text-left">
         {/* Col 1 */}
@@ -33,7 +34,7 @@ export default function Footer() {
             href={BUSINESS_DETAILS.mapsLink}
             target="_blank"
             rel="noreferrer"
-            className="flex items-start gap-2 text-[#FAF8F5]/85 text-[11px] font-semibold leading-relaxed hover:text-[#DECBA5] transition-colors duration-500 ease-out"
+            className="flex items-start gap-2 text-[#FAF8F5]/90 text-[11px] font-semibold leading-relaxed hover:text-[#DECBA5] transition-colors duration-500 ease-out"
           >
             <MapPin className="w-4 h-4 text-[#DECBA5] shrink-0 mt-0.5" />
             <span>{BUSINESS_DETAILS.address}</span>
@@ -45,7 +46,7 @@ export default function Footer() {
           <h4 className="text-[10px] uppercase font-mono tracking-widest text-[#DECBA5] font-black">
             Sanctuary Hours
           </h4>
-          <p className="text-[11px] leading-relaxed text-[#FAF8F5]/80 font-semibold">
+          <p className="text-[11px] leading-relaxed text-[#FAF8F5]/85 font-semibold">
             Monday — Saturday: 07:00 AM — 09:30 PM <br />
             Sunday: 08:30 AM — 08:00 PM <br />
             Direct intake:{" "}
@@ -72,7 +73,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 pt-6 border-t border-[#2D5446]/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[10px] sm:text-[11px] text-emerald-200/50 font-mono font-bold">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[10px] sm:text-[11px] text-[#FAF8F5]/55 font-mono font-bold">
         <span>
           &copy; {new Date().getFullYear()} {BUSINESS_DETAILS.name}. All Rights
           Reserved.

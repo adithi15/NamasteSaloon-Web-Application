@@ -152,7 +152,7 @@ export default function TestimonialsSection() {
         <FadeIn delay={0.1}>
         {/* Slider Card */}
         <div
-          className="bg-white/70 backdrop-blur-sm border border-[#DECBA5]/30 rounded-3xl shadow-sm overflow-hidden"
+          className="card-leaf-bg border border-[#DECBA5]/30 rounded-3xl shadow-lg shadow-[#022A24]/25 overflow-hidden"
           style={{
             opacity: animDir ? 0 : 1,
             transform: animDir
@@ -164,7 +164,7 @@ export default function TestimonialsSection() {
         >
           <div className="flex flex-col md:flex-row min-h-[280px]">
             {/* Left Panel — Avatar, Stars, Name */}
-            <div className="flex flex-col items-center justify-center gap-4 px-6 sm:px-10 py-10 md:py-0 md:w-[280px] shrink-0 border-b md:border-b-0 md:border-r border-[#DECBA5]/30">
+            <div className="flex flex-col items-center justify-center gap-4 px-6 sm:px-10 py-10 md:py-0 md:w-[280px] shrink-0 border-b md:border-b-0 md:border-r border-[#DECBA5]/25">
               {/* Avatar */}
               {rev.avatar ? (
                 <img
@@ -173,7 +173,7 @@ export default function TestimonialsSection() {
                   className="w-24 h-24 rounded-full object-cover border-4 border-[#DECBA5]/40 shadow"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-[#2D5446]/10 border-4 border-[#DECBA5]/40 shadow flex items-center justify-center text-[#1E3E34] font-black text-3xl font-serif">
+                <div className="w-24 h-24 rounded-full bg-[#DECBA5]/15 border-4 border-[#DECBA5]/40 shadow flex items-center justify-center text-[#DECBA5] font-black text-3xl font-serif">
                   {rev.name.charAt(0)}
                 </div>
               )}
@@ -185,8 +185,8 @@ export default function TestimonialsSection() {
                     key={i}
                     className={`w-4 h-4 ${
                       i < rev.rating
-                        ? "fill-[#2D5446] text-[#2D5446]"
-                        : "text-slate-200"
+                        ? "fill-[#DECBA5] text-[#DECBA5]"
+                        : "text-white/25"
                     }`}
                   />
                 ))}
@@ -194,16 +194,16 @@ export default function TestimonialsSection() {
 
               {/* Name & role */}
               <div className="text-center">
-                <p className="font-display font-extrabold text-base text-slate-900 leading-tight">
+                <p className="font-display font-extrabold text-base text-[#FAF8F5] leading-tight">
                   {rev.name}
                 </p>
                 {rev.role && (
-                  <p className="text-xs text-slate-400 font-mono font-bold mt-0.5">
+                  <p className="text-xs text-[#FAF8F5]/55 font-mono font-bold mt-0.5">
                     {rev.role}
                   </p>
                 )}
                 {rev.isGoogleReview && (
-                  <span className="mt-3 inline-block text-[10px] font-mono font-black uppercase text-[#2D5446] bg-[#2D5446]/10 border border-[#2D5446]/20 px-2 py-1 rounded">
+                  <span className="mt-3 inline-block text-[10px] font-mono font-black uppercase text-[#1E3E34] bg-[#DECBA5] border border-[#DECBA5]/40 px-2 py-1 rounded">
                     Google Review
                   </span>
                 )}
@@ -211,7 +211,7 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Right Panel — Quote */}
-            <div className="relative flex flex-col justify-center px-6 sm:px-10 md:px-12 py-10 flex-1 bg-[#2D5446]/5">
+            <div className="relative flex flex-col justify-center px-6 sm:px-10 md:px-12 py-10 flex-1 bg-black/20">
               {/* Classic decorative quote — just above the text */}
               <svg
                 className="w-12 h-12 md:w-14 md:h-14 text-[#DECBA5]/60 mb-4 select-none pointer-events-none shrink-0"
@@ -222,7 +222,7 @@ export default function TestimonialsSection() {
                 <path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.5v-6.5H5.17A2.67 2.67 0 0 1 7.83 8.83L9.5 6H7.17zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.5v-6.5h-3.33a2.67 2.67 0 0 1 2.66-2.67L19.5 6h-2.33z" />
               </svg>
 
-              <p className="relative z-10 text-slate-700 text-sm sm:text-base md:text-lg font-display font-medium leading-relaxed italic">
+              <p className="relative z-10 text-[#FAF8F5]/90 text-sm sm:text-base md:text-lg font-display font-medium leading-relaxed italic">
                 {rev.review}
               </p>
             </div>

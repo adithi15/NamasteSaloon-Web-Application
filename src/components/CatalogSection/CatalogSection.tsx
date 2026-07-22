@@ -60,36 +60,36 @@ export default function CatalogSection({ onSelectService }: CatalogSectionProps)
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="bg-white/60 backdrop-blur-md border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-3xl p-6 shadow-sm hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between group"
+              className="card-leaf-bg border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-3xl p-6 shadow-lg shadow-[#022A24]/25 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex justify-between items-start mb-4">
-                  <span className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-[#1E3E34] bg-[#DECBA5]/20 border border-[#DECBA5]/30 px-2.5 py-1 rounded">
+                  <span className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-[#1E3E34] bg-[#DECBA5] border border-[#DECBA5]/40 px-2.5 py-1 rounded">
                     {service.category}
                   </span>
-                  <div className="flex items-center gap-1 text-xs text-[#2D5446] font-extrabold font-mono">
-                    <Star className="w-3.5 h-3.5 fill-[#2D5446] text-[#2D5446]" />
+                  <div className="flex items-center gap-1 text-xs text-[#DECBA5] font-extrabold font-mono">
+                    <Star className="w-3.5 h-3.5 fill-[#DECBA5] text-[#DECBA5]" />
                     <span>{service.rating.toFixed(2)}</span>
                   </div>
                 </div>
 
-                <h3 className="font-serif text-lg text-slate-900 font-extrabold group-hover:text-[#1E3E34] transition-colors mb-2 leading-snug">
+                <h3 className="font-serif text-lg text-[#FAF8F5] font-extrabold group-hover:text-[#DECBA5] transition-colors mb-2 leading-snug">
                   {service.name}
                 </h3>
                 
-                <p className="text-xs text-slate-600 font-display font-medium leading-relaxed mb-4">
+                <p className="text-xs text-[#FAF8F5]/70 font-display font-medium leading-relaxed mb-4">
                   {service.description}
                 </p>
 
                 {/* Benefits breakdown */}
                 <div className="mb-6 space-y-2">
-                  <span className="text-[9px] uppercase font-mono tracking-wider font-bold text-slate-400 block">
+                  <span className="text-[9px] uppercase font-mono tracking-wider font-bold text-[#DECBA5]/70 block">
                     Key physiological benefits
                   </span>
                   <ul className="space-y-1.5">
                     {service.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-2 text-[11px] text-slate-700 font-semibold leading-tight">
-                        <Check className="w-3.5 h-3.5 text-[#2D5446] shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-2 text-[11px] text-[#FAF8F5]/85 font-semibold leading-tight">
+                        <Check className="w-3.5 h-3.5 text-[#DECBA5] shrink-0 mt-0.5" />
                         <span>{benefit}</span>
                       </li>
                     ))}
@@ -98,20 +98,20 @@ export default function CatalogSection({ onSelectService }: CatalogSectionProps)
               </div>
 
               <div>
-                <div className="h-[1px] bg-slate-200/60 w-full mb-4" />
+                <div className="h-[1px] bg-[#DECBA5]/25 w-full mb-4" />
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3.5">
-                    <div className="flex items-center gap-1 text-slate-500 text-xs font-mono font-semibold">
-                      <Clock className="w-3.5 h-3.5 text-[#2D5446]" />
+                    <div className="flex items-center gap-1 text-[#FAF8F5]/65 text-xs font-mono font-semibold">
+                      <Clock className="w-3.5 h-3.5 text-[#DECBA5]" />
                       <span>{service.durationMinutes} min</span>
                     </div>
-                    <span className="text-slate-900 font-black text-base font-mono">
-                      ${service.price}
+                    <span className="text-[#FAF8F5] font-black text-base font-mono">
+                      ₹{service.price.toLocaleString("en-IN")}
                     </span>
                   </div>
                   <button
                     onClick={() => onSelectService(service)}
-                    className="px-4 py-2 bg-[#1E3E34] hover:bg-[#2D5446] text-white text-[10px] uppercase tracking-widest font-extrabold transition-all duration-300 cursor-pointer shadow-sm rounded-xl hover:scale-105"
+                    className="px-4 py-2 bg-[#DECBA5] hover:bg-[#E9E4DB] text-[#1E3E34] text-[10px] uppercase tracking-widest font-extrabold transition-all duration-300 cursor-pointer shadow-sm rounded-xl hover:scale-105"
                   >
                     Book Now
                   </button>

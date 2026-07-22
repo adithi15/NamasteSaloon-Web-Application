@@ -99,13 +99,7 @@ export default function ServiceCarousel({ onKnowMore }: ServiceCarouselProps) {
                 delay: Math.min(index * 0.08, 0.4),
                 ease: softEase,
               }}
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(2,42,36,0.90), rgba(2,42,36,0.94)), url('/background.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              className="w-[min(85vw,280px)] sm:w-[320px] md:w-[380px] flex-shrink-0 snap-start border border-[#DECBA5]/25 rounded-3xl overflow-hidden shadow-lg shadow-[#022A24]/30 hover:scale-[1.015] transition-transform duration-700 ease-out group flex flex-col justify-between"
+              className="card-leaf-bg w-[min(85vw,280px)] sm:w-[320px] md:w-[380px] flex-shrink-0 snap-start border border-[#DECBA5]/25 rounded-3xl overflow-hidden shadow-lg shadow-[#022A24]/30 hover:scale-[1.015] transition-transform duration-700 ease-out group flex flex-col justify-between"
               id={`carousel-item-${service.id}`}
             >
               <div className="relative h-48 md:h-56 overflow-hidden">

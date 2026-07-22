@@ -109,32 +109,32 @@ export default function PoliciesSection() {
           </div>
 
           {/* Policy Text panel */}
-          <div className="md:col-span-8 text-left bg-white/60 backdrop-blur-sm border border-[#DECBA5]/30 p-5 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl space-y-6">
+          <div className="md:col-span-8 text-left card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl space-y-6 shadow-lg shadow-[#022A24]/20">
             <div className="space-y-2">
-              <span className="text-[9px] font-mono tracking-widest text-[#2D5446] font-black uppercase">
+              <span className="text-[9px] font-mono tracking-widest text-[#DECBA5] font-black uppercase">
                 {activeTab} framework
               </span>
-              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-slate-900 font-extrabold leading-tight">
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#FAF8F5] font-extrabold leading-tight">
                 {currentPolicy.title}
               </h3>
-              <p className="text-[#1E3E34] font-display font-semibold text-sm md:text-base border-l-2 border-[#2D5446]/40 pl-4 py-1">
+              <p className="text-[#DECBA5] font-display font-semibold text-sm md:text-base border-l-2 border-[#DECBA5]/50 pl-4 py-1">
                 {currentPolicy.lead}
               </p>
             </div>
 
-            <p className="text-slate-600 text-xs md:text-sm font-display font-semibold leading-relaxed">
+            <p className="text-[#FAF8F5]/75 text-xs md:text-sm font-display font-semibold leading-relaxed">
               {currentPolicy.detail}
             </p>
 
             {/* Checklist */}
-            <div className="space-y-3 pt-4 border-t border-slate-200/60">
-              <h4 className="text-[10px] uppercase font-mono tracking-widest text-slate-400 font-bold">
+            <div className="space-y-3 pt-4 border-t border-[#DECBA5]/25">
+              <h4 className="text-[10px] uppercase font-mono tracking-widest text-[#DECBA5]/70 font-bold">
                 Detailed Guidelines
               </h4>
               <ul className="space-y-3">
                 {currentPolicy.points.map((pt, index) => (
-                  <li key={index} className="flex items-start gap-3 text-xs md:text-sm text-slate-600 font-medium">
-                    <span className="font-mono text-xs text-[#2D5446] font-bold">0{index + 1}.</span>
+                  <li key={index} className="flex items-start gap-3 text-xs md:text-sm text-[#FAF8F5]/80 font-medium">
+                    <span className="font-mono text-xs text-[#DECBA5] font-bold">0{index + 1}.</span>
                     <span>{pt}</span>
                   </li>
                 ))}
