@@ -57,12 +57,12 @@ function ServicesRoute({
   );
 }
 
-function MembershipsTypeRoute({
+function MembershipsRoute({
   onSelectPlan,
 }: {
   onSelectPlan: (plan: string) => void;
 }) {
-  const { type } = useParams<{ type: string }>();
+  const { type } = useParams<{ type?: string }>();
   const allowed: PackageType[] = [
     "membership",
     "package",
@@ -195,17 +195,7 @@ export default function App() {
               }
             />
             <Route
-              path="/services"
-              element={
-                <ServicesPage
-                  initialCategory="All"
-                  onSelectService={(s) => handleOpenBooking(s, null)}
-                  onCategoryChange={openServices}
-                />
-              }
-            />
-            <Route
-              path="/services/:slug"
+              path="/services/:slug?"
               element={
                 <ServicesRoute
                   onSelectService={(s) => handleOpenBooking(s, null)}
@@ -213,18 +203,9 @@ export default function App() {
               }
             />
             <Route
-              path="/memberships"
+              path="/memberships/:type?"
               element={
-                <MembershipsPage
-                  initialCategory="all"
-                  onSelectPlan={(plan) => handleOpenBooking(null, null, plan)}
-                />
-              }
-            />
-            <Route
-              path="/memberships/:type"
-              element={
-                <MembershipsTypeRoute
+                <MembershipsRoute
                   onSelectPlan={(plan) => handleOpenBooking(null, null, plan)}
                 />
               }

@@ -1,9 +1,9 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import ServiceCarousel from "@/src/components/ServiceCarousel";
 // import SpecialistSection from "@/src/components/SpecialistSection";
 import MembershipsSection from "@/src/components/MembershipsSection";
 import TestimonialsSection from "@/src/components/TestimonialsSection";
-import { pageTransition, softEase } from "@/src/components/FadeIn";
+import { spaEaseInOut } from "@/src/components/FadeIn";
 import { BUSINESS_DETAILS } from "@/src/common/data";
 import type {
   Service,
@@ -12,6 +12,8 @@ import type {
   PackageType,
   ViewName,
 } from "@/src/common/types";
+
+const HERO_WORDS = ["SELF-CARE", "MADE", "SOCIAL"] as const;
 
 interface HomePageProps {
   onOpenBooking: (
@@ -34,12 +36,10 @@ export default function HomePage({
   onOpenMembershipCategory,
   onOpenServiceDetail,
 }: HomePageProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <motion.div
-      key="home"
-      {...pageTransition}
-      className="w-full"
-    >
+    <div className="w-full">
       {/* 1. HERO */}
       <section className="relative min-h-dvh flex flex-col justify-center items-center text-center px-4 py-24 sm:py-20 overflow-hidden bg-[#022A24] border-b border-[#2D5446]/20">
         <video
@@ -59,31 +59,60 @@ export default function HomePage({
         <div className="max-w-7xl mx-auto flex flex-col items-center relative z-10 space-y-8 md:space-y-12">
           <div className="space-y-4">
             <motion.span
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.9, ease: softEase }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.45 }}
+              transition={{ duration: 1.0, ease: spaEaseInOut }}
               className="text-[#DECBA5] text-[9px] sm:text-[10px] md:text-xs tracking-[0.25em] sm:tracking-[0.45em] font-display uppercase font-black px-2"
             >
               {BUSINESS_DETAILS.tagline}
             </motion.span>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 1.05, ease: softEase }}
-              className="mt-8 md:mt-12 font-serif text-[clamp(1.6rem,6.5vw,4.25rem)] font-normal tracking-[0.06em] sm:tracking-[0.1em] text-[#FAF8F5] uppercase leading-tight select-none text-center px-2"
-            >
-              <span className="italic text-[#DECBA5] font-light font-serif normal-case tracking-normal">
-                SELF-CARE MADE SOCIAL
+            <h1 className="mt-8 md:mt-12 font-serif text-[clamp(1.6rem,6.5vw,4.25rem)] font-normal text-[#FAF8F5] leading-tight select-none text-center px-2">
+              <span className="italic text-[#DECBA5] font-light font-serif normal-case tracking-normal inline-flex flex-wrap items-baseline justify-center gap-x-[0.35em] gap-y-1">
+                {HERO_WORDS.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={
+                      reduceMotion
+                        ? false
+                        : { opacity: 0, y: 18, filter: "blur(6px)" }
+                    }
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ once: true, amount: 0.45 }}
+                    transition={{
+                      duration: reduceMotion ? 0 : 1.15,
+                      delay: reduceMotion ? 0 : i * 0.18,
+                      ease: spaEaseInOut,
+                    }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </span>
-            </motion.h1>
+
+              {/* Soft gold line draws under the line after words settle */}
+              <motion.span
+                aria-hidden
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 0.7 }}
+                viewport={{ once: true, amount: 0.45 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 1.1,
+                  delay: reduceMotion ? 0 : 0.55,
+                  ease: spaEaseInOut,
+                }}
+                className="mt-5 mx-auto block h-px w-[min(12rem,55%)] origin-center bg-gradient-to-r from-transparent via-[#DECBA5] to-transparent"
+              />
+            </h1>
           </div>
 
           {/* Reservations CTA — hidden for now
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.9, ease: softEase }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.65, duration: 1.0, ease: spaEaseInOut }}
           >
             <button
               onClick={openWhatsAppGeneral}
@@ -124,6 +153,6 @@ export default function HomePage({
           }}
         />
       </div>
-    </motion.div>
+    </div>
   );
 }

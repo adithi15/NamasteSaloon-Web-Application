@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Clock, Check } from "lucide-react";
-import { pageTransition, softEase } from "@/src/components/FadeIn";
+import { pageTransition, spaEase } from "@/src/components/FadeIn";
 import { SERVICES, SERVICE_CHAPTERS } from "@/src/common/data";
 import { SpaCategory } from "@/src/common/types";
 import type { Service, SpaCategoryValue } from "@/src/common/types";
@@ -9,7 +9,7 @@ import type { Service, SpaCategoryValue } from "@/src/common/types";
 export type ServiceCategoryFilter = "All" | SpaCategoryValue;
 
 interface ServicesPageProps {
-  onSelectService: (service: Service) => void;
+  onSelectService?: (service: Service) => void;
   initialCategory?: ServiceCategoryFilter;
   highlightServiceId?: string | null;
   onCategoryChange?: (category: ServiceCategoryFilter) => void;
@@ -50,7 +50,7 @@ function PriceTier({
 }
 
 export default function ServicesPage({
-  onSelectService,
+  onSelectService: _onSelectService,
   initialCategory = "All",
   highlightServiceId = null,
   onCategoryChange,
@@ -82,7 +82,8 @@ export default function ServicesPage({
         title: "Our Services",
         intro:
           "Nine treatment chapters from our rate card — choose a collection below to explore durations, pricing, and rituals.",
-        image: SERVICE_CHAPTERS[0]?.image ?? "/images/services/massage/1.jpg",
+        // Overview hero — not the same as Korean Blends chapter art
+        image: "/images/services/massage/1.jpg",
       };
     }
     const meta = SERVICE_CHAPTERS.find((c) => c.category === activeCategory);
@@ -114,15 +115,11 @@ export default function ServicesPage({
     onCategoryChange?.(category);
   };
 
-  const motionDur = reduceMotion ? 0.01 : 0.65;
-  const rowDur = reduceMotion ? 0.01 : 0.7;
+  const motionDur = reduceMotion ? 0.01 : 1.15;
+  const rowDur = reduceMotion ? 0.01 : 1.2;
 
   return (
-    <motion.div
-      key={`services-${initialCategory}`}
-      {...pageTransition}
-      className="w-full"
-    >
+    <motion.div {...pageTransition} className="w-full">
       {/* Brochure chapter banner */}
       <section className="relative h-[36vh] sm:h-[40vh] min-h-[220px] sm:min-h-[260px] max-h-[400px] overflow-hidden bg-[#022A24]">
         <div
@@ -138,8 +135,8 @@ export default function ServicesPage({
               key={chapterMeta.title}
               initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reduceMotion ? 0 : -10 }}
-              transition={{ duration: motionDur, ease: softEase }}
+              exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
+              transition={{ duration: motionDur, ease: spaEase }}
               className="text-left min-w-0 flex-1"
             >
               <span className="text-[#DECBA5] text-[9px] sm:text-[10px] tracking-[0.28em] font-display uppercase font-black block mb-2">
@@ -158,9 +155,12 @@ export default function ServicesPage({
 
           <motion.span
             key={`num-${chapterMeta.number}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.9 }}
-            transition={{ duration: motionDur, ease: softEase }}
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}
+            animate={{ opacity: 0.9, y: 0 }}
+            transition={{
+              duration: motionDur,
+              ease: spaEase,
+            }}
             className="font-sans text-[clamp(2.75rem,10vw,6rem)] font-black text-white/90 leading-none select-none shrink-0 tabular-nums"
             aria-hidden
           >
@@ -177,7 +177,7 @@ export default function ServicesPage({
             <button
               type="button"
               onClick={() => selectCategory("All")}
-              className={`shrink-0 px-3.5 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-all duration-500 ease-out cursor-pointer ${
+              className={`shrink-0 px-3.5 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-all duration-700 ease-[cubic-bezier(0.5,0.02,0.18,1)] cursor-pointer ${
                 activeCategory === "All"
                   ? "bg-[#1E3E34] text-white border-[#1E3E34]"
                   : "bg-white/70 border-[#DECBA5]/40 text-slate-700 hover:border-[#DECBA5]"
@@ -190,7 +190,7 @@ export default function ServicesPage({
                 key={category}
                 type="button"
                 onClick={() => selectCategory(category)}
-                className={`shrink-0 px-3.5 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-all duration-500 ease-out cursor-pointer whitespace-nowrap ${
+                className={`shrink-0 px-3.5 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold rounded-lg border transition-all duration-700 ease-[cubic-bezier(0.5,0.02,0.18,1)] cursor-pointer whitespace-nowrap ${
                   activeCategory === category
                     ? "bg-[#1E3E34] text-white border-[#1E3E34]"
                     : "bg-white/70 border-[#DECBA5]/40 text-slate-700 hover:border-[#DECBA5]"
@@ -204,10 +204,6 @@ export default function ServicesPage({
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
-              transition={{ duration: motionDur, ease: softEase }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
             >
               {/* Treatment list */}
@@ -232,14 +228,15 @@ export default function ServicesPage({
                       <motion.article
                         key={service.id}
                         id={`service-row-${service.id}`}
-                        initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         transition={{
                           duration: rowDur,
                           delay: reduceMotion
                             ? 0
-                            : Math.min(index * 0.07, 0.35),
-                          ease: softEase,
+                            : Math.min(index * 0.08, 0.4),
+                          ease: spaEase,
                         }}
                         className={`card-leaf-bg border border-[#DECBA5]/30 rounded-2xl p-4 sm:p-5 shadow-lg shadow-[#022A24]/15 ${
                           highlightServiceId === service.id
@@ -282,14 +279,6 @@ export default function ServicesPage({
 
                             <PriceTier tiers={displayTiers} />
                           </div>
-
-                          <button
-                            type="button"
-                            onClick={() => onSelectService(service)}
-                            className="shrink-0 self-start sm:self-center px-4 py-2.5 bg-[#DECBA5] text-[#1E3E34] text-[10px] uppercase tracking-widest font-extrabold rounded-xl shadow-sm cursor-pointer transition-all duration-500 ease-out hover:bg-[#E9E4DB] active:scale-[0.98]"
-                          >
-                            Book Now
-                          </button>
                         </div>
                       </motion.article>
                     );
@@ -302,9 +291,16 @@ export default function ServicesPage({
                 <div className="lg:sticky lg:top-28">
                   <motion.div
                     key={chapterMeta.image}
-                    initial={{ opacity: 0, scale: reduceMotion ? 1 : 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: reduceMotion ? 0.01 : 1.1, ease: softEase }}
+                    initial={{
+                      opacity: 0,
+                      y: reduceMotion ? 0 : 16,
+                      scale: reduceMotion ? 1 : 1.02,
+                    }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                      duration: reduceMotion ? 0.01 : 1.25,
+                      ease: spaEase,
+                    }}
                     className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-lg shadow-[#022A24]/15"
                   >
                     <img

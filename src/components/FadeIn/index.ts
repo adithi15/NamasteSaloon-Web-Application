@@ -1,1 +1,13 @@
-export { default, softEase, fadeUp, pageTransition } from "./FadeIn";
+export {
+  default,
+  softEase,
+  spaEase,
+  spaEaseInOut,
+  fadeUp,
+  pageTransition,
+  spaCardReveal,
+  spaCardTransition,
+  spaFadeReveal,
+  spaSoftReveal,
+  spaSoftTransition,
+} from "./FadeIn";

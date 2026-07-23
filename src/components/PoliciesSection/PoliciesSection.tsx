@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useLocation } from "react-router-dom";
 import { ShieldCheck, FileText, Ban, RotateCcw, Sparkles } from "lucide-react";
 import { POLICIES } from "@/src/common/data";
+import FadeIn, { spaSoftReveal, spaSoftTransition } from "@/src/components/FadeIn";
+
+type PolicyTab = "cancellation" | "refund" | "privacy" | "terms";
+
+const HASH_TO_TAB: Record<string, PolicyTab> = {
+  "policies-section": "cancellation",
+  "policies-cancellation": "cancellation",
+  "policies-refund": "refund",
+  "policies-privacy": "privacy",
+  "policies-terms": "terms",
+};
 
 export default function PoliciesSection() {
-  const [activeTab, setActiveTab] = useState<"cancellation" | "refund" | "privacy" | "terms">("cancellation");
+  const reduceMotion = useReducedMotion();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<PolicyTab>("cancellation");
+
+  useEffect(() => {
+    const id = location.hash.replace(/^#/, "");
+    const tab = HASH_TO_TAB[id];
+    if (tab) setActiveTab(tab);
+  }, [location.hash, location.pathname]);
 
   const tabItems: {
-    key: "cancellation" | "refund" | "privacy" | "terms";
+    key: PolicyTab;
     label: string;
     icon: React.ReactNode;
   }[] = [
@@ -76,7 +97,7 @@ export default function PoliciesSection() {
       <div className="max-w-5xl mx-auto relative z-10">
         
         {/* Header Block */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+        <FadeIn once={false} className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-[#2D5446]" />
             <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-[#1E3E34] font-black">LEGAL COMPLIANCE</span>
@@ -85,18 +106,24 @@ export default function PoliciesSection() {
             Sanctuary Policies
           </h2>
           <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4" />
-        </div>
+        </FadeIn>
 
         {/* Dynamic Multi-tab layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 md:gap-12">
           
           {/* Tab buttons column */}
-          <div className="md:col-span-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0 -mx-1 px-1 scrollbar-thin">
+          <motion.div
+            className="md:col-span-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0 -mx-1 px-1 scrollbar-thin"
+            {...spaSoftReveal}
+            initial={reduceMotion ? false : spaSoftReveal.initial}
+            viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+            transition={spaSoftTransition(0, !!reduceMotion)}
+          >
             {tabItems.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest font-bold border transition-all duration-300 whitespace-nowrap cursor-pointer shrink-0 ${
+                className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest font-bold border transition-all duration-500 ease-out whitespace-nowrap cursor-pointer shrink-0 ${
                   activeTab === tab.key
                     ? "bg-[#1E3E34] text-white border-[#1E3E34] shadow-md shadow-[#1E3E34]/15"
                     : "bg-white/60 border-white/60 hover:bg-white text-slate-800"
@@ -106,10 +133,16 @@ export default function PoliciesSection() {
                 <span>{tab.label}</span>
               </button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Policy Text panel */}
-          <div className="md:col-span-8 text-left card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl space-y-6 shadow-lg shadow-[#022A24]/20">
+          <motion.div
+            className="md:col-span-8 text-left card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl space-y-6 shadow-lg shadow-[#022A24]/20"
+            {...spaSoftReveal}
+            initial={reduceMotion ? false : spaSoftReveal.initial}
+            viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+            transition={spaSoftTransition(1, !!reduceMotion)}
+          >
             <div className="space-y-2">
               <span className="text-[9px] font-mono tracking-widest text-[#DECBA5] font-black uppercase">
                 {activeTab} framework
@@ -140,7 +173,7 @@ export default function PoliciesSection() {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

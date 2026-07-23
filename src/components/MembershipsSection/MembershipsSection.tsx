@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check, Sparkles, ArrowRight } from "lucide-react";
-import FadeIn, { softEase } from "@/src/components/FadeIn";
+import FadeIn, { spaEase } from "@/src/components/FadeIn";
 import { PRICING_PACKAGES } from "@/src/common/data";
 import type { PackageType, PricingPackage } from "@/src/common/types";
 
@@ -23,6 +23,7 @@ export default function MembershipsSection({
   onKnowMore,
   onFilterChange,
 }: MembershipsSectionProps) {
+  const reduceMotion = useReducedMotion();
   const [filterType, setFilterType] =
     useState<PackageType | "all">(initialFilter);
 
@@ -41,6 +42,9 @@ export default function MembershipsSection({
         .sort((a, b) => (b.popular ? 1 : 0) - (a.popular ? 1 : 0))
         .slice(0, 3)
     : filteredPlans;
+
+  const gridDur = reduceMotion ? 0.01 : 1.4;
+  const cardDur = reduceMotion ? 0.01 : 1.45;
 
   return (
     <section
@@ -80,7 +84,7 @@ export default function MembershipsSection({
                   setFilterType(tab.key);
                   onFilterChange?.(tab.key);
                 }}
-                className={`px-3 sm:px-5 py-2 sm:py-2.5 text-[9px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold transition-all duration-500 ease-out cursor-pointer rounded-lg border ${
+                className={`px-3 sm:px-5 py-2 sm:py-2.5 text-[9px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold transition-all duration-700 ease-[cubic-bezier(0.5,0.02,0.18,1)] cursor-pointer rounded-lg border ${
                   filterType === tab.key
                     ? "bg-[#1E3E34] text-white border-[#1E3E34] shadow-lg shadow-[#1E3E34]/15"
                     : "bg-white/60 border-slate-200 text-slate-800 hover:bg-white hover:text-slate-950"
@@ -92,87 +96,117 @@ export default function MembershipsSection({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
-          {displayedPlans.map((plan, index) => (
-            <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.8,
-                delay: Math.min(index * 0.1, 0.35),
-                ease: softEase,
-              }}
-              className={`card-leaf-bg relative border rounded-[2rem] p-5 sm:p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group transition-transform duration-700 ease-out hover:scale-[1.015] overflow-visible ${
-                plan.popular
-                  ? "border-[#DECBA5] ring-1 ring-[#DECBA5]/40"
-                  : "border-[#DECBA5]/25 hover:border-[#DECBA5]/50"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute top-0 right-4 sm:right-8 transform -translate-y-1/2 bg-[#DECBA5] text-[#1E3E34] text-[9px] uppercase tracking-widest font-black px-3 sm:px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1 max-w-[calc(100%-2rem)]">
-                  <Sparkles className="w-3.5 h-3.5 shrink-0" />{" "}
-                  <span className="truncate">Highly Recommended</span>
-                </div>
-              )}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={preview ? "preview" : filterType}
+            {...(preview
+              ? {}
+              : {
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                  exit: { opacity: 0 },
+                  transition: { duration: gridDur * 0.55, ease: spaEase },
+                })}
+            className={`${preview ? "" : "spa-float-stage "}grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4`}
+          >
+            {displayedPlans.map((plan, index) => (
+              <motion.div
+                key={plan.id}
+                initial={
+                  reduceMotion ? false : { opacity: 0, y: 22 }
+                }
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: cardDur,
+                  delay: reduceMotion
+                    ? 0
+                    : Math.min(index * 0.1, 0.45),
+                  ease: spaEase,
+                }}
+                className={preview ? undefined : "[perspective:1400px]"}
+              >
+                <div
+                  className={`card-leaf-bg relative border rounded-[2rem] p-5 sm:p-8 shadow-lg shadow-[#022A24]/25 flex flex-col justify-between group overflow-visible ${
+                    preview || reduceMotion ? "" : "spa-card-float"
+                  } ${
+                    plan.popular
+                      ? "border-[#DECBA5] ring-1 ring-[#DECBA5]/40"
+                      : "border-[#DECBA5]/25 hover:border-[#DECBA5]/50"
+                  }`}
+                  style={
+                    reduceMotion || preview
+                      ? undefined
+                      : { animationDelay: `${index * -8}s` }
+                  }
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 right-4 sm:right-8 transform -translate-y-1/2 bg-[#DECBA5] text-[#1E3E34] text-[9px] uppercase tracking-widest font-black px-3 sm:px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1 max-w-[calc(100%-2rem)]">
+                      <Sparkles className="w-3.5 h-3.5 shrink-0" />{" "}
+                      <span className="truncate">Highly Recommended</span>
+                    </div>
+                  )}
 
-              <div className="text-left space-y-4">
-                <div className="space-y-1">
-                  <span className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-[#DECBA5]/70">
-                    {plan.type.replace("-", " ")} commitment
-                  </span>
-                  <h3 className="font-serif text-lg md:text-xl text-[#FAF8F5] font-extrabold group-hover:text-[#DECBA5] transition-colors duration-500 leading-snug">
-                    {plan.title}
-                  </h3>
-                </div>
+                  <div className="text-left space-y-4">
+                    <div className="space-y-1">
+                      <span className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-[#DECBA5]/70">
+                        {plan.type.replace("-", " ")} commitment
+                      </span>
+                      <h3 className="font-serif text-lg md:text-xl text-[#FAF8F5] font-extrabold group-hover:text-[#DECBA5] transition-colors duration-500 leading-snug">
+                        {plan.title}
+                      </h3>
+                    </div>
 
-                <div className="flex flex-wrap items-baseline gap-1.5">
-                  <span className="text-[#DECBA5] font-black text-2xl sm:text-3xl font-mono">
-                    ₹{plan.price.toLocaleString("en-IN")}
-                  </span>
-                  <span className="text-[#E9E4DB]/55 text-xs font-mono font-semibold">
-                    / {plan.duration}
-                  </span>
-                </div>
-
-                <p className="text-xs text-[#E9E4DB]/75 font-display font-medium leading-relaxed">
-                  {plan.description}
-                </p>
-
-                <div className="h-[1px] bg-[#DECBA5]/25 w-full" />
-
-                <div className="space-y-3.5">
-                  {plan.benefits.map((b, i) => (
-                    <div key={i} className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-[#DECBA5] shrink-0 mt-0.5" />
-                      <span className="text-xs text-[#FAF8F5]/85 font-display font-semibold leading-snug text-left">
-                        {b}
+                    <div className="flex flex-wrap items-baseline gap-1.5">
+                      <span className="text-[#DECBA5] font-black text-2xl sm:text-3xl font-mono">
+                        ₹{plan.price.toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-[#E9E4DB]/55 text-xs font-mono font-semibold">
+                        / {plan.duration}
                       </span>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pt-8 text-left">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (onKnowMore) {
-                      onKnowMore(plan);
-                      return;
-                    }
-                    onSelectPlan(plan.title);
-                  }}
-                  className="w-full py-3 bg-[#DECBA5] text-[#1E3E34] text-xs uppercase tracking-widest font-extrabold transition-all duration-500 ease-out flex items-center justify-center gap-2 rounded-xl shadow-sm cursor-pointer hover:bg-[#E9E4DB] hover:scale-[1.02] active:scale-95"
-                >
-                  <ArrowRight className="w-4 h-4" />
-                  <span>Know More</span>
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                    <p className="text-xs text-[#E9E4DB]/75 font-display font-medium leading-relaxed">
+                      {plan.description}
+                    </p>
+
+                    <div className="h-[1px] bg-[#DECBA5]/25 w-full" />
+
+                    <div className="space-y-3.5">
+                      {plan.benefits.map((b, i) => (
+                        <div key={i} className="flex items-start gap-2.5">
+                          <Check className="w-4 h-4 text-[#DECBA5] shrink-0 mt-0.5" />
+                          <span className="text-xs text-[#FAF8F5]/85 font-display font-semibold leading-snug text-left">
+                            {b}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {!preview ? null : (
+                    <div className="pt-8 text-left">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (onKnowMore) {
+                            onKnowMore(plan);
+                            return;
+                          }
+                          onSelectPlan(plan.title);
+                        }}
+                        className="w-full py-3 bg-[#DECBA5] text-[#1E3E34] text-xs uppercase tracking-widest font-extrabold transition-all duration-500 ease-out flex items-center justify-center gap-2 rounded-xl shadow-sm cursor-pointer hover:bg-[#E9E4DB] hover:scale-[1.02] active:scale-95"
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                        <span>Know More</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* See All — hidden; Know More already opens memberships
         {preview && (

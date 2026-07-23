@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import {
   Phone,
   Mail,
@@ -9,6 +9,13 @@ import {
   MessageCircle,
   Instagram,
 } from "lucide-react";
+import FadeIn, {
+  spaFadeReveal,
+  spaCardTransition,
+  spaSoftReveal,
+  spaSoftTransition,
+  spaEaseInOut,
+} from "@/src/components/FadeIn";
 import { BUSINESS_DETAILS, FAQS } from "@/src/common/data";
 import { getWhatsAppUrl } from "@/src/common/utils/whatsapp";
 
@@ -27,6 +34,7 @@ function FacebookIcon({ className }: { className?: string }) {
 
 export default function ContactSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
@@ -53,7 +61,13 @@ export default function ContactSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(45,84,70,0.02),transparent_60%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-16"
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.35, margin: "72px 0px 72px 0px" }}
+          transition={{ duration: 0.9, ease: spaEaseInOut }}
+        >
           <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
             Contact Us
           </h2>
@@ -61,12 +75,18 @@ export default function ContactSection() {
           <p className="text-slate-600 text-sm md:text-base font-semibold font-display">
             Reach us by phone, WhatsApp, email, or visit our Kharghar spa.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 mb-14 sm:mb-20">
           {/* Address */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4">
+            <motion.div
+              {...spaFadeReveal}
+              initial={reduceMotion ? false : spaFadeReveal.initial}
+              viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+              transition={spaCardTransition(0, !!reduceMotion)}
+              className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4"
+            >
               <h3 className="font-serif text-xl md:text-2xl text-[#FAF8F5] font-extrabold">
                 Visit Us
               </h3>
@@ -88,11 +108,17 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Phone + Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+              <motion.div
+                {...spaFadeReveal}
+                initial={reduceMotion ? false : spaFadeReveal.initial}
+                viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+                transition={spaCardTransition(1, !!reduceMotion)}
+                className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4"
+              >
                 <div className="p-3 bg-[#DECBA5]/15 rounded-xl text-[#DECBA5] shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
@@ -118,9 +144,15 @@ export default function ContactSection() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4">
+              <motion.div
+                {...spaFadeReveal}
+                initial={reduceMotion ? false : spaFadeReveal.initial}
+                viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+                transition={spaCardTransition(2, !!reduceMotion)}
+                className="card-leaf-bg border border-[#DECBA5]/30 p-5 sm:p-6 rounded-2xl flex items-start gap-3 sm:gap-4"
+              >
                 <div className="p-3 bg-[#DECBA5]/15 rounded-xl text-[#DECBA5] shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
@@ -135,11 +167,17 @@ export default function ContactSection() {
                     {BUSINESS_DETAILS.email}
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Social */}
-            <div className="card-leaf-bg border border-[#DECBA5]/30 p-6 rounded-2xl">
+            <motion.div
+              {...spaFadeReveal}
+              initial={reduceMotion ? false : spaFadeReveal.initial}
+              viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+              transition={spaCardTransition(3, !!reduceMotion)}
+              className="card-leaf-bg border border-[#DECBA5]/30 p-6 rounded-2xl"
+            >
               <span className="text-[9px] uppercase font-mono tracking-widest text-[#DECBA5] font-black block mb-4">
                 Follow Us
               </span>
@@ -163,12 +201,18 @@ export default function ContactSection() {
                   Facebook
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* WhatsApp CTA — compact, centered */}
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="w-full max-w-sm card-leaf-bg text-white p-5 rounded-2xl space-y-4 shadow-xl border border-[#DECBA5]/30">
+            <motion.div
+              {...spaFadeReveal}
+              initial={reduceMotion ? false : spaFadeReveal.initial}
+              viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+              transition={spaCardTransition(1, !!reduceMotion)}
+              className="w-full max-w-sm card-leaf-bg text-white p-5 rounded-2xl space-y-4 shadow-xl border border-[#DECBA5]/30"
+            >
               <div className="space-y-1.5 text-center">
                 <span className="text-[9px] font-mono tracking-widest text-[#DECBA5] font-black uppercase">
                   Quick Connect
@@ -189,25 +233,29 @@ export default function ContactSection() {
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* FAQs */}
         <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center">
+          <FadeIn once={false} className="text-center">
             <h3 className="font-serif text-2xl md:text-3xl text-slate-900 font-extrabold">
               Frequently Asked Questions
             </h3>
             <p className="text-slate-600 text-xs font-display font-semibold mt-2">
               Quick answers about bookings, visits, and spa guidelines.
             </p>
-          </div>
+          </FadeIn>
 
           <div className="space-y-3 text-left">
             {FAQS.map((faq, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                {...spaSoftReveal}
+                initial={reduceMotion ? false : spaSoftReveal.initial}
+                viewport={{ once: false, amount: 0.15, margin: "72px 0px 72px 0px" }}
+                transition={spaSoftTransition(idx, !!reduceMotion)}
                 className="card-leaf-bg border border-[#DECBA5]/30 rounded-2xl overflow-hidden shadow-lg shadow-[#022A24]/20"
               >
                 <button
@@ -233,7 +281,7 @@ export default function ContactSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <div className="px-5 pb-5 pt-1 text-[#FAF8F5]/75 text-xs font-display font-semibold leading-relaxed border-t border-[#DECBA5]/20">
                         {faq.answer}
@@ -241,7 +289,7 @@ export default function ContactSection() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

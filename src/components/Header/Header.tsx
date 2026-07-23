@@ -124,8 +124,8 @@ export default function Header({
   };
 
   const dropdownTransition = {
-    duration: 0.55,
-    ease: [0.22, 1, 0.36, 1] as const,
+    duration: 0.95,
+    ease: [0.5, 0.02, 0.18, 1] as const,
   };
 
   const dropdownBase = [
@@ -241,7 +241,7 @@ export default function Header({
               >
                 <span>Services</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredDropdown === "offerings" ? "rotate-180" : ""} ${chevronColor}`}
+                  className={`w-3.5 h-3.5 transition-transform duration-700 ease-[cubic-bezier(0.5,0.02,0.18,1)] ${hoveredDropdown === "offerings" ? "rotate-180" : ""} ${chevronColor}`}
                 />
                 {underlinedNav === "services" && navLine}
               </button>
@@ -262,7 +262,7 @@ export default function Header({
               >
                 <span>Memberships</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-300 ${hoveredDropdown === "memberships" ? "rotate-180" : ""} ${chevronColor}`}
+                  className={`w-3.5 h-3.5 transition-transform duration-700 ease-[cubic-bezier(0.5,0.02,0.18,1)] ${hoveredDropdown === "memberships" ? "rotate-180" : ""} ${chevronColor}`}
                 />
                 {underlinedNav === "memberships" && navLine}
               </button>
@@ -327,9 +327,9 @@ export default function Header({
         {hoveredDropdown && (
           <motion.div
             key={hoveredDropdown}
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={dropdownTransition}
             className={`hidden lg:block ${dropdownBase}`}
             onMouseEnter={() => {
@@ -436,7 +436,7 @@ export default function Header({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, ease: [0.5, 0.02, 0.18, 1] }}
             className="lg:hidden absolute top-full left-0 right-0 backdrop-blur-lg bg-[#2D5446]/20 border-b border-[#2D5446]/15 overflow-hidden max-h-[calc(100dvh-5rem)] overflow-y-auto"
             id="mobile-dropdown-menu"
           >

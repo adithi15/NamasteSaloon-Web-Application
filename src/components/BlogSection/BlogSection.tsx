@@ -1,25 +1,39 @@
 import React, { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Clock, Calendar, User, ArrowLeft, BookOpen, Sparkles } from "lucide-react";
+import {
+  spaEaseInOut,
+  spaSoftTransition,
+} from "@/src/components/FadeIn";
 import { BLOGS } from "@/src/common/data";
+import type { BlogPost } from "@/src/common/types";
 
 export default function BlogSection() {
-  const [selectedBlog, setSelectedBlog] = useState<import("@/src/common/types").BlogPost | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<BlogPost | null>(null);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent" id="blog-section">
+    <section
+      className="relative py-14 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      id="blog-section"
+    >
       <div className="max-w-4xl mx-auto">
-        
-        {/* Breadcrumb back navigation when viewing single post */}
         {selectedBlog ? (
-          <div className="space-y-6 sm:space-y-8 animate-fadeIn">
+          <motion.div
+            key={selectedBlog.id}
+            className="space-y-6 sm:space-y-8"
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.05, ease: spaEaseInOut }}
+          >
             <button
+              type="button"
               onClick={() => setSelectedBlog(null)}
-              className="flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-widest font-mono font-black text-[#1E3E34] hover:text-[#2D5446] cursor-pointer transition-colors duration-200"
+              className="flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-widest font-mono font-black text-[#1E3E34] hover:text-[#2D5446] cursor-pointer transition-colors duration-300"
             >
               <ArrowLeft className="w-4 h-4 shrink-0" /> Back to all articles
             </button>
- 
-            {/* Featured Hero Image of Selected Post */}
+
             <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md">
               <img
                 src={selectedBlog.image}
@@ -37,8 +51,7 @@ export default function BlogSection() {
                 </h1>
               </div>
             </div>
- 
-            {/* Selected Post Meta info */}
+
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-6 py-4 border-b border-slate-200 text-slate-500 text-xs font-mono font-semibold">
               <span className="flex items-center gap-1.5">
                 <User className="w-4 h-4 text-[#2D5446] shrink-0" />
@@ -53,90 +66,122 @@ export default function BlogSection() {
                 {selectedBlog.readTime}
               </span>
             </div>
- 
-            {/* Content Body */}
+
             <div className="prose max-w-none text-slate-700 text-sm md:text-base leading-relaxed space-y-6 font-display font-medium text-left">
               {selectedBlog.content.split("\n\n").map((para, idx) => (
-                <p key={idx} className="first-letter:text-2xl first-letter:font-serif first-letter:font-bold first-letter:text-[#1E3E34]">
+                <p
+                  key={idx}
+                  className="first-letter:text-2xl first-letter:font-serif first-letter:font-bold first-letter:text-[#1E3E34]"
+                >
                   {para}
                 </p>
               ))}
             </div>
-          </div>
+          </motion.div>
         ) : (
           <div className="space-y-10 sm:space-y-12">
-            
-            {/* Header Title */}
-            <div className="text-center max-w-3xl mx-auto">
+            {/* Header — same calm rise as Contact Us */}
+            <motion.div
+              className="text-center max-w-3xl mx-auto"
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.35, margin: "72px 0px 72px 0px" }}
+              transition={{ duration: 0.9, ease: spaEaseInOut }}
+            >
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-[#2D5446] shrink-0" />
-                <span className="text-[9px] sm:text-[10px] uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#1E3E34] font-black">THE RESTORATION LOG</span>
+                <span className="text-[9px] sm:text-[10px] uppercase font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#1E3E34] font-black">
+                  THE RESTORATION LOG
+                </span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-slate-900 font-extrabold tracking-wide">
                 Somatic Wellness Blog
               </h2>
               <div className="h-[2px] w-24 bg-gradient-to-r from-transparent via-[#2D5446]/60 to-transparent mx-auto mt-4 mb-4" />
               <p className="text-slate-600 text-sm md:text-base font-semibold font-display px-1">
-                Dive deep into clinical analysis, metabolic recovery mechanisms, and physiological wellness theories curated by our therapists.
+                Dive deep into clinical analysis, metabolic recovery mechanisms,
+                and physiological wellness theories curated by our therapists.
               </p>
-            </div>
- 
-            {/* Grid listings */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-              {BLOGS.map((blog) => (
-                <div
+            </motion.div>
+
+            <div className="spa-float-stage grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {BLOGS.map((blog, index) => (
+                <motion.div
                   key={blog.id}
-                  onClick={() => setSelectedBlog(blog)}
-                  className="card-leaf-bg border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg shadow-[#022A24]/25 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+                  initial={
+                    reduceMotion ? false : { opacity: 0, y: 12 }
+                  }
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2, margin: "72px 0px 72px 0px" }}
+                  transition={spaSoftTransition(index, !!reduceMotion)}
+                  className="[perspective:1400px]"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={blog.image}
-                      alt={blog.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#DECBA5] border border-[#DECBA5]/40 px-2.5 sm:px-3 py-1 rounded text-[9px] uppercase tracking-wider font-extrabold text-[#1E3E34]">
-                      Scientific Insights
-                    </div>
-                  </div>
- 
-                  <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
-                    <div className="text-left">
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[#FAF8F5]/55 text-[10px] font-mono font-bold mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
-                          {blog.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
-                          {blog.readTime}
-                        </span>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setSelectedBlog(blog)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedBlog(blog);
+                      }
+                    }}
+                    className={`card-leaf-bg border border-[#DECBA5]/30 hover:border-[#DECBA5]/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg shadow-[#022A24]/25 cursor-pointer flex flex-col justify-between group h-full ${
+                      reduceMotion ? "" : "spa-card-float"
+                    }`}
+                    style={
+                      reduceMotion
+                        ? undefined
+                        : { animationDelay: `${index * -5}s` }
+                    }
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#DECBA5] border border-[#DECBA5]/40 px-2.5 sm:px-3 py-1 rounded text-[9px] uppercase tracking-wider font-extrabold text-[#1E3E34]">
+                        Scientific Insights
                       </div>
-                      <h3 className="font-serif text-[#FAF8F5] text-base sm:text-lg font-bold group-hover:text-[#DECBA5] transition-colors mb-2.5 line-clamp-2 leading-snug">
-                        {blog.title}
-                      </h3>
-                      <p className="text-xs text-[#FAF8F5]/70 font-display font-medium mb-4 line-clamp-3 leading-relaxed">
-                        {blog.summary}
-                      </p>
                     </div>
- 
-                    <div className="h-[1px] bg-[#DECBA5]/25 w-full mb-4" />
-                    
-                    <div className="flex items-center justify-between text-xs font-mono font-bold uppercase text-[#DECBA5] group-hover:text-[#E9E4DB] transition-colors">
-                      <span className="flex items-center gap-1.5">
-                        <BookOpen className="w-4 h-4" /> Read Article
-                      </span>
-                      <span>&rarr;</span>
+
+                    <div className="p-4 sm:p-6 flex-grow flex flex-col justify-between">
+                      <div className="text-left">
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[#FAF8F5]/55 text-[10px] font-mono font-bold mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
+                            {blog.date}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5 text-[#DECBA5] shrink-0" />
+                            {blog.readTime}
+                          </span>
+                        </div>
+                        <h3 className="font-serif text-[#FAF8F5] text-base sm:text-lg font-bold group-hover:text-[#DECBA5] transition-colors duration-700 mb-2.5 line-clamp-2 leading-snug">
+                          {blog.title}
+                        </h3>
+                        <p className="text-xs text-[#FAF8F5]/70 font-display font-medium mb-4 line-clamp-3 leading-relaxed">
+                          {blog.summary}
+                        </p>
+                      </div>
+
+                      <div className="h-[1px] bg-[#DECBA5]/25 w-full mb-4" />
+
+                      <div className="flex items-center justify-between text-xs font-mono font-bold uppercase text-[#DECBA5] group-hover:text-[#E9E4DB] transition-colors duration-700">
+                        <span className="flex items-center gap-1.5">
+                          <BookOpen className="w-4 h-4" /> Read Article
+                        </span>
+                        <span>&rarr;</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
- 
           </div>
         )}
-
       </div>
     </section>
   );

@@ -17,11 +17,7 @@ export default function MembershipsPage({
   const navigate = useNavigate();
 
   return (
-    <motion.div
-      key={`memberships-${initialCategory}`}
-      {...pageTransition}
-      className="pt-20 md:pt-24"
-    >
+    <motion.div {...pageTransition} className="pt-20 md:pt-24">
       <MembershipsSection
         initialFilter={initialCategory}
         onSelectPlan={onSelectPlan}

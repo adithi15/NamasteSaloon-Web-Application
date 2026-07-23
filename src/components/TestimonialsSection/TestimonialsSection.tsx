@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import FadeIn from "@/src/components/FadeIn";
+import FadeIn, { spaFadeReveal, spaCardTransition } from "@/src/components/FadeIn";
 import { TESTIMONIALS } from "@/src/common/data";
 
 import type { Testimonial } from "@/src/common/types";
 
+/** Calm slide — ease-out exit stays snappy; ease-in entrance is slower */
+const SLIDE_OUT_MS = 700;
+const SLIDE_IN_MS = 1200;
+
 export default function TestimonialsSection() {
+  const reduceMotion = useReducedMotion();
   const [reviews, setReviews] = useState<Testimonial[]>(TESTIMONIALS);
   const [current, setCurrent] = useState(0);
   const [formOpen, setFormOpen] = useState(false);
@@ -14,17 +20,45 @@ export default function TestimonialsSection() {
   const [rating, setRating] = useState(5);
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [animDir, setAnimDir] = useState<"left" | "right" | null>(null);
+  const [sliding, setSliding] = useState(false);
+  const slideTimerRef = useRef<number | null>(null);
+
+  const slideOutMs = reduceMotion ? 0 : SLIDE_OUT_MS;
+
+  useEffect(() => {
+    return () => {
+      if (slideTimerRef.current != null) {
+        window.clearTimeout(slideTimerRef.current);
+      }
+    };
+  }, []);
+
+  const runSlide = (nextIndex: number, dir: "left" | "right") => {
+    if (sliding || reviews.length < 2) return;
+    setSliding(true);
+    setAnimDir(dir);
+    if (slideTimerRef.current != null) {
+      window.clearTimeout(slideTimerRef.current);
+    }
+    slideTimerRef.current = window.setTimeout(() => {
+      setCurrent(nextIndex);
+      setAnimDir(null);
+      setSliding(false);
+      slideTimerRef.current = null;
+    }, slideOutMs);
+  };
 
   const goTo = (dir: "left" | "right") => {
-    setAnimDir(dir);
-    setTimeout(() => {
-      setCurrent((prev) =>
-        dir === "right"
-          ? (prev + 1) % reviews.length
-          : (prev - 1 + reviews.length) % reviews.length,
-      );
-      setAnimDir(null);
-    }, 380);
+    const next =
+      dir === "right"
+        ? (current + 1) % reviews.length
+        : (current - 1 + reviews.length) % reviews.length;
+    runSlide(next, dir);
+  };
+
+  const goToIndex = (index: number) => {
+    if (index === current) return;
+    runSlide(index, index > current ? "right" : "left");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -149,17 +183,26 @@ export default function TestimonialsSection() {
           </div>
         )}
 
-        <FadeIn delay={0.1}>
+        <motion.div
+          {...spaFadeReveal}
+          initial={reduceMotion ? false : spaFadeReveal.initial}
+          transition={spaCardTransition(0, !!reduceMotion)}
+        >
         {/* Slider Card */}
         <div
           className="bg-white/70 backdrop-blur-sm border border-[#DECBA5]/30 rounded-3xl shadow-sm overflow-hidden"
           style={{
             opacity: animDir ? 0 : 1,
             transform: animDir
-              ? `translateX(${animDir === "right" ? "-18px" : "18px"})`
+              ? `translateX(${animDir === "right" ? "-14px" : "14px"})`
               : "translateX(0)",
-            transition:
-              "opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: reduceMotion
+              ? "none"
+              : animDir
+                ? /* leave — ease-out (feels perfect) */
+                  `opacity ${SLIDE_OUT_MS}ms cubic-bezier(0.22, 1, 0.36, 1), transform ${SLIDE_OUT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
+                : /* enter — slow ease-in, soft land */
+                  `opacity ${SLIDE_IN_MS}ms cubic-bezier(0.5, 0.02, 0.18, 1), transform ${SLIDE_IN_MS}ms cubic-bezier(0.5, 0.02, 0.18, 1)`,
           }}
         >
           <div className="flex flex-col md:flex-row min-h-[280px]">
@@ -233,8 +276,9 @@ export default function TestimonialsSection() {
         <div className="flex items-center justify-center gap-3 sm:gap-4 mt-8">
           <button
             onClick={() => goTo("left")}
+            disabled={sliding}
             aria-label="Previous review"
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm shrink-0"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer disabled:cursor-wait disabled:opacity-60 shadow-sm shrink-0"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -244,15 +288,10 @@ export default function TestimonialsSection() {
             {reviews.map((_, i) => (
               <button
                 key={i}
-                onClick={() => {
-                  setAnimDir(i > current ? "right" : "left");
-                  setTimeout(() => {
-                    setCurrent(i);
-                    setAnimDir(null);
-                  }, 380);
-                }}
+                onClick={() => goToIndex(i)}
+                disabled={sliding}
                 aria-label={`Go to review ${i + 1}`}
-                className={`rounded-full transition-all duration-500 ease-out cursor-pointer ${
+                className={`rounded-full transition-all duration-500 ease-out cursor-pointer disabled:cursor-wait ${
                   i === current
                     ? "w-6 h-2.5 bg-[#1E3E34]"
                     : "w-2.5 h-2.5 bg-[#DECBA5]/60 hover:bg-[#2D5446]/40"
@@ -263,13 +302,14 @@ export default function TestimonialsSection() {
 
           <button
             onClick={() => goTo("right")}
+            disabled={sliding}
             aria-label="Next review"
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer shadow-sm shrink-0"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#DECBA5]/50 bg-white/70 hover:bg-[#1E3E34] hover:border-[#1E3E34] hover:text-white text-slate-600 flex items-center justify-center transition-all duration-500 ease-out cursor-pointer disabled:cursor-wait disabled:opacity-60 shadow-sm shrink-0"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
-        </FadeIn>
+        </motion.div>
 
         {/* Counter */}
         {/* <p className="text-center mt-3 text-[10px] font-mono text-slate-400 font-bold">

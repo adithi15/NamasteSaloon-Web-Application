@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { AlertCircle } from "lucide-react";
-import { pageTransition } from "@/src/components/FadeIn";
+import { pageTransition, spaFadeReveal, spaCardTransition } from "@/src/components/FadeIn";
 import type { Booking, Service, Specialist } from "@/src/common/types";
 
 interface BookingsPageProps {
@@ -22,6 +22,7 @@ export default function BookingsPage({
   getServiceName,
   getSpecialistName,
 }: BookingsPageProps) {
+  const reduceMotion = useReducedMotion();
   return (
     <motion.div
       key="bookings"
@@ -40,7 +41,12 @@ export default function BookingsPage({
         </div>
 
         {bookingsList.length === 0 ? (
-          <div className="text-center py-12 sm:py-16 card-leaf-bg border border-[#DECBA5]/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl space-y-5 shadow-lg shadow-[#022A24]/20">
+          <motion.div
+            {...spaFadeReveal}
+            initial={reduceMotion ? false : spaFadeReveal.initial}
+            transition={spaCardTransition(0, !!reduceMotion)}
+            className="text-center py-12 sm:py-16 card-leaf-bg border border-[#DECBA5]/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl space-y-5 shadow-lg shadow-[#022A24]/20"
+          >
             <AlertCircle className="w-12 h-12 text-[#DECBA5] mx-auto" />
             <div className="space-y-1">
               <h3 className="font-serif text-lg font-bold text-[#FAF8F5]">
@@ -58,13 +64,16 @@ export default function BookingsPage({
             >
               Book A Session
             </button>
-          </div>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {bookingsList.map((book) => (
-              <div
+            {bookingsList.map((book, index) => (
+              <motion.div
                 key={book.id}
-                className="card-leaf-bg border border-[#DECBA5]/30 p-4 sm:p-6 rounded-2xl flex flex-col justify-between hover:border-[#DECBA5]/50 transition-colors shadow-lg shadow-[#022A24]/20"
+                {...spaFadeReveal}
+                initial={reduceMotion ? false : spaFadeReveal.initial}
+                transition={spaCardTransition(index, !!reduceMotion)}
+                className="card-leaf-bg border border-[#DECBA5]/30 p-4 sm:p-6 rounded-2xl flex flex-col justify-between hover:border-[#DECBA5]/50 transition-colors duration-700 shadow-lg shadow-[#022A24]/20"
               >
                 <div className="space-y-3.5">
                   <div className="flex justify-between items-start gap-2">
@@ -120,7 +129,7 @@ export default function BookingsPage({
                     Cancel Slot
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

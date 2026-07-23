@@ -170,12 +170,12 @@ h6,
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeIn 1.15s cubic-bezier(0.42, 0, 0.28, 1) forwards;
 }
 
 /* Horizontal carousels — silky native scroll */
@@ -196,4 +196,43 @@ h6,
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Spa cards — soft down + sideways float */
+.spa-float-stage {
+  perspective: 1400px;
+}
+
+@keyframes spa-card-float-tilt {
+  0%,
+  100% {
+    transform: rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+  25% {
+    transform: rotateX(4deg) rotateY(-5deg) translateY(4px);
+  }
+  50% {
+    transform: rotateX(-2deg) rotateY(4deg) translateY(-3px);
+  }
+  75% {
+    transform: rotateX(3deg) rotateY(3deg) translateY(3px);
+  }
+}
+
+.spa-card-float {
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  animation: spa-card-float-tilt 12s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
+  will-change: transform;
+}
+
+.spa-card-float:hover,
+.spa-card-float:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spa-card-float {
+    animation: none;
+  }
 }
